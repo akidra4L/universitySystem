@@ -1,10 +1,14 @@
 package users;
 
+import java.util.Vector;
+
 import classes.ID;
+import classes.Message;
 import enums.Role;
 
 public class Employee extends User {
 	private double salary;
+	private Vector<Message> messages;
 	
     public Employee(ID id, String name, Role role, double salary) {
 		super(id, name, role);
@@ -21,4 +25,8 @@ public class Employee extends User {
     public void createMessage() {
     	// TODO
     }
+
+	public Vector<Message> getMessages() {
+		return messages;
+	}
 }

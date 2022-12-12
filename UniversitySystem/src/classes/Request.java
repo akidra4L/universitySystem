@@ -7,14 +7,12 @@ public class Request {
     private ID id;
     private String description;
     private User from;
-    private User to;
     private StateOfRequest state;
     
-    public Request(ID id, String description, User from, User to, StateOfRequest state) {
+    public Request(ID id, String description, User from, StateOfRequest state) {
     	this.id = id;
     	this.description = description;
     	this.from = from;
-    	this.to = to;
     	this.state = state;
     }
     
@@ -42,13 +40,5 @@ public class Request {
     
     public void setState(StateOfRequest state) {
         this.state = state;
-    }
-
-	public User getTo() {
-		return to;
-	}
-
-	public void setTo(User to) {
-		this.to = to;
-	}    
+    }  
 }

@@ -2,21 +2,23 @@ package classes;
 
 import java.util.Vector;
 
+import enums.Faculty;
 import users.Student;
 import users.Teacher;
 
 public class Lesson extends Course {
-    private Date date;
+	private Date date;
     private String room;
     private Teacher teacher;
     private Vector<Student> students;
     
-    public Lesson(Date date, String room, Teacher teacher, Vector<Student> students) {
-    	this.date = date;
-    	this.room = room;
-    	this.teacher = teacher;
-    	this.students = students;
-    }
+    public Lesson(ID id, String code, String title, Faculty faculty, int credits, Vector<Course> prerequisite, Date date, String room, Teacher teacher, Vector<Student> students) {
+		super(id, code, title, faculty, credits, prerequisite);
+		this.date = date;
+		this.room = room;
+		this.teacher = teacher;
+		this.students = students;
+	}
     
     public Date getDate() {
         return this.date;

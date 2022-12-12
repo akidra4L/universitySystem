@@ -1,17 +1,21 @@
 package classes;
 
+import java.util.Vector;
+
+import enums.Faculty;
 import enums.Mark;
 
 public class CourseStudent extends Course {
-    private Mark mark;
+	private Mark mark;
     private int attendance;
     private boolean isPassed;
     
-    public CourseStudent(Mark mark, int attendance, boolean isPassed) {
-    	this.mark = mark;
-    	this.attendance = attendance;
-    	this.isPassed = isPassed;
-    }
+    public CourseStudent(ID id, String code, String title, Faculty faculty, int credits, Vector<Course> prerequisite, Mark mark, int attendance, boolean isPassed) {
+		super(id, code, title, faculty, credits, prerequisite);
+		this.mark = mark;
+		this.attendance = attendance;
+		this.isPassed = isPassed;
+	}
     
     public Mark getMark() {
         return this.mark;
