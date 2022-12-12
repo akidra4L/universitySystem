@@ -1,5 +1,9 @@
 package users;
 
+import java.util.Vector;
+
+import classes.Lesson;
+import classes.Request;
 import enums.Faculty;
 import enums.ManagerType;
 

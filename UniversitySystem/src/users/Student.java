@@ -2,6 +2,9 @@ package users;
 
 import java.util.Vector;
 
+import classes.CourseStudent;
+import classes.Schedule;
+import classes.Transcript;
 import enums.Degree;
 import enums.Faculty;
 
@@ -12,29 +15,29 @@ public class Student extends User {
     private double gpa;
     private Schedule schedule;
 
-    private Faculty getFaculty() {
+    public Faculty getFaculty() {
         return this.faculty;
     }
     
-    private Degree getDegree() {
+    public Degree getDegree() {
         return this.degree;
     }
     
-    private Vector<CourseStudent> getCourses() {
+    public Vector<CourseStudent> getCourses() {
         return this.courses;
     }
-    private Vector<CourseStudent> setCourses(Vector<CourseStudent> courses) {
+    public void setCourses(Vector<CourseStudent> courses) {
         this.courses = courses;
     }
     
-    private double getGpa() {
+    public double getGpa() {
         return this.gpa;
     }
     
-    private Schedule getSchedule() {
+    public Schedule getSchedule() {
         return this.schedule;
     }
-    private Schedule setSchedule(Schedule schedule) {
+    public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
     }
     
@@ -60,5 +63,6 @@ public class Student extends User {
 
     public Transcript viewTranscript() {
         // TODO
+    	return null;
     }
 }

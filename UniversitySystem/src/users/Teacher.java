@@ -2,9 +2,9 @@ package users;
 
 import java.util.Vector;
 
-import classes.ID;
+import classes.Course;
+import classes.Schedule;
 import enums.Faculty;
-import enums.Role;
 import enums.TeacherTitle;
 
 public class Teacher extends Employee {
@@ -30,14 +30,14 @@ public class Teacher extends Employee {
     public Vector<Course> getCourses() {
         return this.courses;
     }
-    public Vector<Course> setCourses(Vector<Course> courses) {
+    public void setCourses(Vector<Course> courses) {
         this.courses = courses;
     }
     
-    private Schedule getSchedule() {
+    public Schedule getSchedule() {
         return this.schedule;
     }
-    private Schedule setSchedule(Schedule schedule) {
+    public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
     }
     
@@ -47,5 +47,6 @@ public class Teacher extends Employee {
 
     public Vector<Student> checkAttendance() {
         // TODO
+    	return null;
     }
 }
