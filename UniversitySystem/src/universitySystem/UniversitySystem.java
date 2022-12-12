@@ -2,6 +2,7 @@ package universitySystem;
 
 import java.util.*;
 
+import classes.Book;
 import users.*;
 
 public class UniversitySystem {
@@ -14,6 +15,7 @@ public class UniversitySystem {
 	
 	static {
 		Vector<User> users = new Vector<User>();
+		Vector<Book> books = new Vector<Book>();
 	}
 	
 	public String getName() {
