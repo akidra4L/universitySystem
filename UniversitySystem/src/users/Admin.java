@@ -9,7 +9,7 @@ public class Admin extends User {
 	}
 
 	public void createUser() {
-        // TODO
+		//TODO
     }
     
     public void deleteUser() {
@@ -34,5 +34,9 @@ public class Admin extends User {
     
     public void backupData() {
         //TODO
+    }
+    
+    public String toString() {
+    	return super.toString();
     }
 }
