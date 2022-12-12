@@ -15,17 +15,17 @@ public class User {
         this.id = id;
     }
 
-    private String getName() {
+    public String getName() {
         return this.name;
     }
-    private void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
     
-    private Role getRole() {
+    public Role getRole() {
         return this.role;
     }
-    private void setRole(Role role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

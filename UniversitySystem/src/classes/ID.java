@@ -13,24 +13,24 @@ public class ID {
         this.numberID = numberID;
     }
     
-    private boolean getIsAvailable() {
+    public boolean getIsAvailable() {
         return this.isAvailable;
     }
-    private void setIsAvailable(Boolean isAvailable) {
+    public void setIsAvailable(Boolean isAvailable) {
         this.isAvailable = isAvailable;
     }
 
-    private Date getDateCreation() {
+    public Date getDateCreation() {
         return this.dateCreation;
     }
-    private void setDateCreation(Date dateCreation) {
+    public void setDateCreation(Date dateCreation) {
         this.dateCreation = dateCreation;
     }
 
-    private Date getDateExpiration() {
+    public Date getDateExpiration() {
         return this.dateExpiration;
     }
-    private void setDateExpiration(Date dateExpiration) {
+    public void setDateExpiration(Date dateExpiration) {
         this.dateExpiration = dateExpiration;
     }
 }
