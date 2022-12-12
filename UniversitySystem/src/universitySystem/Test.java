@@ -1,16 +1,13 @@
 package universitySystem;
 
-import decorators.EmployeeResearcher;
-import decorators.Researcher;
-import decorators.ResearcherItem;
+import classes.ID;
+import enums.Role;
+import users.User;
 
 public class Test {
-
 	public static void main(String[] args) {
-//		System.out.println("Hello, World!");
-		
-		Researcher r = new EmployeeResearcher(new ResearcherItem());
-		System.out.println(r.makeResearch());
+		UniversitySystem app = new UniversitySystem("WSP");
+		UniversitySystem.users.add(new User(new ID(), "Alikhan", Role.Student));
+		System.out.println(UniversitySystem.users);
 	}
-
 }

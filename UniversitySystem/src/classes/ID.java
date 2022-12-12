@@ -1,16 +1,22 @@
 package classes;
 
+import generators.GeneratorID;
+
 public class ID {
     private String numberID;
     private boolean isAvailable;
     private Date dateCreation;
-    private Date dateExpiration;
     
-    public ID(String numberID, boolean isAvailable, Date dateCreation, Date dateExpiration) {
+    public ID(String numberID, boolean isAvailable, Date dateCreation) {
     	this.numberID = numberID;
     	this.isAvailable = isAvailable;
     	this.dateCreation = dateCreation;
-    	this.dateExpiration = dateExpiration;
+    }
+    
+    public ID() {
+    	this.numberID = GeneratorID.generateID();
+    	this.isAvailable = true;
+    	this.dateCreation = new Date(30, 8, 2022);
     }
     
     public String getNumberID() {
@@ -33,11 +39,8 @@ public class ID {
     public void setDateCreation(Date dateCreation) {
         this.dateCreation = dateCreation;
     }
-
-    public Date getDateExpiration() {
-        return this.dateExpiration;
-    }
-    public void setDateExpiration(Date dateExpiration) {
-        this.dateExpiration = dateExpiration;
+    
+    public String toString() {
+    	return this.numberID;
     }
 }

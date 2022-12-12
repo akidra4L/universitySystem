@@ -5,17 +5,25 @@ import enums.WeekDay;
 
 public class Date {
     private Time time;
+    private int day;
     private int month;
     private int year;
-    private WeekDay day;
+    private WeekDay weekday;
     private Semester semester;
     
-    public Date(Time time, int month, int year, WeekDay day, Semester semester) {
+    public Date(Time time, int day, int month, int year, WeekDay weekday, Semester semester) {
     	this.time = time;
+    	this.day = day;
     	this.month = month;
     	this.year = year;
-    	this.day = day;
+    	this.weekday = weekday;
     	this.semester = semester;
+    }
+    
+    public Date(int day, int month, int year) {
+    	this.day = day;
+    	this.month = month;
+    	this.year = year;
     }
     
     public Time getTime() {
@@ -38,11 +46,11 @@ public class Date {
         this.year = year;
     }
     
-    public WeekDay getDay() {
-        return this.day;
+    public WeekDay getWeekDay() {
+        return this.weekday;
     }
-    public void setDay(WeekDay day) {
-        this.day = day;
+    public void setWeekDay(WeekDay weekday) {
+        this.weekday = weekday;
     }
     
     public Semester getSemester() {
@@ -51,4 +59,12 @@ public class Date {
     public void setSemester(Semester semester) {
         this.semester = semester;
     }
+
+	public int getDay() {
+		return day;
+	}
+
+	public void setDay(int day) {
+		this.day = day;
+	}
 }

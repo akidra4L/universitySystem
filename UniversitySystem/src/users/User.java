@@ -46,4 +46,8 @@ public class User {
     public void createRequest() {
         //TODO
     }
+    
+    public String toString() {
+    	return this.id + " " + this.name + " " + this.role;
+    }
 }
