@@ -6,6 +6,11 @@ public class Schedule {
     private ID id;
     private Vector<Lesson> lessons;
     
+    public Schedule(ID id, Vector<Lesson> lessons) {
+    	this.id = id;
+    	this.lessons = lessons;
+    }
+    
     public ID getId() {
         return this.id;
     }

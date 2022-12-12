@@ -3,15 +3,25 @@ package users;
 import java.util.Vector;
 
 import classes.Course;
+import classes.ID;
 import classes.Schedule;
 import enums.Faculty;
+import enums.Role;
 import enums.TeacherTitle;
 
 public class Teacher extends Employee {
-    private Faculty faculty;
+	private Faculty faculty;
     private TeacherTitle title;
     private Vector<Course> courses;
     private Schedule schedule;
+    
+    public Teacher(ID id, String name, Role role, double salary, Faculty faculty, TeacherTitle title, Vector<Course> courses, Schedule schedule) {
+		super(id, name, role, salary);
+		this.faculty = faculty;
+		this.title = title;
+		this.courses = courses;
+		this.schedule = schedule;
+	}
     
     public Faculty getFaculty() {
         return this.faculty;

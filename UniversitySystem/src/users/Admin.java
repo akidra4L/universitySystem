@@ -1,7 +1,14 @@
 package users;
 
+import classes.ID;
+import enums.Role;
+
 public class Admin extends User {
-    public void createUser() {
+    public Admin(ID id, String name, Role role) {
+		super(id, name, role);
+	}
+
+	public void createUser() {
         //TODO
     }
     

@@ -10,6 +10,14 @@ public class Date {
     private WeekDay day;
     private Semester semester;
     
+    public Date(Time time, int month, int year, WeekDay day, Semester semester) {
+    	this.time = time;
+    	this.month = month;
+    	this.year = year;
+    	this.day = day;
+    	this.semester = semester;
+    }
+    
     public Time getTime() {
     	return this.time;
     }

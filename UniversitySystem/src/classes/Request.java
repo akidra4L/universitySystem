@@ -10,6 +10,14 @@ public class Request {
     private User to;
     private StateOfRequest state;
     
+    public Request(ID id, String description, User from, User to, StateOfRequest state) {
+    	this.id = id;
+    	this.description = description;
+    	this.from = from;
+    	this.to = to;
+    	this.state = state;
+    }
+    
     public ID getId() {
         return this.id;
     }

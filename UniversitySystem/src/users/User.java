@@ -7,6 +7,12 @@ public class User {
     private ID id;
     private String name;
     private Role role;
+    
+    public User(ID id, String name, Role role) {
+    	this.id = id;
+    	this.name = name;
+    	this.role = role;
+    }
 
     public ID getId() {
         return this.id;
@@ -37,7 +43,7 @@ public class User {
         //TODO
     }
     
-    public void makeRequest() {
+    public void createRequest() {
         //TODO
     }
 }

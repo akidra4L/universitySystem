@@ -9,6 +9,12 @@ public class Transcript {
     private Semester semester;
     private Vector<CourseStudent> courses;
     
+    public Transcript(ID studentID, Semester semester, Vector<CourseStudent> courses) {
+    	this.studentID = studentID;
+    	this.semester = semester;
+    	this.courses = courses;
+    }
+    
     public ID getStudentID() {
         return this.studentID;
     }

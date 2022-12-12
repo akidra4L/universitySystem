@@ -12,6 +12,15 @@ public class Course {
     private int credits;
     private Vector<Course> prerequisite;
     
+    public Course(ID id, String code, String title, Faculty faculty, int credits, Vector<Course> prerequisite) {
+    	this.id = id;
+    	this.code = code;
+    	this.title = title;
+    	this.faculty = faculty;
+    	this.credits = credits;
+    	this.prerequisite = prerequisite;
+    }
+    
     public ID getId() {
         return this.id;
     }

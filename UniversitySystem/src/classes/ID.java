@@ -6,6 +6,13 @@ public class ID {
     private Date dateCreation;
     private Date dateExpiration;
     
+    public ID(String numberID, boolean isAvailable, Date dateCreation, Date dateExpiration) {
+    	this.numberID = numberID;
+    	this.isAvailable = isAvailable;
+    	this.dateCreation = dateCreation;
+    	this.dateExpiration = dateExpiration;
+    }
+    
     public String getNumberID() {
         return this.numberID;
     }

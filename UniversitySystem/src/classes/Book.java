@@ -6,6 +6,13 @@ public class Book {
     private String name;
     private boolean isAvailable;
     
+    public Book(ID id, String author, String name, boolean isAvailable) {
+    	this.id = id;
+    	this.author = author;
+    	this.name = name;
+    	this.isAvailable = isAvailable;
+    }
+    
     public ID getId() {
         return this.id;
     }

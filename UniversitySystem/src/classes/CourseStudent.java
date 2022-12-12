@@ -7,6 +7,12 @@ public class CourseStudent extends Course {
     private int attendance;
     private boolean isPassed;
     
+    public CourseStudent(Mark mark, int attendance, boolean isPassed) {
+    	this.mark = mark;
+    	this.attendance = attendance;
+    	this.isPassed = isPassed;
+    }
+    
     public Mark getMark() {
         return this.mark;
     }
