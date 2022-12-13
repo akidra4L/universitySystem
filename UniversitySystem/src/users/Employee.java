@@ -31,4 +31,8 @@ public class Employee extends User {
 	public Vector<Message> getMessages() {
 		return messages;
 	}
+	
+	public String toString() {
+		return super.toString() + " " + this.salary + " " + this.messages;
+	}
 }

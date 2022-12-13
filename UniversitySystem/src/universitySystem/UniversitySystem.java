@@ -1,5 +1,6 @@
 package universitySystem;
 
+import java.io.IOException;
 import java.util.*;
 
 import classes.*;
@@ -38,8 +39,10 @@ public class UniversitySystem {
 		return this.name;
 	}
 	
-	public void launch() {
+	public void launch() throws IOException {
 		Admin admin = new Admin(new ID(), "admin", Role.Admin);
 		System.out.println(users);
+		admin.createUser(new ID(), "Alikhan", Role.Employee);
+		System.out.println(employees);
 	}
 }
