@@ -18,13 +18,18 @@ public class Admin extends User {
 		if(role == Role.Admin) {
 			@SuppressWarnings("unused")
 			Admin admin = new Admin(id, name, role);
-		} else if (role == Role.Employee) {
+		} else if (role == Role.Employee || role == Role.Librarian) {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 			System.out.println("Enter salary: ");
 			double salary = Double.parseDouble(reader.readLine());
 			
-			@SuppressWarnings("unused")
-			Employee employee = new Employee(id, name, role, salary);
+			if(role == Role.Employee) {
+				@SuppressWarnings("unused")
+				Employee employee = new Employee(id, name, role, salary);
+			} else if (role == Role.Librarian) {
+				@SuppressWarnings("unused")
+				Librarian librarian = new Librarian(id, name, role, salary);
+			}
 		}
     }
     

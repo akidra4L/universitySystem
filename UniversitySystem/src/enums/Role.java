@@ -1,5 +1,5 @@
 package enums;
 
 public enum Role {
-	Admin, Student, Teacher, Manager, Employee;
+	Admin, Student, Teacher, Manager, Employee, Librarian;
 }

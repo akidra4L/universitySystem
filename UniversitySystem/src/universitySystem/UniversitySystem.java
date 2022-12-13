@@ -42,7 +42,7 @@ public class UniversitySystem {
 	public void launch() throws IOException {
 		Admin admin = new Admin(new ID(), "admin", Role.Admin);
 		System.out.println(users);
-		admin.createUser(new ID(), "Alikhan", Role.Employee);
-		System.out.println(employees);
+		admin.createUser(new ID(), "Alikhan", Role.Librarian);
+		System.out.println(librarians);
 	}
 }
