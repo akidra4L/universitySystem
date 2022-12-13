@@ -14,7 +14,7 @@ public class Employee extends User {
     public Employee(ID id, String name, Role role, double salary) {
 		super(id, name, role);
 		this.salary = salary;
-		UniversitySystem.employees.add(this);
+		UniversitySystem.addEmployee(this);
 	}
 
     public double getSalary() {

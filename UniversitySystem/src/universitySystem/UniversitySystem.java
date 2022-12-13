@@ -9,15 +9,15 @@ import users.*;
 
 public class UniversitySystem {
 	private String name;
-	public static Vector<User> users = new Vector<User>();
-	public static Vector<Admin> admins = new Vector<Admin>();
-	public static Vector<Student> students = new Vector<Student>();
-	public static Vector<Employee> employees = new Vector<Employee>();
-	public static Vector<Teacher> teachers = new Vector<Teacher>();
-	public static Vector<Librarian> librarians = new Vector<Librarian>();
-	public static Vector<Manager> managers = new Vector<Manager>();
-	public static Vector<Book> books = new Vector<Book>();
-	public static Vector<News> news = new Vector<News>();
+	private static Vector<User> users;
+	private static Vector<Admin> admins;
+	private static Vector<Student> students;
+	private static Vector<Employee> employees;
+	private static Vector<Teacher> teachers;
+	private static Vector<Librarian> librarians;
+	private static Vector<Manager> managers;
+	private static Vector<Book> books;
+	private static Vector<News> news;
 	
 	public UniversitySystem(String name) {
 		this.name = name;
@@ -37,6 +37,34 @@ public class UniversitySystem {
 	
 	public String getName() {
 		return this.name;
+	}
+	
+	public static void addUser(User u) {
+		users.add(u);
+	}
+	public static void addAdmin(Admin a) {
+		admins.add(a);
+	}
+	public static void addStudent(Student s) {
+		students.add(s);
+	}
+	public static void addEmployee(Employee e) {
+		employees.add(e);
+	}
+	public static void addTeacher(Teacher t) {
+		teachers.add(t);
+	}
+	public static void addLibrarian(Librarian l) {
+		librarians.add(l);
+	}
+	public static void addManager(Manager m) {
+		managers.add(m);
+	}
+	public static void addBook(Book b) {
+		books.add(b);
+	}
+	public static void addNews(News n) {
+		news.add(n);
 	}
 	
 	public void launch() throws IOException {

@@ -18,7 +18,7 @@ public class Manager extends Employee {
 		super(id, name, role, salary);
 		this.faculty = faculty;
 		this.type = type;
-		UniversitySystem.managers.add(this);
+		UniversitySystem.addManager(this);
 	}
     
     public Faculty getFaculty() {

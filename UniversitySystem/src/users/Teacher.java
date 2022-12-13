@@ -22,7 +22,7 @@ public class Teacher extends Employee {
 		this.title = title;
 		this.courses = courses;
 		this.schedule = schedule;
-		UniversitySystem.teachers.add(this);
+		UniversitySystem.addTeacher(this);
 	}
     
     public Faculty getFaculty() {

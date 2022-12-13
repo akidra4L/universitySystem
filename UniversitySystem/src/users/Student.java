@@ -29,7 +29,7 @@ public class Student extends User {
 		this.gpa = gpa;
 		this.schedule = schedule;
 		this.transcript = transcript;
-		UniversitySystem.students.add(this);
+		UniversitySystem.addStudent(this);
 	}
 
     public Faculty getFaculty() {

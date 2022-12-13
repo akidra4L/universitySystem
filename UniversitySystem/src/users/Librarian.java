@@ -13,12 +13,12 @@ public class Librarian extends Employee {
 	public Librarian(ID id, String name, Role role, double salary, Vector<Book> books) {
 		super(id, name, role, salary);
 		this.books = books;
-		UniversitySystem.librarians.add(this);
+		UniversitySystem.addLibrarian(this);
 	}
 	
 	public Librarian(ID id, String name, Role role, double salary) {
 		super(id, name, role, salary);
-		UniversitySystem.librarians.add(this);
+		UniversitySystem.addLibrarian(this);
 	}
     
     public Vector<Book> getBooks() {
