@@ -1,6 +1,6 @@
 package classes;
 
-import enums.Semester;
+import generators.Semester;
 import enums.WeekDay;
 
 public class Date {

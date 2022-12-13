@@ -2,14 +2,16 @@ package users;
 
 import classes.ID;
 import enums.Role;
+import universitySystem.UniversitySystem;
 
 public class Admin extends User {
     public Admin(ID id, String name, Role role) {
 		super(id, name, role);
+		UniversitySystem.admins.add(this);
 	}
 
-	public void createUser() {
-		//TODO
+	public void createUser(ID id, String name, Role role) {
+		User user = new User(id, name, role);
     }
     
     public void deleteUser() {

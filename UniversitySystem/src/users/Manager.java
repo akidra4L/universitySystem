@@ -8,6 +8,7 @@ import classes.Request;
 import enums.Faculty;
 import enums.ManagerType;
 import enums.Role;
+import universitySystem.UniversitySystem;
 
 public class Manager extends Employee {
 	private Faculty faculty;
@@ -17,6 +18,7 @@ public class Manager extends Employee {
 		super(id, name, role, salary);
 		this.faculty = faculty;
 		this.type = type;
+		UniversitySystem.managers.add(this);
 	}
     
     public Faculty getFaculty() {

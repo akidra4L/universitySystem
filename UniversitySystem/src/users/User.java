@@ -2,6 +2,7 @@ package users;
 
 import classes.ID;
 import enums.Role;
+import universitySystem.UniversitySystem;
 
 public class User {
     private ID id;
@@ -12,6 +13,7 @@ public class User {
     	this.id = id;
     	this.name = name;
     	this.role = role;
+    	UniversitySystem.users.add(this);
     }
 
     public ID getId() {

@@ -5,6 +5,7 @@ import java.util.Vector;
 import classes.ID;
 import classes.Message;
 import enums.Role;
+import universitySystem.UniversitySystem;
 
 public class Employee extends User {
 	private double salary;
@@ -13,6 +14,7 @@ public class Employee extends User {
     public Employee(ID id, String name, Role role, double salary) {
 		super(id, name, role);
 		this.salary = salary;
+		UniversitySystem.employees.add(this);
 	}
 
     public double getSalary() {

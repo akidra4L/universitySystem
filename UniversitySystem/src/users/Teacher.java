@@ -8,6 +8,7 @@ import classes.Schedule;
 import enums.Faculty;
 import enums.Role;
 import enums.TeacherTitle;
+import universitySystem.UniversitySystem;
 
 public class Teacher extends Employee {
 	private Faculty faculty;
@@ -21,6 +22,7 @@ public class Teacher extends Employee {
 		this.title = title;
 		this.courses = courses;
 		this.schedule = schedule;
+		UniversitySystem.teachers.add(this);
 	}
     
     public Faculty getFaculty() {

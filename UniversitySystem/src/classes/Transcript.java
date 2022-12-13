@@ -1,18 +1,28 @@
 package classes;
 
-import java.util.Vector;
+import java.util.HashMap;
+import java.time.LocalDate;
 
-import enums.Semester;
+import enums.Mark;
+import generators.Semester;
 
 public class Transcript {
     private ID studentID;
     private Semester semester;
-    private Vector<CourseStudent> courses;
+    private HashMap<CourseStudent, Mark> marks;
     
-    public Transcript(ID studentID, Semester semester, Vector<CourseStudent> courses) {
+    private LocalDate currentDate = LocalDate.now();
+    
+    public Transcript(ID studentID, Semester semester, HashMap<CourseStudent, Mark> marks) {
     	this.studentID = studentID;
     	this.semester = semester;
-    	this.courses = courses;
+    	this.marks = marks;
+    }
+    
+    public Transcript(ID studentID) {
+    	this.studentID = studentID;
+    	this.semester = Semester.of(currentDate.getMonth());
+    	this.marks = new HashMap<CourseStudent, Mark>();
     }
     
     public ID getStudentID() {
@@ -23,7 +33,11 @@ public class Transcript {
         return this.semester;
     }
     
-    public Vector<CourseStudent> getCourses() {
-        return this.courses;
-    }
+	public HashMap<CourseStudent, Mark> getMarks() {
+		return marks;
+	}
+	
+	public String toString() {
+		return this.studentID + " " + this.semester + " " + this.marks;
+	}
 }

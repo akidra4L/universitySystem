@@ -5,6 +5,7 @@ import java.util.Vector;
 import classes.Book;
 import classes.ID;
 import enums.Role;
+import universitySystem.UniversitySystem;
 
 public class Librarian extends Employee {
 	private Vector<Book> books;
@@ -12,6 +13,7 @@ public class Librarian extends Employee {
 	public Librarian(ID id, String name, Role role, double salary, Vector<Book> books) {
 		super(id, name, role, salary);
 		this.books = books;
+		UniversitySystem.librarians.add(this);
 	}
     
     public Vector<Book> getBooks() {

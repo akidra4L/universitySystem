@@ -1,6 +1,7 @@
 package users;
 
 import java.util.Vector;
+import java.util.HashMap;
 
 import classes.CourseStudent;
 import classes.ID;
@@ -8,7 +9,9 @@ import classes.Schedule;
 import classes.Transcript;
 import enums.Degree;
 import enums.Faculty;
+import enums.Mark;
 import enums.Role;
+import universitySystem.UniversitySystem;
 
 public class Student extends User {
 	private Faculty faculty;
@@ -16,14 +19,17 @@ public class Student extends User {
     private Vector<CourseStudent> courses;
     private double gpa;
     private Schedule schedule;
+    private Transcript transcript;
     
-    public Student(ID id, String name, Role role, Faculty faculty, Degree degree, Vector<CourseStudent> courses, double gpa, Schedule schedule) {
+    public Student(ID id, String name, Role role, Faculty faculty, Degree degree, Vector<CourseStudent> courses, double gpa, Schedule schedule, Transcript transcript) {
 		super(id, name, role);
 		this.faculty = faculty;
 		this.degree = degree;
 		this.courses = courses;
 		this.gpa = gpa;
 		this.schedule = schedule;
+		this.transcript = transcript;
+		UniversitySystem.students.add(this);
 	}
 
     public Faculty getFaculty() {
@@ -72,8 +78,11 @@ public class Student extends User {
         // TODO
     }
 
-    public Transcript viewTranscript() {
-        // TODO
-    	return null;
-    }
+	public Transcript getTranscript() {
+		return transcript;
+	}
+	
+	public String toString() {
+		return super.toString() + " " + this.faculty + " " + this.degree + " " + this.courses + " " + this.gpa + " " + this.schedule + " " + this.transcript;
+ 	}
 }
