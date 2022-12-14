@@ -2,6 +2,7 @@ package users;
 
 import java.util.Vector;
 
+import classes.Course;
 import classes.CourseStudent;
 import classes.ID;
 import classes.Schedule;
@@ -11,7 +12,7 @@ import enums.Faculty;
 import enums.Role;
 import universitySystem.UniversitySystem;
 
-public class Student extends User {
+public class Student extends User implements Comparable<Student> {
 	private Faculty faculty;
     private Degree degree;
     private Vector<CourseStudent> courses;
@@ -67,28 +68,45 @@ public class Student extends User {
         this.schedule = schedule;
     }
     
-    public void takeExam() {
-        // TODO
-    }
-
-    public void takeHomework() {
-        // TODO
-    }
-    
-    public void takeLesson() {
-        // TODO
+    public int getTotalCreditsInSemester() {
+    	int total = 0;
+    	for(Course c: courses) {
+    		total += c.getCredits();
+    	}
+    	return total;
     }
     
-    public void enrollCourse() {
-        // TODO
+    public boolean enrollCourse(Course course) {
+    	if(course.getCredits() + getTotalCreditsInSemester() <= 30) {
+    		return true;
+    	}
+        return false;
     }
 
-    public void dropCourse() {
-        // TODO
+    public boolean dropCourse(Course course) {
+        for(Course c: courses) {
+        	if(c.equals(course)) {
+        		courses.remove(c);
+        		return true;
+        	}
+        }
+        return false;
     }
 
 	public Transcript getTranscript() {
 		return transcript;
+	}
+	
+	@Override
+	public int compareTo(Student o) {
+		return 0;
+	}
+	
+	public boolean equals(Object o) {
+		if(!super.equals(o)) return false;
+		
+		Student s = (Student) o;
+		return this.faculty.equals(s.getFaculty()) && this.degree.equals(s.getDegree()) && this.courses.equals(s.getCourses()) && this.gpa == s.getGpa() && this.schedule.equals(s.getSchedule()) && this.transcript.equals(s.getTranscript());
 	}
 	
 	public String toString() {
