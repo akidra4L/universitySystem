@@ -32,6 +32,13 @@ public class Employee extends User {
 		return messages;
 	}
 	
+	public boolean equals(Object o) {
+		if(!super.equals(o)) return false;
+		
+		Employee e = (Employee) o;
+		return this.salary == e.getSalary() && this.messages.equals(e.getMessages());
+	}
+	
 	public String toString() {
 		return super.toString() + " " + this.salary + " " + this.messages;
 	}

@@ -49,6 +49,15 @@ public class User {
         //TODO
     }
     
+    public boolean equals(Object o) {
+    	if(this == o) return true;
+    	if(o == null) return false;
+    	if(this.getClass() != o.getClass()) return false;
+    	
+    	User u = (User) o;
+    	return this.id.equals(u.getId()) && this.name.equals(u.getName()) && this.role.equals(u.getRole());
+    }
+    
     public String toString() {
     	return this.id + " " + this.name + " " + this.role;
     }
