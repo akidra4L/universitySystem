@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.time.LocalDate;
 import java.util.Random;
 
+import enums.Role;
+
 public class GeneratorID {
 	private static LocalDate currentDate = LocalDate.now();
 	private static HashMap<Integer, Boolean> allID = new HashMap<Integer, Boolean>();
@@ -18,7 +20,7 @@ public class GeneratorID {
 	}
 	
 	public static String generateID() {
-		String code = getYear() + "B";
+		String code = getYear() + "B0";
 		int randomID = getRandomID();
 		while(true) {
 			if(!allID.containsKey(randomID)) {

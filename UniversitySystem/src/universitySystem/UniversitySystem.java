@@ -100,6 +100,13 @@ public class UniversitySystem {
 		UniversitySystem.users = users;
 	}
 	
+	public static Vector<News> getNews() {
+		return news;
+	}
+	public static void setNews(Vector<News> news) {
+		UniversitySystem.news = news;
+	}
+	
 	public User findUser(User u) {
 		if(users.contains(u)) {
 			return u;

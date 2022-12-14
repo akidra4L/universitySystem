@@ -1,22 +1,18 @@
 package classes;
 
+import universitySystem.UniversitySystem;
 import users.Manager;
 
 public class News {
-    private ID id;
     private Manager author;
     private String title;
     private String description;
     
-    public News(ID id, Manager author, String title, String description) {
-    	this.id = id;
+    public News(Manager author, String title, String description) {
     	this.author = author;
     	this.title = title;
     	this.description = description;
-    }
-    
-    public ID getId() {
-        return this.id;
+    	UniversitySystem.addNews(this);
     }
     
     public Manager getAuthor() {
@@ -38,5 +34,18 @@ public class News {
     }
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public boolean equals(Object o) {
+    	if(this == o) return true;
+    	if(o == null) return false;
+    	if(this.getClass() != o.getClass()) return false;
+    	
+    	News n = (News) o;
+    	return this.author.equals(n.getAuthor()) && this.title.equals(n.getTitle()) && this.description.equals(n.getDescription());
+    }
+    
+    public String toString() {
+    	return this.author + " " + this.title + " " + this.description;
     }
 }

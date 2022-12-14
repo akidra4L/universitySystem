@@ -2,8 +2,10 @@ package users;
 
 import java.util.Vector;
 
+import classes.CourseStudent;
 import classes.ID;
 import classes.Lesson;
+import classes.News;
 import classes.Request;
 import enums.ManagerType;
 import enums.Role;
@@ -28,21 +30,44 @@ public class Manager extends Employee {
         return this.type;
     }
     
-    public void createNews() {
-    	// TODO
+    public News createNews(String title, String description) {
+    	return new News(this, title, description);
     }
 
-    public void manageNews() {
-        // TODO
+    public boolean deleteNews(News news) {
+    	Vector<News> allNews = UniversitySystem.getNews();
+    	for(News n: allNews) {
+    		if(n.equals(news)) {
+    			allNews.remove(n);
+    			UniversitySystem.setNews(allNews);
+    			return true;
+    		}
+    	}
+        return false;
     }
     
-    public void registerForCourse() {
-        // TODO
+    public boolean registerForCourse(Student student, CourseStudent course) {
+        if(student.enrollCourse(course)) {
+        	Vector<CourseStudent> courses = student.getCourses();
+        	courses.add(course);
+        	student.setCourses(courses);
+        	return true;
+        }
+        return false;
     }
     
-    public User viewUser() {
-    	// TODO
-        return null;
+    public Vector<User> viewUsers() {
+    	return UniversitySystem.getUsers();
+    }
+    
+    public User viewUser(User user) {
+    	Vector<User> allUsers = UniversitySystem.getUsers();
+    	for(User u: allUsers) {
+    		if(u.equals(user)) {
+    			return u;
+    		}
+    	}
+    	return null;
     }
 
     public Lesson viewLessonInfo() {
