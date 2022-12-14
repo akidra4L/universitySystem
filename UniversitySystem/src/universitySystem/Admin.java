@@ -1,10 +1,15 @@
-package users;
+package universitySystem;
 
 import java.util.Vector;
 
 import classes.ID;
 import enums.Role;
-import universitySystem.UniversitySystem;
+import users.Employee;
+import users.Librarian;
+import users.Manager;
+import users.Student;
+import users.Teacher;
+import users.User;
 
 public class Admin extends User {
     public Admin(ID id, String name, Role role) {

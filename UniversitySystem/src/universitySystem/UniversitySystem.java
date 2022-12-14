@@ -6,18 +6,20 @@ import java.util.*;
 import classes.*;
 import enums.*;
 import users.*;
+import view.viewStudentController;
+import view.viewUserController;
 
 public class UniversitySystem {
 	private String name;
-	private static Vector<User> users;
-	private static Vector<Admin> admins;
-	private static Vector<Student> students;
-	private static Vector<Employee> employees;
-	private static Vector<Teacher> teachers;
-	private static Vector<Librarian> librarians;
-	private static Vector<Manager> managers;
-	private static Vector<Book> books;
-	private static Vector<News> news;
+	static Vector<User> users;
+	static Vector<Admin> admins;
+	static Vector<Student> students;
+	static Vector<Employee> employees;
+	static Vector<Teacher> teachers;
+	static Vector<Librarian> librarians;
+	static Vector<Manager> managers;
+	static Vector<Book> books;
+	static Vector<News> news;
 	
 	static {
 		users = new Vector<User>();
@@ -42,10 +44,10 @@ public class UniversitySystem {
 	public static void addUser(User u) {
 		users.add(u);
 	}
-	public static void addAdmin(Admin a) {
+	static void addAdmin(Admin a) {
 		admins.add(a);
 	}
-	public static void removeAdmin(Admin a) {
+	static void removeAdmin(Admin a) {
 		admins.remove(a);
 	}
 	
@@ -94,19 +96,35 @@ public class UniversitySystem {
 	public static Vector<User> getUsers() {
 		return users;
 	}
-	public static void setUsers(Vector<User> users) {
+	static void setUsers(Vector<User> users) {
 		UniversitySystem.users = users;
 	}
 	
-	public void launch() throws IOException {
+	public User findUser(User u) {
+		if(users.contains(u)) {
+			return u;
+		}
+		return null;
+	}
+	
+	public User login(String name, String password) {
+		for(User u: users) {
+			if(u.getName().equals(name) && u.getPassword().equals(password)) {
+				return u;
+			}
+ 		}
+		return null;
+	}
+	
+	void launch() throws IOException {
+		viewUserController.showUserMenu();
 		Admin admin = new Admin(new ID(), "admin", Role.Admin);
 		System.out.println(users);
-		admin.createUser(new ID(), "Alikhan", Role.Manager);
-		ID id = UniversitySystem.managers.get(0).getId();
-		System.out.println(managers);
-		
-		admin.deleteUser(id);
-		System.out.println(id);
-		System.out.println(teachers);
+		admin.createUser(new ID(), "Alikhan", Role.Student);
+		System.out.println(users);
+		System.out.println(users.elementAt(1).getPassword());
+		users.elementAt(1).setPassword("123");
+		System.out.println(login("Alikhan", "123"));
+		viewStudentController.showStudentMenu((Student) login("Alikhan", "123"));
 	}
 }

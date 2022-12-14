@@ -7,11 +7,13 @@ import universitySystem.UniversitySystem;
 public class User {
     private ID id;
     private String name;
+    private String password;
     private Role role;
     
     public User(ID id, String name, Role role) {
     	this.id = id;
     	this.name = name;
+    	this.password = id.getNumberID();
     	this.role = role;
     	UniversitySystem.addUser(this);
     }
@@ -30,15 +32,21 @@ public class User {
         this.name = name;
     }
     
+    public String getPassword() {
+		return password;
+    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public int getHashCode() {
+		return this.password.hashCode();
+	}
+    
     public Role getRole() {
         return this.role;
     }
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    public void Login() {
-        //TODO
     }
 
     public void Logout() {
@@ -55,7 +63,7 @@ public class User {
     	if(this.getClass() != o.getClass()) return false;
     	
     	User u = (User) o;
-    	return this.id.equals(u.getId()) && this.name.equals(u.getName()) && this.role.equals(u.getRole());
+    	return this.id.equals(u.getId()) && this.name.equals(u.getName()) && this.role.equals(u.getRole()) && this.password.equals(u.getPassword());
     }
     
     public String toString() {

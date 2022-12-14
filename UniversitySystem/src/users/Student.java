@@ -1,7 +1,6 @@
 package users;
 
 import java.util.Vector;
-import java.util.HashMap;
 
 import classes.CourseStudent;
 import classes.ID;
@@ -9,7 +8,6 @@ import classes.Schedule;
 import classes.Transcript;
 import enums.Degree;
 import enums.Faculty;
-import enums.Mark;
 import enums.Role;
 import universitySystem.UniversitySystem;
 
