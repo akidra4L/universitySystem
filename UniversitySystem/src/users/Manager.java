@@ -60,4 +60,8 @@ public class Manager extends Employee {
         //TODO
         return null;
     }
+    
+    public String toString() {
+    	return super.toString() + " " + this.faculty + " " + this.type;
+    }
 }
