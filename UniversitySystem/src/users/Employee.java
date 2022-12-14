@@ -23,6 +23,13 @@ public class Employee extends User {
     	this.messages = new Vector<Message>();
     	UniversitySystem.addEmployee(this);
     }
+    
+    public Employee(ID id, String name, String password, Role role) {
+    	super(id, name, password, role);
+    	this.salary = 0;
+    	this.messages = new Vector<Message>();
+    	UniversitySystem.addEmployee(this);
+    }
 
     public double getSalary() {
         return this.salary;

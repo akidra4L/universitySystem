@@ -3,26 +3,26 @@ package classes;
 import java.util.HashMap;
 import java.time.LocalDate;
 
-import enums.Mark;
+import enums.MarkLetter;
 import generators.Semester;
 
 public class Transcript {
     private ID studentID;
     private Semester semester;
-    private HashMap<CourseStudent, Mark> marks;
+    private HashMap<CourseStudent, MarkLetter> markLetters;
     
     private LocalDate currentDate = LocalDate.now();
     
-    public Transcript(ID studentID, Semester semester, HashMap<CourseStudent, Mark> marks) {
+    public Transcript(ID studentID, Semester semester, HashMap<CourseStudent, MarkLetter> markLetters) {
     	this.studentID = studentID;
     	this.semester = semester;
-    	this.marks = marks;
+    	this.markLetters = markLetters;
     }
     
     public Transcript(ID studentID) {
     	this.studentID = studentID;
     	this.semester = Semester.of(currentDate.getMonth());
-    	this.marks = new HashMap<CourseStudent, Mark>();
+    	this.markLetters = new HashMap<CourseStudent, MarkLetter>();
     }
     
     public ID getStudentID() {
@@ -33,11 +33,11 @@ public class Transcript {
         return this.semester;
     }
     
-	public HashMap<CourseStudent, Mark> getMarks() {
-		return marks;
+	public HashMap<CourseStudent, MarkLetter> getMarks() {
+		return markLetters;
 	}
 	
 	public String toString() {
-		return this.studentID + " " + this.semester + " " + this.marks;
+		return this.studentID + " " + this.semester + " " + this.markLetters;
 	}
 }

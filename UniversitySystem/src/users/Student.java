@@ -41,6 +41,17 @@ public class Student extends User implements Comparable<Student>, Cloneable {
     	this.transcript = new Transcript(id);
     	UniversitySystem.addStudent(this);
     }
+    
+    public Student(ID id, String name, String password, Role role) {
+    	super(id, name, password, role);
+    	this.faculty = Faculty.Undefined;
+    	this.degree = Degree.Undefined;
+    	this.courses = new Vector<CourseStudent>();
+    	this.gpa = 0;
+    	this.schedule = new Schedule(id);
+    	this.transcript = new Transcript(id);
+    	UniversitySystem.addStudent(this);
+    }
 
     public Faculty getFaculty() {
         return this.faculty;

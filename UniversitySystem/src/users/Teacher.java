@@ -42,6 +42,15 @@ public class Teacher extends Employee {
 		this.schedule = new Schedule(id);
 		UniversitySystem.addTeacher(this);
 	}
+	
+	public Teacher(ID id, String name, String password, Role role) {
+		super(id, name, password, role);
+		this.faculty = Faculty.Undefined;
+		this.title = TeacherTitle.Undefined;
+		this.courses = new Vector<Course>();
+		this.schedule = new Schedule(id);
+		UniversitySystem.addTeacher(this);
+	}
 
 	public Faculty getFaculty() {
 		return this.faculty;

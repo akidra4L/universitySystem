@@ -16,6 +16,11 @@ public class Admin extends User {
 		super(id, name, role);
 		UniversitySystem.addAdmin(this);
 	}
+    
+    public Admin(ID id, String name, String password, Role role) {
+		super(id, name, password, role);
+		UniversitySystem.addAdmin(this);
+	}
 
 	public void createUser(ID id, String name, Role role) {
 		if(role == Role.Admin) {
@@ -47,6 +52,37 @@ public class Admin extends User {
     	Vector<User> users = UniversitySystem.getUsers();
     	for(User user: users) {
     		if(id.equals(user.getId())) {
+    			users.remove(user);
+    			UniversitySystem.setUsers(users);
+    			if(user.getRole() == Role.Admin) {
+    				Admin admin = (Admin) user;
+    				UniversitySystem.removeAdmin(admin);
+    			} else if (user.getRole() == Role.Employee) {
+    				Employee employee = (Employee) user;
+    				UniversitySystem.removeEmployee(employee);
+    			} else if (user.getRole() == Role.Librarian) {
+    				Librarian librarian = (Librarian) user;
+    				UniversitySystem.removeLibrarian(librarian);
+    			} else if (user.getRole() == Role.Manager) {
+    				Manager manager = (Manager) user;
+    				UniversitySystem.removeManager(manager);
+    			} else if (user.getRole() == Role.Student) {
+    				Student student = (Student) user;
+    				UniversitySystem.removeStudent(student);
+    			} else if (user.getRole() == Role.Teacher) {
+    				Teacher teacher = (Teacher) user;
+    				UniversitySystem.removeTeacher(teacher);
+    			}
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    
+    public boolean deleteUser(String id) {
+    	Vector<User> users = UniversitySystem.getUsers();
+    	for(User user: users) {
+    		if(id.equals(user.getId().getNumberID())) {
     			users.remove(user);
     			UniversitySystem.setUsers(users);
     			if(user.getRole() == Role.Admin) {

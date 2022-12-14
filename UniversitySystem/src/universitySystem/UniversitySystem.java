@@ -1,12 +1,16 @@
 package universitySystem;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 import classes.*;
 import enums.*;
 import users.*;
+import view.viewAdminController;
 import view.viewStudentController;
+import view.viewTeacherController;
 import view.viewUserController;
 
 public class UniversitySystem {
@@ -124,14 +128,107 @@ public class UniversitySystem {
 	}
 	
 	void launch() throws IOException {
-		viewUserController.showUserMenu();
-		Admin admin = new Admin(new ID(), "admin", Role.Admin);
-		System.out.println(users);
-		admin.createUser(new ID(), "Alikhan", Role.Student);
-		System.out.println(users);
-		System.out.println(users.elementAt(1).getPassword());
-		users.elementAt(1).setPassword("123");
-		System.out.println(login("Alikhan", "123"));
-		viewStudentController.showStudentMenu((Student) login("Alikhan", "123"));
+		Data.loadData();
+		
+		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+		while(true) {
+			viewUserController.showUserMenu();
+			System.out.print("Option: ");
+			int command = Integer.parseInt(input.readLine());
+			if(command == 1) {
+				System.out.print("Login: ");
+				String login = input.readLine();
+				System.out.print("Password: ");
+				String password = input.readLine();
+				User u = login(login, password);
+				
+				boolean isLoged = true;
+				while(isLoged) {
+					if(u == null) {
+						System.err.println("Error. Check login and password.\n");
+						break;
+						
+					} else if (u.getRole() == Role.Admin) {
+						Admin admin = (Admin) u;
+						viewAdminController.showAdminMenu(admin);
+						
+						System.out.print("Option: ");
+						int option = Integer.parseInt(input.readLine());
+						if(option == 1) {
+							System.out.print("New password: ");
+							String newPassword = input.readLine();
+							admin.setPassword(newPassword);
+							System.out.println("---Done---");
+						} else if (option == 2) {
+							System.out.println("---All users---");
+							for(User us: users) {
+								System.out.println(us);
+							}
+							
+						} else if (option == 3) {
+							System.out.println("---Create user---");
+							System.out.print("Name: ");
+							String newUserName = input.readLine();
+							System.out.print("Role: ");
+							Role newUserRole = Role.of(input.readLine().toLowerCase());
+							admin.createUser(new ID(), newUserName, newUserRole);
+							System.out.println("---Done---");
+							
+						} else if (option == 4) {
+							System.out.println("---Delete user---");
+							System.out.print("ID: ");
+							String deleteID = input.readLine();
+							
+							if(deleteID.equals(admin.getId().getNumberID())) {
+								admin.deleteUser(deleteID);
+								isLoged = false;
+								System.out.println();
+							} else {
+								admin.deleteUser(deleteID);
+							}
+							System.out.println("---Done---");
+							
+						} else if (option == 5) {
+							isLoged = false;
+						}
+						
+					} else if (u.getRole() == Role.Student) {
+						Student student = (Student) u;
+						viewStudentController.showStudentMenu((Student) u);
+						
+						System.out.print("Option: ");
+						int option = Integer.parseInt(input.readLine());
+						if(option == 1) {
+							System.err.print("New password: ");
+							String newPassword = input.readLine();
+							student.setPassword(newPassword);
+							System.out.println("\n---Done---");
+						}  else if (option == 2) {
+							System.err.println("\n---Schedule---");
+							System.out.println(student.getSchedule());
+						} else if (option == 3) {
+							System.err.println("\n---Marks---");
+							for(CourseStudent cs: student.getCourses()) {
+								System.out.println(cs.getTitle() + " - " + cs.getMark().getScore());
+							}
+						} else if (option == 4) {
+							System.err.println("\n---Transcript---");
+							System.out.println(student.getTranscript());
+						}
+						else if (option == 5) {
+							isLoged = false;
+						}
+					} else if (u.getRole() == Role.Teacher) {
+						viewTeacherController.showTeacherMenu((Teacher) u);
+					}
+				}
+				
+			} else if (command == 2) {
+				System.err.println("\n---Bye---\n");
+				break;
+			}
+		}
+		
+		input.close();
 	}
 }

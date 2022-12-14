@@ -17,6 +17,14 @@ public class User {
     	this.role = role;
     	UniversitySystem.addUser(this);
     }
+    
+    public User(ID id, String name, String password, Role role) {
+    	this.id = id;
+    	this.name = name;
+    	this.password = password;
+    	this.role = role;
+    	UniversitySystem.addUser(this);
+    }
 
     public ID getId() {
         return this.id;

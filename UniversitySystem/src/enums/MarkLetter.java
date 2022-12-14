@@ -1,5 +1,5 @@
 package enums;
 
-public enum Mark {
+public enum MarkLetter {
 	A, B, C, D, F;
 }
