@@ -12,7 +12,7 @@ import enums.Faculty;
 import enums.Role;
 import universitySystem.UniversitySystem;
 
-public class Student extends User implements Comparable<Student> {
+public class Student extends User implements Comparable<Student>, Cloneable {
 	private Faculty faculty;
     private Degree degree;
     private Vector<CourseStudent> courses;
@@ -99,7 +99,14 @@ public class Student extends User implements Comparable<Student> {
 	
 	@Override
 	public int compareTo(Student o) {
+		if(this.gpa > o.getGpa()) {
+			return 1;
+		}
 		return 0;
+	}
+	
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 	
 	public boolean equals(Object o) {
