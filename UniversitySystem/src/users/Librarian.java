@@ -16,6 +16,12 @@ public class Librarian extends Employee {
 		UniversitySystem.addLibrarian(this);
 	}
 	
+	public Librarian(ID id, String name, Role role) {
+		super(id, name, role);
+		this.books = new Vector<Book>();
+		UniversitySystem.addLibrarian(this);
+	}
+	
 	public Librarian(ID id, String name, Role role, double salary) {
 		super(id, name, role, salary);
 		UniversitySystem.addLibrarian(this);

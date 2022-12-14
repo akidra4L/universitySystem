@@ -1,5 +1,5 @@
 package enums;
 
 public enum ManagerType {
-	Manager, OR;
+	Manager, ManagerFinancial, ManagerDepartment, Undefined;
 }

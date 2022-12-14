@@ -25,6 +25,23 @@ public class Teacher extends Employee {
 		UniversitySystem.addTeacher(this);
 	}
     
+    public Teacher(ID id, String name, Role role, double salary) {
+    	super(id, name, role, salary);
+    	this.faculty = Faculty.Undefined;
+    	this.courses = new Vector<Course>();
+    	this.schedule = new Schedule(id);
+    	UniversitySystem.addTeacher(this);
+    }
+    
+    public Teacher(ID id, String name, Role role) {
+    	super(id, name, role);
+    	this.faculty = Faculty.Undefined;
+    	this.title = TeacherTitle.Undefined;
+    	this.courses = new Vector<Course>();
+    	this.schedule = new Schedule(id);
+    	UniversitySystem.addTeacher(this);
+    }
+    
     public Faculty getFaculty() {
         return this.faculty;
     }
@@ -55,6 +72,13 @@ public class Teacher extends Employee {
     
     public void putMark() {
         // TODO
+    }
+    
+    public boolean equals(Object o) {
+    	if(!super.equals(o)) return false;
+    	
+    	Teacher t = (Teacher) o;
+    	return this.faculty.equals(t.getFaculty()) && this.title.equals(t.getTitle()) && this.courses.equals(t.getCourses()) && this.schedule.equals(t.getSchedule());
     }
 
     public Vector<Student> checkAttendance() {

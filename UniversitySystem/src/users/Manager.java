@@ -5,24 +5,23 @@ import java.util.Vector;
 import classes.ID;
 import classes.Lesson;
 import classes.Request;
-import enums.Faculty;
 import enums.ManagerType;
 import enums.Role;
 import universitySystem.UniversitySystem;
 
 public class Manager extends Employee {
-	private Faculty faculty;
     private ManagerType type;
     
-    public Manager(ID id, String name, Role role, double salary, Faculty faculty, ManagerType type) {
+    public Manager(ID id, String name, Role role, double salary, ManagerType type) {
 		super(id, name, role, salary);
-		this.faculty = faculty;
 		this.type = type;
 		UniversitySystem.addManager(this);
 	}
     
-    public Faculty getFaculty() {
-        return this.faculty;
+    public Manager(ID id, String name, Role role) {
+    	super(id, name, role);
+    	this.type = ManagerType.Undefined;
+    	UniversitySystem.addManager(this);
     }
     
     public ManagerType getType() {
@@ -62,6 +61,6 @@ public class Manager extends Employee {
     }
     
     public String toString() {
-    	return super.toString() + " " + this.faculty + " " + this.type;
+    	return super.toString() + " " + this.type;
     }
 }

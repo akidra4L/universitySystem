@@ -10,6 +10,10 @@ public class Schedule {
     	this.id = id;
     	this.lessons = lessons;
     }
+    public Schedule(ID id) {
+    	this.id = id;
+    	this.lessons = new Vector<Lesson>();
+    }
     
     public ID getId() {
         return this.id;
@@ -23,5 +27,9 @@ public class Schedule {
     }
     public void setLessons(Vector<Lesson> lessons) {
         this.lessons = lessons;
+    }
+    
+    public String toString() {
+    	return this.id + " " + this.lessons;
     }
 }

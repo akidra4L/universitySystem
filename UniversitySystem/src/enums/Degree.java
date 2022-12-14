@@ -1,5 +1,5 @@
 package enums;
 
 public enum Degree {
-	Bachelor, Master, PhD;
+	Bachelor, Master, PhD, Undefined;
 }
