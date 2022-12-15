@@ -13,4 +13,15 @@ public class CourseTeacher extends Course {
 		super(id, code, title, faculty, credits, prerequisite);
 	}
 
+	public HashMap<Course, Student> getStudents() {
+		return students;
+	}
+
+	public void setStudents(HashMap<Course, Student> students) {
+		this.students = students;
+	}
+	
+	public String toString() {
+		return super.toString() + " " + this.students;
+ 	}
 }

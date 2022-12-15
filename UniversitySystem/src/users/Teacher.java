@@ -2,7 +2,7 @@ package users;
 
 import java.util.Vector;
 
-import classes.Course;
+import classes.CourseTeacher;
 import classes.ID;
 import classes.Schedule;
 import enums.Faculty;
@@ -13,11 +13,11 @@ import universitySystem.UniversitySystem;
 public class Teacher extends Employee {
 	private Faculty faculty;
 	private TeacherTitle title;
-	private Vector<Course> courses;
+	private Vector<CourseTeacher> courses;
 	private Schedule schedule;
 
 	public Teacher(ID id, String name, Role role, double salary, Faculty faculty, TeacherTitle title,
-			Vector<Course> courses, Schedule schedule) {
+			Vector<CourseTeacher> courses, Schedule schedule) {
 		super(id, name, role, salary);
 		this.faculty = faculty;
 		this.title = title;
@@ -29,7 +29,7 @@ public class Teacher extends Employee {
 	public Teacher(ID id, String name, Role role, double salary) {
 		super(id, name, role, salary);
 		this.faculty = Faculty.Undefined;
-		this.courses = new Vector<Course>();
+		this.courses = new Vector<CourseTeacher>();
 		this.schedule = new Schedule(id);
 		UniversitySystem.addTeacher(this);
 	}
@@ -38,7 +38,7 @@ public class Teacher extends Employee {
 		super(id, name, role);
 		this.faculty = Faculty.Undefined;
 		this.title = TeacherTitle.Undefined;
-		this.courses = new Vector<Course>();
+		this.courses = new Vector<CourseTeacher>();
 		this.schedule = new Schedule(id);
 		UniversitySystem.addTeacher(this);
 	}
@@ -47,7 +47,7 @@ public class Teacher extends Employee {
 		super(id, name, password, role);
 		this.faculty = Faculty.Undefined;
 		this.title = TeacherTitle.Undefined;
-		this.courses = new Vector<Course>();
+		this.courses = new Vector<CourseTeacher>();
 		this.schedule = new Schedule(id);
 		UniversitySystem.addTeacher(this);
 	}
@@ -68,11 +68,11 @@ public class Teacher extends Employee {
 		this.title = title;
 	}
 
-	public Vector<Course> getCourses() {
+	public Vector<CourseTeacher> getCourses() {
 		return this.courses;
 	}
 
-	public void setCourses(Vector<Course> courses) {
+	public void setCourses(Vector<CourseTeacher> courses) {
 		this.courses = courses;
 	}
 
