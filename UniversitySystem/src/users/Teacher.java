@@ -84,7 +84,8 @@ public class Teacher extends Employee {
 		this.schedule = schedule;
 	}
 
-	public void putMark(Student o) {
+	public void putMark(Student s) {
+		
 	}
 
 	public boolean equals(Object o) {

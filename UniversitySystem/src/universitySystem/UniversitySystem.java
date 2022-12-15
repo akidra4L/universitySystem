@@ -219,7 +219,23 @@ public class UniversitySystem {
 							isLoged = false;
 						}
 					} else if (u.getRole() == Role.Teacher) {
+						Teacher teacher = (Teacher) u;
 						viewTeacherController.showTeacherMenu((Teacher) u);
+						
+						System.out.print("Option: ");
+						int option = Integer.parseInt(input.readLine());
+						if(option == 1) {
+							System.err.print("New password: ");
+							String newPassword = input.readLine();
+							teacher.setPassword(newPassword);
+							System.out.println("\n---Done---");
+						} else if (option == 2) {
+							System.err.println("\n---Schedule---");
+							System.out.println(teacher.getSchedule());
+						} else if (option == 3) {
+							System.out.print("\n---Setting mark---");
+							
+						}
 					}
 				}
 				
