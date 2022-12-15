@@ -6,6 +6,7 @@ public enum Semester {
 	Spring, Summer, Fall;
 	
 	static public Semester of (final Month month) {
+		if(month.ordinal()<6) return Spring;
 		switch(month) {
 		// cases to return Spring Semester
 		case JANUARY:

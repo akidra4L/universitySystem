@@ -8,7 +8,7 @@ public class User {
     private ID id;
     private String name;
     private String password;
-    private Role role;
+  //  private Role role;
     
     public User(ID id, String name, Role role) {
     	this.id = id;
