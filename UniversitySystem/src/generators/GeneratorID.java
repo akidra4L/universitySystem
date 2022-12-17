@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.time.LocalDate;
 import java.util.Random;
 
-import enums.Role;
-
 public class GeneratorID {
 	private static LocalDate currentDate = LocalDate.now();
 	private static HashMap<Integer, Boolean> allID = new HashMap<Integer, Boolean>();

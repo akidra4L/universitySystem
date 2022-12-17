@@ -9,8 +9,6 @@ import classes.Schedule;
 import classes.Transcript;
 import enums.Degree;
 import enums.Faculty;
-import enums.Role;
-import universitySystem.UniversitySystem;
 
 public class Student extends User implements Comparable<Student>, Cloneable {
 	private Faculty faculty;
@@ -20,37 +18,34 @@ public class Student extends User implements Comparable<Student>, Cloneable {
     private Schedule schedule;
     private Transcript transcript;
     
-    public Student(ID id, String name, Role role, Faculty faculty, Degree degree, Vector<CourseStudent> courses, double gpa, Schedule schedule, Transcript transcript) {
-		super(id, name, role);
+    public Student(ID id, String name, Faculty faculty, Degree degree, Vector<CourseStudent> courses, double gpa, Schedule schedule, Transcript transcript) {
+		super(id, name);
 		this.faculty = faculty;
 		this.degree = degree;
 		this.courses = courses;
 		this.gpa = gpa;
 		this.schedule = schedule;
 		this.transcript = transcript;
-		UniversitySystem.addStudent(this);
 	}
     
-    public Student(ID id, String name, Role role) {
-    	super(id, name, role);
+    public Student(ID id, String name) {
+    	super(id, name);
     	this.faculty = Faculty.Undefined;
     	this.degree = Degree.Undefined;
     	this.courses = new Vector<CourseStudent>();
     	this.gpa = 0;
     	this.schedule = new Schedule(id);
     	this.transcript = new Transcript(id);
-    	UniversitySystem.addStudent(this);
     }
     
-    public Student(ID id, String name, String password, Role role) {
-    	super(id, name, password, role);
+    public Student(ID id, String name, String password) {
+    	super(id, name, password);
     	this.faculty = Faculty.Undefined;
     	this.degree = Degree.Undefined;
     	this.courses = new Vector<CourseStudent>();
     	this.gpa = 0;
     	this.schedule = new Schedule(id);
     	this.transcript = new Transcript(id);
-    	UniversitySystem.addStudent(this);
     }
 
     public Faculty getFaculty() {

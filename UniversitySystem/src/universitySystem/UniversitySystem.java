@@ -16,23 +16,11 @@ import view.viewUserController;
 public class UniversitySystem {
 	private String name;
 	static Vector<User> users;
-	static Vector<Admin> admins;
-	static Vector<Student> students;
-	static Vector<Employee> employees;
-	static Vector<Teacher> teachers;
-	static Vector<Librarian> librarians;
-	static Vector<Manager> managers;
 	static Vector<Book> books;
 	static Vector<News> news;
 	
 	static {
 		users = new Vector<User>();
-		admins = new Vector<Admin>();
-		students = new Vector<Student>();
-		employees = new Vector<Employee>();
-		teachers = new Vector<Teacher>();
-		librarians = new Vector<Librarian>();
-		managers = new Vector<Manager>();
 		books = new Vector<Book>();
 		news = new Vector<News>();
 	}
@@ -48,51 +36,11 @@ public class UniversitySystem {
 	public static void addUser(User u) {
 		users.add(u);
 	}
-	static void addAdmin(Admin a) {
-		admins.add(a);
-	}
-	static void removeAdmin(Admin a) {
-		admins.remove(a);
-	}
-	
-	public static void addStudent(Student s) {
-		students.add(s);
-	}
-	public static void removeStudent(Student s) {
-		students.remove(s);
-	}
-	
-	public static void addEmployee(Employee e) {
-		employees.add(e);
-	}
-	public static void removeEmployee(Employee e) {
-		employees.remove(e);
-	}
-	
-	public static void addTeacher(Teacher t) {
-		teachers.add(t);
-	}
-	public static void removeTeacher(Teacher t) {
-		teachers.remove(t);
-	}
-	
-	public static void addLibrarian(Librarian l) {
-		librarians.add(l);
-	}
-	public static void removeLibrarian(Librarian l) {
-		librarians.remove(l);
-	}
-	
-	public static void addManager(Manager m) {
-		managers.add(m);
-	}
-	public static void removeManager(Manager m) {
-		managers.remove(m);
-	}
 	
 	public static void addBook(Book b) {
 		books.add(b);
 	}
+	
 	public static void addNews(News n) {
 		news.add(n);
 	}
@@ -148,7 +96,7 @@ public class UniversitySystem {
 						System.err.println("Error. Check login and password.\n");
 						break;
 						
-					} else if (u.getRole() == Role.Admin) {
+					} else if (u instanceof Admin) {
 						Admin admin = (Admin) u;
 						viewAdminController.showAdminMenu(admin);
 						
@@ -192,7 +140,7 @@ public class UniversitySystem {
 							isLoged = false;
 						}
 						
-					} else if (u.getRole() == Role.Student) {
+					} else if (u instanceof Student) {
 						Student student = (Student) u;
 						viewStudentController.showStudentMenu((Student) u);
 						
@@ -218,7 +166,7 @@ public class UniversitySystem {
 						else if (option == 5) {
 							isLoged = false;
 						}
-					} else if (u.getRole() == Role.Teacher) {
+					} else if (u instanceof Teacher) {
 						Teacher teacher = (Teacher) u;
 						viewTeacherController.showTeacherMenu((Teacher) u);
 						

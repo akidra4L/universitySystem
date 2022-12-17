@@ -6,9 +6,7 @@ import classes.CourseTeacher;
 import classes.ID;
 import classes.Schedule;
 import enums.Faculty;
-import enums.Role;
 import enums.TeacherTitle;
-import universitySystem.UniversitySystem;
 
 public class Teacher extends Employee {
 	private Faculty faculty;
@@ -16,40 +14,36 @@ public class Teacher extends Employee {
 	private Vector<CourseTeacher> courses;
 	private Schedule schedule;
 
-	public Teacher(ID id, String name, Role role, double salary, Faculty faculty, TeacherTitle title,
+	public Teacher(ID id, String name, double salary, Faculty faculty, TeacherTitle title,
 			Vector<CourseTeacher> courses, Schedule schedule) {
-		super(id, name, role, salary);
+		super(id, name, salary);
 		this.faculty = faculty;
 		this.title = title;
 		this.courses = courses;
 		this.schedule = schedule;
-		UniversitySystem.addTeacher(this);
 	}
 
-	public Teacher(ID id, String name, Role role, double salary) {
-		super(id, name, role, salary);
+	public Teacher(ID id, String name, double salary) {
+		super(id, name, salary);
 		this.faculty = Faculty.Undefined;
 		this.courses = new Vector<CourseTeacher>();
 		this.schedule = new Schedule(id);
-		UniversitySystem.addTeacher(this);
 	}
 
-	public Teacher(ID id, String name, Role role) {
-		super(id, name, role);
+	public Teacher(ID id, String name) {
+		super(id, name);
 		this.faculty = Faculty.Undefined;
 		this.title = TeacherTitle.Undefined;
 		this.courses = new Vector<CourseTeacher>();
 		this.schedule = new Schedule(id);
-		UniversitySystem.addTeacher(this);
 	}
 	
-	public Teacher(ID id, String name, String password, Role role) {
-		super(id, name, password, role);
+	public Teacher(ID id, String name, String password) {
+		super(id, name, password);
 		this.faculty = Faculty.Undefined;
 		this.title = TeacherTitle.Undefined;
 		this.courses = new Vector<CourseTeacher>();
 		this.schedule = new Schedule(id);
-		UniversitySystem.addTeacher(this);
 	}
 
 	public Faculty getFaculty() {
@@ -100,13 +94,6 @@ public class Teacher extends Employee {
 	public Vector<Student> checkAttendance() {
 		// TODO
 		return null;
-	}
-
-	public int compareTo(Teacher t) {
-//		if (this.getId() == t.getId())
-//			return true;
-//		return false;
-		return 0;
 	}
 
 	public String toString() {

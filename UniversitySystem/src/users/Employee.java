@@ -4,31 +4,26 @@ import java.util.Vector;
 
 import classes.ID;
 import classes.Message;
-import enums.Role;
-import universitySystem.UniversitySystem;
 
 public class Employee extends User {
 	private double salary;
 	private Vector<Message> messages;
 	
-    public Employee(ID id, String name, Role role, double salary) {
-		super(id, name, role);
+    public Employee(ID id, String name, double salary) {
+		super(id, name);
 		this.salary = salary;
-		UniversitySystem.addEmployee(this);
 	}
     
-    public Employee(ID id, String name, Role role) {
-    	super(id, name, role);
+    public Employee(ID id, String name) {
+    	super(id, name);
     	this.salary = 0;
     	this.messages = new Vector<Message>();
-    	UniversitySystem.addEmployee(this);
     }
     
-    public Employee(ID id, String name, String password, Role role) {
-    	super(id, name, password, role);
+    public Employee(ID id, String name, String password) {
+    	super(id, name, password);
     	this.salary = 0;
     	this.messages = new Vector<Message>();
-    	UniversitySystem.addEmployee(this);
     }
 
     public double getSalary() {

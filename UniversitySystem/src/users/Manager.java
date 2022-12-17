@@ -8,22 +8,19 @@ import classes.Lesson;
 import classes.News;
 import classes.Request;
 import enums.ManagerType;
-import enums.Role;
 import universitySystem.UniversitySystem;
 
 public class Manager extends Employee {
     private ManagerType type;
     
-    public Manager(ID id, String name, Role role, double salary, ManagerType type) {
-		super(id, name, role, salary);
+    public Manager(ID id, String name, double salary, ManagerType type) {
+		super(id, name, salary);
 		this.type = type;
-		UniversitySystem.addManager(this);
 	}
     
-    public Manager(ID id, String name, Role role) {
-    	super(id, name, role);
+    public Manager(ID id, String name) {
+    	super(id, name);
     	this.type = ManagerType.Undefined;
-    	UniversitySystem.addManager(this);
     }
     
     public ManagerType getType() {

@@ -1,28 +1,24 @@
 package users;
 
 import classes.ID;
-import enums.Role;
 import universitySystem.UniversitySystem;
 
 public class User {
     private ID id;
     private String name;
     private String password;
-  //  private Role role;
     
-    public User(ID id, String name, Role role) {
+    public User(ID id, String name) {
     	this.id = id;
     	this.name = name;
     	this.password = id.getNumberID();
-    	this.role = role;
     	UniversitySystem.addUser(this);
     }
     
-    public User(ID id, String name, String password, Role role) {
+    public User(ID id, String name, String password) {
     	this.id = id;
     	this.name = name;
     	this.password = password;
-    	this.role = role;
     	UniversitySystem.addUser(this);
     }
 
@@ -49,13 +45,6 @@ public class User {
 	public int getHashCode() {
 		return this.password.hashCode();
 	}
-    
-    public Role getRole() {
-        return this.role;
-    }
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
     public void Logout() {
         //TODO
@@ -71,10 +60,10 @@ public class User {
     	if(this.getClass() != o.getClass()) return false;
     	
     	User u = (User) o;
-    	return this.id.equals(u.getId()) && this.name.equals(u.getName()) && this.role.equals(u.getRole()) && this.password.equals(u.getPassword());
+    	return this.id.equals(u.getId()) && this.name.equals(u.getName()) && this.password.equals(u.getPassword());
     }
     
     public String toString() {
-    	return this.id + " " + this.name + " " + this.role;
+    	return this.id + " " + this.name;
     }
 }

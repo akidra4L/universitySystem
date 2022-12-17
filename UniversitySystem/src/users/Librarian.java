@@ -4,27 +4,27 @@ import java.util.Vector;
 
 import classes.Book;
 import classes.ID;
-import enums.Role;
 import universitySystem.UniversitySystem;
 
 public class Librarian extends Employee {
 	private Vector<Book> books;
 	
-	public Librarian(ID id, String name, Role role, double salary, Vector<Book> books) {
-		super(id, name, role, salary);
+	public Librarian(ID id, String name, double salary, Vector<Book> books) {
+		super(id, name, salary);
 		this.books = books;
-		UniversitySystem.addLibrarian(this);
 	}
 	
-	public Librarian(ID id, String name, Role role) {
-		super(id, name, role);
+	public Librarian(ID id, String name) {
+		super(id, name);
 		this.books = new Vector<Book>();
-		UniversitySystem.addLibrarian(this);
 	}
 	
-	public Librarian(ID id, String name, Role role, double salary) {
-		super(id, name, role, salary);
-		UniversitySystem.addLibrarian(this);
+	public Librarian(ID id, String name, double salary) {
+		super(id, name, salary);
+	}
+	
+	public void addBook(Book book) {
+		UniversitySystem.addBook(book);
 	}
     
     public Vector<Book> getBooks() {
