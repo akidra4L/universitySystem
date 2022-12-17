@@ -5,6 +5,7 @@ import java.util.Vector;
 import enums.Faculty;
 
 public class CourseStudent extends Course {
+	private static final long serialVersionUID = 1L;
 	private Mark mark;
     private int attendance;
     private boolean isPassed;

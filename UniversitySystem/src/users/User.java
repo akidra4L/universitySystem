@@ -1,10 +1,13 @@
 package users;
 
+import java.io.Serializable;
+
 import classes.ID;
 import universitySystem.UniversitySystem;
 
-public class User {
-    private ID id;
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
+	private ID id;
     private String name;
     private String password;
     

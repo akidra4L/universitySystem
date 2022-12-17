@@ -1,10 +1,14 @@
 package classes;
 
 import generators.Semester;
+
+import java.io.Serializable;
+
 import enums.WeekDay;
 
-public class Date {
-    private Time time;
+public class Date implements Serializable {
+    private static final long serialVersionUID = 1L;
+	private Time time;
     private int day;
     private int month;
     private int year;

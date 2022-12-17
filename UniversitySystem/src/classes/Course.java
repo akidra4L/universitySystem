@@ -1,11 +1,13 @@
 package classes;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import enums.Faculty;
 
-public class Course {
-    private ID id;
+public class Course implements Serializable {
+    private static final long serialVersionUID = 1L;
+	private ID id;
     private String code;
     private String title;
     private Faculty faculty;

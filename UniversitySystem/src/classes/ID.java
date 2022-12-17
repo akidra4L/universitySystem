@@ -1,9 +1,12 @@
 package classes;
 
+import java.io.Serializable;
+
 import generators.GeneratorID;
 
-public class ID {
-    private String numberID;
+public class ID implements Serializable {
+    private static final long serialVersionUID = 1L;
+	private String numberID;
     private boolean isAvailable;
     private Date dateCreation;
     

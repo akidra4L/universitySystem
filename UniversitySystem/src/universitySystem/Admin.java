@@ -1,5 +1,6 @@
 package universitySystem;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import classes.ID;
@@ -11,8 +12,10 @@ import users.Student;
 import users.Teacher;
 import users.User;
 
-public class Admin extends User {
-    public Admin(ID id, String name) {
+public class Admin extends User implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+	public Admin(ID id, String name) {
 		super(id, name);
 	}
     
