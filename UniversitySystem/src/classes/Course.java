@@ -7,15 +7,13 @@ import enums.Faculty;
 
 public class Course implements Serializable {
     private static final long serialVersionUID = 1L;
-	private ID id;
     private String code;
     private String title;
     private Faculty faculty;
     private int credits;
     private Vector<Course> prerequisite;
     
-    public Course(ID id, String code, String title, Faculty faculty, int credits, Vector<Course> prerequisite) {
-    	this.id = id;
+    public Course(String code, String title, Faculty faculty, int credits, Vector<Course> prerequisite) {
     	this.code = code;
     	this.title = title;
     	this.faculty = faculty;
@@ -23,11 +21,10 @@ public class Course implements Serializable {
     	this.prerequisite = prerequisite;
     }
     
-    public ID getId() {
-        return this.id;
-    }
-    public void setId(ID id) {
-        this.id = id;
+    public Course(String title, Faculty faculty, int credits) {
+    	this.title = title;
+    	this.faculty = faculty;
+    	this.credits = credits;
     }
     
     public String getCode() {

@@ -9,12 +9,13 @@ import classes.*;
 import enums.*;
 import users.*;
 import view.viewAdminController;
+import view.viewManagerController;
 import view.viewStudentController;
 import view.viewTeacherController;
 import view.viewUserController;
 
 public class UniversitySystem {
-	private String name;
+	public static String name;
 	static Vector<User> users;
 	static Vector<Course> courses;
 	static Vector<Book> books;
@@ -30,11 +31,7 @@ public class UniversitySystem {
 	}
 	
 	public UniversitySystem(String name) {
-		this.name = name;
-	}
-	
-	public String getName() {
-		return this.name;
+		UniversitySystem.name = name;
 	}
 	
 	public static void addUser(User u) {
@@ -86,7 +83,7 @@ public class UniversitySystem {
 	}
 	
 	void launch() throws Exception {
-//		UsersData.loadData();
+		System.out.println("--- " + name + " ---");
 		
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		try {
@@ -114,6 +111,7 @@ public class UniversitySystem {
 							System.out.print("Option: ");
 							int option = Integer.parseInt(input.readLine());
 							if(option == 1) {
+								System.out.println("---Change password---");
 								System.out.print("New password: ");
 								String newPassword = input.readLine();
 								admin.setPassword(newPassword);
@@ -130,7 +128,15 @@ public class UniversitySystem {
 								String newUserName = input.readLine();
 								System.out.print("Role: ");
 								Role newUserRole = Role.of(input.readLine().toLowerCase());
-								admin.createUser(new ID(), newUserName, newUserRole);
+								
+								if (newUserRole == Role.Manager) {
+									System.out.print("Manager type: ");
+									ManagerType managerType = ManagerType.of(input.readLine().toLowerCase());
+									
+									admin.createUser(new ID(), newUserName, managerType);
+								} else {
+									admin.createUser(new ID(), newUserName, newUserRole);
+								}
 								System.out.println("\n---Done---");
 									
 							} else if (option == 4) {
@@ -149,8 +155,6 @@ public class UniversitySystem {
 									
 							} else if (option == 5) {
 									isLoged = false;
-							} else if (option == 6) {
-								System.out.println(courses);
 							}
 								
 						} else if (u instanceof Student) {
@@ -160,6 +164,7 @@ public class UniversitySystem {
 							System.out.print("Option: ");
 							int option = Integer.parseInt(input.readLine());
 							if(option == 1) {
+								System.out.println("---Change password---");
 								System.err.print("New password: ");
 								String newPassword = input.readLine();
 								student.setPassword(newPassword);
@@ -186,16 +191,65 @@ public class UniversitySystem {
 							System.out.print("Option: ");
 							int option = Integer.parseInt(input.readLine());
 							if(option == 1) {
+								System.out.println("---Change password---");
 								System.err.print("New password: ");
 								String newPassword = input.readLine();
 								teacher.setPassword(newPassword);
-								System.out.println("\n---Done---");
+								System.out.println("---Done---");
 							} else if (option == 2) {
 								System.err.println("\n---Schedule---");
 								System.out.println(teacher.getSchedule());
 							} else if (option == 3) {
 								System.out.print("\n---Setting mark---");
 									
+							}
+						} else if (u instanceof Manager) {
+							Manager manager = (Manager) u;
+							viewManagerController.showManagerMenu(manager);
+							
+							System.out.print("Option: ");
+							int option = Integer.parseInt(input.readLine());
+							if(option == 7) {
+								isLoged = false;
+							} else if (option == 1) {
+								System.err.print("New password: ");
+								String newPassword = input.readLine();
+								manager.setPassword(newPassword);
+								System.out.println("---Done---");
+							} else if (option == 2) {
+								System.err.println("\n---All students---");
+								System.out.println(manager.viewStudents());
+							} else if (option == 3) {
+								System.out.println("\n---View student---");
+								System.out.print("ID: ");
+								String studentID = input.readLine();
+								
+								System.out.println(manager.viewStudent(studentID));
+								System.out.println("\n---Done---");
+							} else if (option == 4) {
+								System.out.println("---News---");
+								System.out.println(news);
+								System.out.println("---Done---");
+							} else if (option == 5) {
+								System.out.println("\n---News creation---");
+								System.out.print("Title: ");
+								String title = input.readLine();
+								System.out.print("Description: ");
+								String description = input.readLine();
+								
+								manager.createNews(title, description);
+								System.out.println("\n---Done---");
+							} else if (option == 6) {
+								System.out.println("\n---Delete news---");
+								System.out.print("Author: ");
+								String author = input.readLine();
+								System.out.print("Title: ");
+								String title = input.readLine();
+								System.out.print("Description: ");
+								String description = input.readLine();
+								
+								manager.deleteNews(author, title, description);
+								System.out.println("\n---Done---");
 							}
 						}
 					}

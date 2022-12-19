@@ -7,21 +7,21 @@ import users.Manager;
 
 public class News implements Serializable {
     private static final long serialVersionUID = 1L;
-	private Manager author;
+	private String author;
     private String title;
     private String description;
     
-    public News(Manager author, String title, String description) {
+    public News(String author, String title, String description) {
     	this.author = author;
     	this.title = title;
     	this.description = description;
     	UniversitySystem.addNews(this);
     }
     
-    public Manager getAuthor() {
+    public String getAuthor() {
         return this.author;
     }
-    public void setAuthor(Manager author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
     
@@ -49,6 +49,6 @@ public class News implements Serializable {
     }
     
     public String toString() {
-    	return this.author + " " + this.title + " " + this.description;
+    	return "Author: " + this.author + " Title: " + this.title + " Description: " + this.description;
     }
 }

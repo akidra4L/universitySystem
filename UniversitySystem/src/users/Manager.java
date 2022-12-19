@@ -2,12 +2,8 @@ package users;
 
 import java.util.Vector;
 
-import classes.StudentCourse;
-import classes.ID;
-import classes.Lesson;
-import classes.News;
-import classes.Request;
-import enums.ManagerType;
+import classes.*;
+import enums.*;
 import universitySystem.UniversitySystem;
 
 public class Manager extends Employee {
@@ -24,18 +20,23 @@ public class Manager extends Employee {
     	this.type = ManagerType.Undefined;
     }
     
+    public Manager(ID id, String name, ManagerType type) {
+    	super(id, name);
+    	this.type = type;
+    }
+    
     public ManagerType getType() {
         return this.type;
     }
     
     public News createNews(String title, String description) {
-    	return new News(this, title, description);
+    	return new News(this.getName(), title, description);
     }
 
-    public boolean deleteNews(News news) {
+    public boolean deleteNews(String author, String title, String description) {
     	Vector<News> allNews = UniversitySystem.getNews();
     	for(News n: allNews) {
-    		if(n.equals(news)) {
+    		if(n.getAuthor().equals(author) && n.getTitle().equals(title) && n.getDescription().equals(description)) {
     			allNews.remove(n);
     			UniversitySystem.setNews(allNews);
     			return true;
@@ -54,18 +55,30 @@ public class Manager extends Employee {
         return false;
     }
     
-    public Vector<User> viewUsers() {
-    	return UniversitySystem.getUsers();
+    public Vector<Student> viewStudents() {
+    	Vector <Student> students = new Vector<Student>();
+    	Vector <User> users = UniversitySystem.getUsers();
+    	
+    	for(User u : users) {
+    		if (u instanceof Student) {
+    			students.add((Student) u);
+    		}
+    	}
+    	return students;
     }
     
-    public User viewUser(User user) {
-    	Vector<User> allUsers = UniversitySystem.getUsers();
-    	for(User u: allUsers) {
-    		if(u.equals(user)) {
-    			return u;
+    public Student viewStudent(String id) {
+    	Vector <Student> students = viewStudents();
+    	for(Student s : students) {
+    		if (s.getId().getNumberID().equals(id)) {
+    			return s;
     		}
     	}
     	return null;
+    }
+    
+    public boolean createCourse(String name, Faculty faculty, int credits) {
+    	return false;
     }
 
     public Lesson viewLessonInfo() {

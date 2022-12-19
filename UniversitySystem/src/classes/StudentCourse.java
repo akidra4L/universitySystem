@@ -10,8 +10,8 @@ public class StudentCourse extends Course {
     private int attendance;
     private boolean isPassed;
     
-    public StudentCourse(ID id, String code, String title, Faculty faculty, int credits, Vector<Course> prerequisite, Mark mark, int attendance, boolean isPassed) {
-		super(id, code, title, faculty, credits, prerequisite);
+    public StudentCourse(String code, String title, Faculty faculty, int credits, Vector<Course> prerequisite, Mark mark, int attendance, boolean isPassed) {
+		super(code, title, faculty, credits, prerequisite);
 		this.setMark(mark);
 		this.attendance = attendance;
 		this.isPassed = isPassed;

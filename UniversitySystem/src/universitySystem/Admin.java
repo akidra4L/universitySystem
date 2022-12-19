@@ -3,14 +3,9 @@ package universitySystem;
 import java.io.Serializable;
 import java.util.Vector;
 
-import classes.ID;
-import enums.Role;
-import users.Employee;
-import users.Librarian;
-import users.Manager;
-import users.Student;
-import users.Teacher;
-import users.User;
+import classes.*;
+import enums.*;
+import users.*;
 
 public class Admin extends User implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -48,6 +43,10 @@ public class Admin extends User implements Serializable {
 			System.out.println("Error: Unknown role.");
 		}
     }
+	
+	public void createUser(ID id, String name, ManagerType type) {
+		new Manager(id, name, type);
+    }
     
     public boolean deleteUser(ID id) {
     	Vector<User> users = UniversitySystem.getUsers();
@@ -71,10 +70,6 @@ public class Admin extends User implements Serializable {
     		}
     	}
     	return false;
-    }
-
-    public void changeUserProfile() {
-        //TODO
     }
 
     public void updateSoftware() {

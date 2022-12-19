@@ -13,8 +13,8 @@ public class Lesson extends Course {
     private Teacher teacher;
     private Vector<Student> students;
     
-    public Lesson(ID id, String code, String title, Faculty faculty, int credits, Vector<Course> prerequisite, Date date, String room, Teacher teacher, Vector<Student> students) {
-		super(id, code, title, faculty, credits, prerequisite);
+    public Lesson(String code, String title, Faculty faculty, int credits, Vector<Course> prerequisite, Date date, String room, Teacher teacher, Vector<Student> students) {
+		super(code, title, faculty, credits, prerequisite);
 		this.date = date;
 		this.room = room;
 		this.teacher = teacher;

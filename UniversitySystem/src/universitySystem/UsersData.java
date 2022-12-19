@@ -22,9 +22,9 @@ public class UsersData implements Serializable {
 				e.printStackTrace();
 			}
 		} else {
-			@SuppressWarnings("unused")
-			Admin a = new Admin(new ID(), "Alikhan", "admin");
 			UniversitySystem.users = new Vector<User>();
+			@SuppressWarnings("unused")
+			Admin a = new Admin(new ID(), "admin", "admin");
 		}
 	}
 	
