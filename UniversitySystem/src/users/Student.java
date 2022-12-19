@@ -3,7 +3,7 @@ package users;
 import java.util.Vector;
 
 import classes.Course;
-import classes.CourseStudent;
+import classes.StudentCourse;
 import classes.ID;
 import classes.Schedule;
 import classes.Transcript;
@@ -11,14 +11,15 @@ import enums.Degree;
 import enums.Faculty;
 
 public class Student extends User implements Comparable<Student>, Cloneable {
+	private static final long serialVersionUID = 1L;
 	private Faculty faculty;
     private Degree degree;
-    private Vector<CourseStudent> courses;
+    private Vector<StudentCourse> courses;
     private double gpa;
     private Schedule schedule;
     private Transcript transcript;
     
-    public Student(ID id, String name, Faculty faculty, Degree degree, Vector<CourseStudent> courses, double gpa, Schedule schedule, Transcript transcript) {
+    public Student(ID id, String name, Faculty faculty, Degree degree, Vector<StudentCourse> courses, double gpa, Schedule schedule, Transcript transcript) {
 		super(id, name);
 		this.faculty = faculty;
 		this.degree = degree;
@@ -32,7 +33,7 @@ public class Student extends User implements Comparable<Student>, Cloneable {
     	super(id, name);
     	this.faculty = Faculty.Undefined;
     	this.degree = Degree.Undefined;
-    	this.courses = new Vector<CourseStudent>();
+    	this.courses = new Vector<StudentCourse>();
     	this.gpa = 0;
     	this.schedule = new Schedule(id);
     	this.transcript = new Transcript(id);
@@ -42,7 +43,7 @@ public class Student extends User implements Comparable<Student>, Cloneable {
     	super(id, name, password);
     	this.faculty = Faculty.Undefined;
     	this.degree = Degree.Undefined;
-    	this.courses = new Vector<CourseStudent>();
+    	this.courses = new Vector<StudentCourse>();
     	this.gpa = 0;
     	this.schedule = new Schedule(id);
     	this.transcript = new Transcript(id);
@@ -56,10 +57,10 @@ public class Student extends User implements Comparable<Student>, Cloneable {
         return this.degree;
     }
     
-    public Vector<CourseStudent> getCourses() {
+    public Vector<StudentCourse> getCourses() {
         return this.courses;
     }
-    public void setCourses(Vector<CourseStudent> courses) {
+    public void setCourses(Vector<StudentCourse> courses) {
         this.courses = courses;
     }
     

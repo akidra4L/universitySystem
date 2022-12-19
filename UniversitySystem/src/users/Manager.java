@@ -2,7 +2,7 @@ package users;
 
 import java.util.Vector;
 
-import classes.CourseStudent;
+import classes.StudentCourse;
 import classes.ID;
 import classes.Lesson;
 import classes.News;
@@ -11,7 +11,8 @@ import enums.ManagerType;
 import universitySystem.UniversitySystem;
 
 public class Manager extends Employee {
-    private ManagerType type;
+    private static final long serialVersionUID = 1L;
+	private ManagerType type;
     
     public Manager(ID id, String name, double salary, ManagerType type) {
 		super(id, name, salary);
@@ -43,9 +44,9 @@ public class Manager extends Employee {
         return false;
     }
     
-    public boolean registerForCourse(Student student, CourseStudent course) {
+    public boolean registerForCourse(Student student, StudentCourse course) {
         if(student.enrollCourse(course)) {
-        	Vector<CourseStudent> courses = student.getCourses();
+        	Vector<StudentCourse> courses = student.getCourses();
         	courses.add(course);
         	student.setCourses(courses);
         	return true;

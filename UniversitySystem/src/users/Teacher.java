@@ -2,20 +2,21 @@ package users;
 
 import java.util.Vector;
 
-import classes.CourseTeacher;
+import classes.TeacherCourse;
 import classes.ID;
 import classes.Schedule;
 import enums.Faculty;
 import enums.TeacherTitle;
 
 public class Teacher extends Employee {
+	private static final long serialVersionUID = 1L;
 	private Faculty faculty;
 	private TeacherTitle title;
-	private Vector<CourseTeacher> courses;
+	private Vector<TeacherCourse> courses;
 	private Schedule schedule;
 
 	public Teacher(ID id, String name, double salary, Faculty faculty, TeacherTitle title,
-			Vector<CourseTeacher> courses, Schedule schedule) {
+			Vector<TeacherCourse> courses, Schedule schedule) {
 		super(id, name, salary);
 		this.faculty = faculty;
 		this.title = title;
@@ -26,7 +27,7 @@ public class Teacher extends Employee {
 	public Teacher(ID id, String name, double salary) {
 		super(id, name, salary);
 		this.faculty = Faculty.Undefined;
-		this.courses = new Vector<CourseTeacher>();
+		this.courses = new Vector<TeacherCourse>();
 		this.schedule = new Schedule(id);
 	}
 
@@ -34,7 +35,7 @@ public class Teacher extends Employee {
 		super(id, name);
 		this.faculty = Faculty.Undefined;
 		this.title = TeacherTitle.Undefined;
-		this.courses = new Vector<CourseTeacher>();
+		this.courses = new Vector<TeacherCourse>();
 		this.schedule = new Schedule(id);
 	}
 	
@@ -42,7 +43,7 @@ public class Teacher extends Employee {
 		super(id, name, password);
 		this.faculty = Faculty.Undefined;
 		this.title = TeacherTitle.Undefined;
-		this.courses = new Vector<CourseTeacher>();
+		this.courses = new Vector<TeacherCourse>();
 		this.schedule = new Schedule(id);
 	}
 
@@ -62,11 +63,11 @@ public class Teacher extends Employee {
 		this.title = title;
 	}
 
-	public Vector<CourseTeacher> getCourses() {
+	public Vector<TeacherCourse> getCourses() {
 		return this.courses;
 	}
 
-	public void setCourses(Vector<CourseTeacher> courses) {
+	public void setCourses(Vector<TeacherCourse> courses) {
 		this.courses = courses;
 	}
 

@@ -1,9 +1,12 @@
 package classes;
 
+import java.io.Serializable;
+
 import users.User;
 
-public class Party {
-    private String title;
+public class Party implements Serializable {
+    private static final long serialVersionUID = 1L;
+	private String title;
     private String description;
     private User organizator;
     

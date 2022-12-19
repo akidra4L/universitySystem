@@ -16,16 +16,17 @@ import view.viewUserController;
 public class UniversitySystem {
 	private String name;
 	static Vector<User> users;
+	static Vector<Course> courses;
 	static Vector<Book> books;
 	static Vector<News> news;
 	
 	static {
-		new UsersData();
+		courses = new Vector<Course>();
 		users = new Vector<User>();
+		new UsersData();
+		new CoursesData();
 		books = new Vector<Book>();
 		news = new Vector<News>();
-		@SuppressWarnings("unused")
-		Admin a = new Admin(new ID(), "Alikhan", "admin");
 	}
 	
 	public UniversitySystem(String name) {
@@ -81,6 +82,7 @@ public class UniversitySystem {
 	public void exit() throws Exception {
 		System.err.println("\n---Bye---\n");
 		UsersData.saveUsers();
+		CoursesData.saveCourses();
 	}
 	
 	void launch() throws Exception {
@@ -102,7 +104,7 @@ public class UniversitySystem {
 					boolean isLoged = true;
 					while(isLoged) {
 						if(u == null) {
-							System.err.println("Error. Check login and password.\n");
+							System.err.println("\nError. Check login and password.\n");
 							break;
 							
 						} else if (u instanceof Admin) {
@@ -115,24 +117,24 @@ public class UniversitySystem {
 								System.out.print("New password: ");
 								String newPassword = input.readLine();
 								admin.setPassword(newPassword);
-								System.out.println("---Done---");
+								System.out.println("\n---Done---");
 							} else if (option == 2) {
-								System.out.println("---All users---");
+								System.out.println("\n---All users---");
 								for(User us: users) {
 									System.out.println(us);
 								}
 									
 							} else if (option == 3) {
-								System.out.println("---Create user---");
+								System.out.println("\n---Create user---");
 								System.out.print("Name: ");
 								String newUserName = input.readLine();
 								System.out.print("Role: ");
 								Role newUserRole = Role.of(input.readLine().toLowerCase());
 								admin.createUser(new ID(), newUserName, newUserRole);
-								System.out.println("---Done---");
+								System.out.println("\n---Done---");
 									
 							} else if (option == 4) {
-								System.out.println("---Delete user---");
+								System.out.println("\n---Delete user---");
 								System.out.print("ID: ");
 								String deleteID = input.readLine();
 									
@@ -143,10 +145,12 @@ public class UniversitySystem {
 								} else {
 									admin.deleteUser(deleteID);
 								}
-								System.out.println("---Done---");
+								System.out.println("\n---Done---");
 									
 							} else if (option == 5) {
 									isLoged = false;
+							} else if (option == 6) {
+								System.out.println(courses);
 							}
 								
 						} else if (u instanceof Student) {
@@ -165,7 +169,7 @@ public class UniversitySystem {
 								System.out.println(student.getSchedule());
 							} else if (option == 3) {
 								System.err.println("\n---Marks---");
-								for(CourseStudent cs: student.getCourses()) {
+								for(StudentCourse cs: student.getCourses()) {
 									System.out.println(cs.getTitle() + " - " + cs.getMark().getScore());
 								}
 							} else if (option == 4) {

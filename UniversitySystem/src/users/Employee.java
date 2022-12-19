@@ -6,6 +6,7 @@ import classes.ID;
 import classes.Message;
 
 public class Employee extends User {
+	private static final long serialVersionUID = 1L;
 	private double salary;
 	private Vector<Message> messages;
 	

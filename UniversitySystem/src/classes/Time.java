@@ -1,6 +1,9 @@
 package classes;
 
-public class Time implements Comparable<Time> {
+import java.io.Serializable;
+
+public class Time implements Comparable<Time>, Serializable {
+	private static final long serialVersionUID = 1L;
 	int hours, minutes, seconds;
 
 	public Time(int hours, int minutes, int seconds) {

@@ -1,8 +1,11 @@
 package classes;
 
+import java.io.Serializable;
+
 import enums.MarkLetter;
 
-public class Mark {
+public class Mark implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private double score;
 	private MarkLetter markLetter;
 	

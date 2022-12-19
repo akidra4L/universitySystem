@@ -6,11 +6,11 @@ import java.util.Vector;
 import enums.Faculty;
 import users.Student;
 
-public class CourseTeacher extends Course {
+public class TeacherCourse extends Course {
 	private static final long serialVersionUID = 1L;
 	private HashMap<Course, Student> students;
 
-	public CourseTeacher(ID id, String code, String title, Faculty faculty, int credits, Vector<Course> prerequisite) {
+	public TeacherCourse(ID id, String code, String title, Faculty faculty, int credits, Vector<Course> prerequisite) {
 		super(id, code, title, faculty, credits, prerequisite);
 	}
 

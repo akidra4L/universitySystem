@@ -1,10 +1,13 @@
 package classes;
 
+import java.io.Serializable;
+
 import enums.StateOfRequest;
 import users.User;
 
-public class Request {
-    private ID id;
+public class Request implements Serializable {
+    private static final long serialVersionUID = 1L;
+	private ID id;
     private String description;
     private User from;
     private StateOfRequest state;

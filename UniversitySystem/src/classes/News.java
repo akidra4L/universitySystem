@@ -1,10 +1,13 @@
 package classes;
 
+import java.io.Serializable;
+
 import universitySystem.UniversitySystem;
 import users.Manager;
 
-public class News {
-    private Manager author;
+public class News implements Serializable {
+    private static final long serialVersionUID = 1L;
+	private Manager author;
     private String title;
     private String description;
     

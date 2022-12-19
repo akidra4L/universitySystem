@@ -1,9 +1,11 @@
 package classes;
 
+import java.io.Serializable;
 import java.util.Vector;
 
-public class Schedule {
-    private ID id;
+public class Schedule implements Serializable {
+    private static final long serialVersionUID = 1L;
+	private ID id;
     private Vector<Lesson> lessons;
     
     public Schedule(ID id, Vector<Lesson> lessons) {

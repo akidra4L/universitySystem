@@ -7,6 +7,7 @@ import users.Student;
 import users.Teacher;
 
 public class Lesson extends Course {
+	private static final long serialVersionUID = 1L;
 	private Date date;
     private String room;
     private Teacher teacher;

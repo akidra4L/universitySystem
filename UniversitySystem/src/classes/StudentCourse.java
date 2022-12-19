@@ -4,13 +4,13 @@ import java.util.Vector;
 
 import enums.Faculty;
 
-public class CourseStudent extends Course {
+public class StudentCourse extends Course {
 	private static final long serialVersionUID = 1L;
 	private Mark mark;
     private int attendance;
     private boolean isPassed;
     
-    public CourseStudent(ID id, String code, String title, Faculty faculty, int credits, Vector<Course> prerequisite, Mark mark, int attendance, boolean isPassed) {
+    public StudentCourse(ID id, String code, String title, Faculty faculty, int credits, Vector<Course> prerequisite, Mark mark, int attendance, boolean isPassed) {
 		super(id, code, title, faculty, credits, prerequisite);
 		this.setMark(mark);
 		this.attendance = attendance;

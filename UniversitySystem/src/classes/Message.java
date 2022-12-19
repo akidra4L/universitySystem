@@ -1,9 +1,12 @@
 package classes;
 
+import java.io.Serializable;
+
 import users.Employee;
 
-public class Message {
-    private ID id;
+public class Message implements Serializable {
+    private static final long serialVersionUID = 1L;
+	private ID id;
     private Employee from;
     private Employee to;
     

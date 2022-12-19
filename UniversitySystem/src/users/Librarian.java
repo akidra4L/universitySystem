@@ -7,6 +7,7 @@ import classes.ID;
 import universitySystem.UniversitySystem;
 
 public class Librarian extends Employee {
+	private static final long serialVersionUID = 1L;
 	private Vector<Book> books;
 	
 	public Librarian(ID id, String name, double salary, Vector<Book> books) {
