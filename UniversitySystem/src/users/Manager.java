@@ -77,11 +77,11 @@ public class Manager extends Employee {
     	return null;
     }
     
-    public boolean createCourse(String name, Faculty faculty, int credits) {
-    	return false;
+    public void createCourse(String name, Faculty faculty, int credits) {
+    	new Course(name, faculty, credits);
     }
 
-    public Lesson viewLessonInfo() {
+    public Course viewCourseInfo() {
         //TODO
         return null;
     }

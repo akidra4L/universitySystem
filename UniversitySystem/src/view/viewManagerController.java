@@ -10,6 +10,10 @@ public class viewManagerController {
 		System.out.println("4. View news");
 		System.out.println("5. Create news");
 		System.out.println("6. Delete news");
-		System.out.println("7. Logout");
+		System.out.println("7. View courses");
+		System.out.println("8. Create course");
+		System.out.println("9. Edit course");
+		System.out.println("10. Delete course");
+		System.out.println("11. Logout");
 	}
 }

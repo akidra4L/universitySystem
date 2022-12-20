@@ -9,6 +9,7 @@ import classes.*;
 import enums.*;
 import users.*;
 import view.viewAdminController;
+import view.viewEditCourseController;
 import view.viewManagerController;
 import view.viewStudentController;
 import view.viewTeacherController;
@@ -22,12 +23,13 @@ public class UniversitySystem {
 	static Vector<News> news;
 	
 	static {
-		courses = new Vector<Course>();
 		users = new Vector<User>();
+		courses = new Vector<Course>();
+		news = new Vector<News>();
 		new UsersData();
 		new CoursesData();
+		new NewsData();
 		books = new Vector<Book>();
-		news = new Vector<News>();
 	}
 	
 	public UniversitySystem(String name) {
@@ -46,6 +48,10 @@ public class UniversitySystem {
 		news.add(n);
 	}
 	
+	public static void addCourse(Course c) {
+		courses.add(c);
+	}
+	
 	public static Vector<User> getUsers() {
 		return users;
 	}
@@ -58,6 +64,13 @@ public class UniversitySystem {
 	}
 	public static void setNews(Vector<News> news) {
 		UniversitySystem.news = news;
+	}
+	
+	public static Vector<Course> getCourse() {
+		return courses;
+	}
+	public static void setCourses(Vector<Course> courses) {
+		UniversitySystem.courses = courses;
 	}
 	
 	public User findUser(User u) {
@@ -80,6 +93,7 @@ public class UniversitySystem {
 		System.err.println("\n---Bye---\n");
 		UsersData.saveUsers();
 		CoursesData.saveCourses();
+		NewsData.saveNews();
 	}
 	
 	void launch() throws Exception {
@@ -209,7 +223,7 @@ public class UniversitySystem {
 							
 							System.out.print("Option: ");
 							int option = Integer.parseInt(input.readLine());
-							if(option == 7) {
+							if(option == 11) {
 								isLoged = false;
 							} else if (option == 1) {
 								System.err.print("New password: ");
@@ -249,6 +263,71 @@ public class UniversitySystem {
 								String description = input.readLine();
 								
 								manager.deleteNews(author, title, description);
+								System.out.println("\n---Done---");
+							} else if (option == 7) {
+								System.out.println("---All courses---");
+								if(courses.isEmpty()) {
+									System.out.println("Empty.");
+								} else {
+									for(Course c: courses) {
+										System.out.println("- " + c);
+									}
+								}
+								System.out.println("\n---Done---");
+							} else if (option == 8) {
+								System.out.println("---Create course---");
+								System.out.print("Course name: ");
+								String courseName = input.readLine();
+								
+								System.out.print("Faculty: ");
+								Faculty faculty = Faculty.of(input.readLine().toLowerCase());
+								
+								System.out.print("Credits: ");
+								int credits = Integer.parseInt(input.readLine());
+								
+								manager.createCourse(courseName, faculty, credits);
+								System.out.println("\n---Done---");
+							} else if (option == 9) {
+								System.out.println("\n---Edit course---");
+								System.out.print("Course's code: ");
+								String courseCode = input.readLine();
+								
+								for(Course c: courses) {
+									if(c.getCode().equals(courseCode)) {
+										viewEditCourseController.showEditMenu();
+										System.out.print("--- Option: ");
+										int editCourse = Integer.parseInt(input.readLine());
+										
+										if (editCourse == 1) {
+											System.out.print("New name: ");
+											String name = input.readLine();
+											c.setTitle(name);
+										} else if (editCourse == 2) {
+											System.out.print("New faculty: ");
+											Faculty faculty = Faculty.of(input.readLine().toLowerCase());
+											c.setFaculty(faculty);
+										} else if (editCourse == 3) {
+											System.out.print("New credits: ");
+											int credits = Integer.parseInt(input.readLine());
+											c.setCredits(credits);
+										}
+										break;
+									}
+								}
+								System.out.println("\n---Done---");
+							} else if (option == 10) {
+								System.out.println("---Delete course---");
+								System.out.print("Course's code: ");
+								String courseCode = input.readLine();
+								
+								Vector <Course> newCourses = courses;
+								for(Course c: newCourses) {
+									if(c.getCode().equals(courseCode)) {
+										newCourses.remove(c);
+										UniversitySystem.setCourses(newCourses);
+										break;
+									}
+								}
 								System.out.println("\n---Done---");
 							}
 						}

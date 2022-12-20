@@ -9,11 +9,11 @@ import users.*;
 public class TeacherCourse extends Course {
 	private static final long serialVersionUID = 1L;
 	private Teacher teacher;
+	private String room;
 	private HashMap<Course, Student> students;
 
-	public TeacherCourse(String code, String title, Faculty faculty, int credits, Vector<Course> prerequisite) {
-		super(code, title, faculty, credits, prerequisite);
-		this.setTeacher(null);
+	public TeacherCourse(String code, String title, Faculty faculty, int credits) {
+		super(code, title, faculty, credits);
 		this.students = null;
 	}
 
@@ -22,6 +22,13 @@ public class TeacherCourse extends Course {
 	}
 	public void setStudents(HashMap<Course, Student> students) {
 		this.students = students;
+	}
+
+	public String getRoom() {
+		return room;
+	}
+	public void setRoom(String room) {
+		this.room = room;
 	}
 	
 	public Teacher getTeacher() {
@@ -32,6 +39,6 @@ public class TeacherCourse extends Course {
 	}
 	
 	public String toString() {
-		return super.toString() + " " + this.teacher + " " + this.students;
- 	}
+		return this.room + " " + this.teacher + " " + this.students;
+	}
 }

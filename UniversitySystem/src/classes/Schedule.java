@@ -6,15 +6,15 @@ import java.util.Vector;
 public class Schedule implements Serializable {
     private static final long serialVersionUID = 1L;
 	private ID id;
-    private Vector<Lesson> lessons;
+    private Vector<Course> lessons;
     
-    public Schedule(ID id, Vector<Lesson> lessons) {
+    public Schedule(ID id, Vector<Course> lessons) {
     	this.id = id;
     	this.lessons = lessons;
     }
     public Schedule(ID id) {
     	this.id = id;
-    	this.lessons = new Vector<Lesson>();
+    	this.lessons = new Vector<Course>();
     }
     
     public ID getId() {
@@ -24,10 +24,10 @@ public class Schedule implements Serializable {
         this.id = id;
     }
     
-    public Vector<Lesson> getLessons() {
+    public Vector<Course> getLessons() {
         return this.lessons;
     }
-    public void setLessons(Vector<Lesson> lessons) {
+    public void setLessons(Vector<Course> lessons) {
         this.lessons = lessons;
     }
     

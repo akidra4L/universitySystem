@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Vector;
 
 import enums.Faculty;
+import generators.GeneratorCourseCode;
+import universitySystem.UniversitySystem;
 
 public class Course implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -11,20 +13,21 @@ public class Course implements Serializable {
     private String title;
     private Faculty faculty;
     private int credits;
-    private Vector<Course> prerequisite;
     
-    public Course(String code, String title, Faculty faculty, int credits, Vector<Course> prerequisite) {
+    public Course(String code, String title, Faculty faculty, int credits) {
     	this.code = code;
     	this.title = title;
     	this.faculty = faculty;
     	this.credits = credits;
-    	this.prerequisite = prerequisite;
+    	UniversitySystem.addCourse(this);
     }
     
     public Course(String title, Faculty faculty, int credits) {
+    	this.code = GeneratorCourseCode.getCode(faculty);
     	this.title = title;
     	this.faculty = faculty;
     	this.credits = credits;
+    	UniversitySystem.addCourse(this);
     }
     
     public String getCode() {
@@ -55,10 +58,7 @@ public class Course implements Serializable {
         this.credits = credits;
     }
     
-    public Vector<Course> getPrerequisite() {
-        return this.prerequisite;
-    }
-    public void setPrerequisite(Vector<Course> prerequisite) {
-        this.prerequisite = prerequisite;
+    public String toString() {
+    	return this.code + " " + this.title + " " + this.faculty + " " + this.credits;
     }
 }
