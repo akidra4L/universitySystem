@@ -134,12 +134,12 @@ public class Student extends User implements Comparable<Student>, Cloneable {
 			double sum = currentMark.getScore() + mark.getScore();
 
 			if (sum > 100) {
-				throw new IllegalArgumentException("Mark cannot exceed 100");
+				throw new IllegalArgumentException("Оценка не может быть выше 100");
 			}
 
 			allCourses.put(course, new Mark(sum));
 		} else {
-			allCourses.put(course, mark);
+			throw new IllegalArgumentException("Студент не зарегестрирован на данный курс");
 		}
 	}
 
