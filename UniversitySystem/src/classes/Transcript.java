@@ -11,11 +11,11 @@ public class Transcript implements Serializable {
     private static final long serialVersionUID = 1L;
 	private ID studentID;
     private Semester semester;
-    private HashMap<StudentCourse, MarkLetter> markLetters;
+    private HashMap<Course, MarkLetter> markLetters;
     
     private LocalDate currentDate = LocalDate.now();
     
-    public Transcript(ID studentID, Semester semester, HashMap<StudentCourse, MarkLetter> markLetters) {
+    public Transcript(ID studentID, Semester semester, HashMap<Course, MarkLetter> markLetters) {
     	this.studentID = studentID;
     	this.semester = semester;
     	this.markLetters = markLetters;
@@ -24,7 +24,7 @@ public class Transcript implements Serializable {
     public Transcript(ID studentID) {
     	this.studentID = studentID;
     	this.semester = Semester.of(currentDate.getMonth());
-    	this.markLetters = new HashMap<StudentCourse, MarkLetter>();
+    	this.markLetters = new HashMap<Course, MarkLetter>();
     }
     
     public ID getStudentID() {
@@ -35,7 +35,7 @@ public class Transcript implements Serializable {
         return this.semester;
     }
     
-	public HashMap<StudentCourse, MarkLetter> getMarks() {
+	public HashMap<Course, MarkLetter> getMarks() {
 		return markLetters;
 	}
 	

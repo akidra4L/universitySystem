@@ -126,20 +126,18 @@ public class Student extends User implements Comparable<Student>, Cloneable {
 				+ this.schedule + " " + this.transcript;
 	}
 
-	public void putMark(Course course, Mark mark) {
+	public void putMark(Course course, double mark) {
 		if (allCourses.containsKey(course)) {
 
 			Mark currentMark = allCourses.get(course);
-
-			double sum = currentMark.getScore() + mark.getScore();
+			double sum = currentMark.getScore() + mark;
 
 			if (sum > 100) {
-				throw new IllegalArgumentException("Оценка не может быть выше 100");
+				throw new IllegalArgumentException("The score cannot exceed 100");
 			}
-
 			allCourses.put(course, new Mark(sum));
 		} else {
-			throw new IllegalArgumentException("Студент не зарегестрирован на данный курс");
+			throw new IllegalArgumentException("The student is not registered for this course");
 		}
 	}
 

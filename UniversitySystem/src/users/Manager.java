@@ -47,18 +47,28 @@ public class Manager extends Employee {
         return false;
     }
     
-    public boolean registerForCourse(Student student, String courseCode) {
+    public boolean registerForCourse(Student student, String courseCode, Teacher teacher) {
     	Course c = UniversitySystem.findCourse(courseCode);
-        if(student.enrollCourse(c)) {
+    	if(student.enrollCourse(c)) {
+    		teacher.addStudent(c, student);
         	HashMap<Course, Mark> allCourses = student.getAllCourses();
         	if(allCourses.containsKey(c)) {
         		return false;
         	}
         	allCourses.put(c, new Mark());
         	student.setAllCourses(allCourses);
-        	return true;
-        }
-        return false;
+    		return true;
+    	}
+    	return false;
+    }
+    
+    public boolean registerForCourse(Teacher teacher, String courseCode) {
+    	Course c = UniversitySystem.findCourse(courseCode);
+    	if (!teacher.getAllCourses().keySet().contains(c)) {
+    		teacher.addCourse(c);
+    		return true;
+    	}
+    	return false;
     }
     
     public boolean deleteFromCourse(Student student, String courseCode) {

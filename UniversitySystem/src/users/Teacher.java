@@ -1,25 +1,23 @@
 package users;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 import classes.Course;
 import classes.ID;
-import classes.Mark;
 import classes.Schedule;
-import classes.StudentCourse;
 import enums.Faculty;
-import enums.MarkLetter;
 import enums.TeacherTitle;
 
 public class Teacher extends Employee {
 	private static final long serialVersionUID = 1L;
 	private Faculty faculty;
 	private TeacherTitle title;
-	private HashMap<Course, Student> allCourses;
+	private HashMap<Course, Vector<Student>> allCourses;
 	private Schedule schedule;
 
-	public Teacher(ID id, String name, double salary, Faculty faculty, TeacherTitle title, HashMap<Course, Student> allCourses, Schedule schedule) {
+	public Teacher(ID id, String name, double salary, Faculty faculty, TeacherTitle title, HashMap<Course, Vector<Student>> allCourses, Schedule schedule) {
 		super(id, name, salary);
 		this.faculty = faculty;
 		this.title = title;
@@ -30,7 +28,7 @@ public class Teacher extends Employee {
 	public Teacher(ID id, String name, double salary) {
 		super(id, name, salary);
 		this.faculty = Faculty.Undefined;
-		this.allCourses = new HashMap<Course, Student>();
+		this.allCourses = new HashMap<Course, Vector<Student>>();
 		this.schedule = new Schedule(id);
 	}
 
@@ -38,7 +36,7 @@ public class Teacher extends Employee {
 		super(id, name);
 		this.faculty = Faculty.Undefined;
 		this.title = TeacherTitle.Undefined;
-		this.allCourses = new HashMap<Course, Student>();
+		this.allCourses = new HashMap<Course, Vector<Student>>();
 		this.schedule = new Schedule(id);
 	}
 	
@@ -46,7 +44,7 @@ public class Teacher extends Employee {
 		super(id, name, password);
 		this.faculty = Faculty.Undefined;
 		this.title = TeacherTitle.Undefined;
-		this.allCourses = new HashMap<Course, Student>();
+		this.allCourses = new HashMap<Course, Vector<Student>>();
 		this.schedule = new Schedule(id);
 	}
 
@@ -74,24 +72,13 @@ public class Teacher extends Employee {
 		this.schedule = schedule;
 	}
 	
-	public HashMap<Course, Student> getAllCourses() {
+	public HashMap<Course, Vector<Student>> getAllCourses() {
 		return allCourses;
 	}
 
-	public void setAllCourses(HashMap<Course, Student> allCourses) {
+	public void setAllCourses(HashMap<Course, Vector<Student>> allCourses) {
 		this.allCourses = allCourses;
 	}
-
-//	public void putMark(StudentCourse studentCourse) {
-//	    Mark mark = studentCourse.getMark();
-//	    mark.setScore(90.0);
-//	    mark.setMarkLetter(MarkLetter.A);
-//	    if (mark.getScore() >= 60.0) {
-//	        studentCourse.setIsPassed(true);
-//	    } else {
-//	        studentCourse.setIsPassed(false);
-//	    }
-//	}
 
 	public boolean equals(Object o) {
 		if (!super.equals(o))
@@ -105,6 +92,54 @@ public class Teacher extends Employee {
 	public Vector<Student> checkAttendance() {
 		// TODO
 		return null;
+	}
+	
+	public Course containsCourse(String courseCode) {
+		for (Course c : this.allCourses.keySet()) {
+			if(c.getCode().equals(courseCode)) {
+				return c;
+			}
+		}
+		return null;
+	}
+	
+	public Student getStudent(String courseCode, String studentID) {
+		Course c = containsCourse(courseCode);
+		for(Map.Entry<Course, Vector<Student>> hm: allCourses.entrySet()) {
+			if(hm.getKey().equals(c)) {
+				Vector<Student> students = hm.getValue();
+				for(Student s: students) {
+					if(s.getId().getNumberID().equals(studentID)) {
+						return s;
+					}
+				}
+			} else {
+				return null;
+			}
+		}
+		return null;
+	}
+	
+	public boolean putMarkToStudent(String courseCode, String id, double mark) {
+		for(Map.Entry<Course, Vector<Student>> hm : allCourses.entrySet()) {
+			if(hm.getKey().getCode().equals(courseCode)) {
+				for(Student st: hm.getValue()) {
+					if(st.getId().getNumberID().equals(id)) {
+						st.putMark(hm.getKey(), mark);
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
+	public void addStudent(Course c, Student s) {
+		allCourses.entrySet().stream().filter(n -> n.getKey().equals(c)).forEach(n -> n.getValue().add(s));;
+	}
+	
+	public void addCourse(Course c) {
+		allCourses.put(c, new Vector<Student>());
 	}
 
 	public String toString() {

@@ -222,7 +222,9 @@ public class UniversitySystem {
 								
 							System.out.print("Option: ");
 							int option = Integer.parseInt(input.readLine());
-							if(option == 1) {
+							if(option == 4) {
+								isLoged = false;
+							} else if(option == 1) {
 								System.out.println("---Change password---");
 								System.err.print("New password: ");
 								String newPassword = input.readLine();
@@ -232,8 +234,28 @@ public class UniversitySystem {
 								System.err.println("\n---Schedule---");
 								System.out.println(teacher.getSchedule());
 							} else if (option == 3) {
-								System.out.print("\n---Setting mark---");
-									
+								System.out.println("\n---Setting mark---");
+								
+								System.out.print("ID: ");
+								String studentID = input.readLine();
+								
+								System.out.print("Course Code: ");
+								String courseCode = input.readLine();
+								
+								System.out.print("Points: ");
+								int points = Integer.parseInt(input.readLine());
+								
+								User us = findUser(studentID);
+								if(us instanceof Student) {
+									if (teacher.containsCourse(courseCode) != null) {
+										teacher.putMarkToStudent(courseCode, studentID, points);
+										System.out.println("---Done---");
+									} else {
+										System.err.println("Error: you do not have permission to this course");
+									}
+								} else {
+									System.err.println("Error: wrong user");
+								}
 							}
 						} else if (u instanceof Manager) {
 							Manager manager = (Manager) u;
@@ -358,11 +380,22 @@ public class UniversitySystem {
 								User user = findUser(id);
 								if(user != null) {
 									if(user instanceof Student) {
+										System.out.print("Teacher's ID: ");
+										String teacherID = input.readLine();
+										User teacher = findUser(teacherID);
 										Student s = (Student) user;
-										if(manager.registerForCourse(s, courseCode)) {
+										Teacher t = (Teacher) teacher;
+										if(manager.registerForCourse(s, courseCode, t)) {
 											System.out.println("\n---Done---");
 										} else {
 											System.err.println("Error: student already registered for this course");
+										}
+									} else if(user instanceof Teacher) {
+										Teacher t = (Teacher) user;
+										if(manager.registerForCourse(t, courseCode)) {
+											System.out.println("\n---Done---");
+										} else {
+											System.err.println("Error: teacher already registered for this course");
 										}
 									}
 								} else {

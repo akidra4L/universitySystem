@@ -50,7 +50,7 @@ public class Employee extends User {
 	}
 	
 	public String toString() {
-		return super.toString() + " " + this.salary + " " + this.messages;
+		return super.toString();
 	} 
 	
 }
