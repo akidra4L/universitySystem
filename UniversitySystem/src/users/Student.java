@@ -1,10 +1,10 @@
 package users;
 
-import java.util.Vector;
+import java.util.HashMap;
 
 import classes.Course;
-import classes.StudentCourse;
 import classes.ID;
+import classes.Mark;
 import classes.Schedule;
 import classes.Transcript;
 import enums.Degree;
@@ -14,16 +14,16 @@ public class Student extends User implements Comparable<Student>, Cloneable {
 	private static final long serialVersionUID = 1L;
 	private Faculty faculty;
     private Degree degree;
-    private Vector<StudentCourse> courses;
+    private HashMap <Course, Mark> allCourses;
     private double gpa;
     private Schedule schedule;
     private Transcript transcript;
     
-    public Student(ID id, String name, Faculty faculty, Degree degree, Vector<StudentCourse> courses, double gpa, Schedule schedule, Transcript transcript) {
+    public Student(ID id, String name, Faculty faculty, Degree degree, HashMap<Course, Mark> allCourses, double gpa, Schedule schedule, Transcript transcript) {
 		super(id, name);
 		this.faculty = faculty;
 		this.degree = degree;
-		this.courses = courses;
+		this.allCourses = allCourses;
 		this.gpa = gpa;
 		this.schedule = schedule;
 		this.transcript = transcript;
@@ -33,7 +33,7 @@ public class Student extends User implements Comparable<Student>, Cloneable {
     	super(id, name);
     	this.faculty = Faculty.Undefined;
     	this.degree = Degree.Undefined;
-    	this.courses = new Vector<StudentCourse>();
+    	this.allCourses = new HashMap<Course, Mark>();
     	this.gpa = 0;
     	this.schedule = new Schedule(id);
     	this.transcript = new Transcript(id);
@@ -43,7 +43,7 @@ public class Student extends User implements Comparable<Student>, Cloneable {
     	super(id, name, password);
     	this.faculty = Faculty.Undefined;
     	this.degree = Degree.Undefined;
-    	this.courses = new Vector<StudentCourse>();
+    	this.allCourses = new HashMap<Course, Mark>();
     	this.gpa = 0;
     	this.schedule = new Schedule(id);
     	this.transcript = new Transcript(id);
@@ -55,13 +55,6 @@ public class Student extends User implements Comparable<Student>, Cloneable {
     
     public Degree getDegree() {
         return this.degree;
-    }
-    
-    public Vector<StudentCourse> getCourses() {
-        return this.courses;
-    }
-    public void setCourses(Vector<StudentCourse> courses) {
-        this.courses = courses;
     }
     
     public double getGpa() {
@@ -77,7 +70,7 @@ public class Student extends User implements Comparable<Student>, Cloneable {
     
     public int getTotalCreditsInSemester() {
     	int total = 0;
-    	for(Course c: courses) {
+    	for(Course c: allCourses.keySet()) {
     		total += c.getCredits();
     	}
     	return total;
@@ -91,9 +84,9 @@ public class Student extends User implements Comparable<Student>, Cloneable {
     }
 
     public boolean dropCourse(Course course) {
-        for(Course c: courses) {
+        for(Course c: allCourses.keySet()) {
         	if(c.equals(course)) {
-        		courses.remove(c);
+        		allCourses.remove(c);
         		return true;
         	}
         }
@@ -120,10 +113,19 @@ public class Student extends User implements Comparable<Student>, Cloneable {
 		if(!super.equals(o)) return false;
 		
 		Student s = (Student) o;
-		return this.faculty.equals(s.getFaculty()) && this.degree.equals(s.getDegree()) && this.courses.equals(s.getCourses()) && this.gpa == s.getGpa() && this.schedule.equals(s.getSchedule()) && this.transcript.equals(s.getTranscript());
+		return this.faculty.equals(s.getFaculty()) && this.degree.equals(s.getDegree()) && this.gpa == s.getGpa() && this.schedule.equals(s.getSchedule()) 
+				&& this.transcript.equals(s.getTranscript()) && this.getAllCourses().equals(s.getAllCourses());
 	}
 	
 	public String toString() {
-		return super.toString() + " " + this.faculty + " " + this.degree + " " + this.courses + " " + this.gpa + " " + this.schedule + " " + this.transcript;
+		return super.toString() + " " + this.faculty + " " + this.degree + " " + this.allCourses + " " + this.gpa + " " + this.schedule + " " + this.transcript;
  	}
+
+	public HashMap <Course, Mark> getAllCourses() {
+		return allCourses;
+	}
+
+	public void setAllCourses(HashMap <Course, Mark> allCourses) {
+		this.allCourses = allCourses;
+	}
 }

@@ -1,7 +1,6 @@
 package classes;
 
 import java.util.HashMap;
-import java.util.Vector;
 
 import enums.Faculty;
 import users.*;

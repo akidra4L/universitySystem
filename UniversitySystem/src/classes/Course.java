@@ -1,7 +1,6 @@
 package classes;
 
 import java.io.Serializable;
-import java.util.Vector;
 
 import enums.Faculty;
 import generators.GeneratorCourseCode;
@@ -56,6 +55,15 @@ public class Course implements Serializable {
     }
     public void setCredits(Integer credits) {
         this.credits = credits;
+    }
+    
+    public boolean equals(Object o) {
+    	if(this == o) return true;
+    	if(o == null) return false;
+    	if(this.getClass() != o.getClass()) return false;
+    	
+    	Course c = (Course) o;
+    	return this.code.equals(c.getCode()) && this.title.equals(c.getTitle()) && this.getCredits() == c.getCredits() && this.getFaculty().equals(c.getFaculty());
     }
     
     public String toString() {

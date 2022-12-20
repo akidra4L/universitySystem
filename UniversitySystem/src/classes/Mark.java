@@ -13,6 +13,10 @@ public class Mark implements Serializable {
 		this.score = score;
 	}
 	
+	public Mark() {
+		this.score = 0;
+	}
+	
 	public double getScore() {
 		return score;
 	}

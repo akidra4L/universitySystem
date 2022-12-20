@@ -1,5 +1,7 @@
 package users;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 import classes.*;
@@ -45,14 +47,31 @@ public class Manager extends Employee {
         return false;
     }
     
-    public boolean registerForCourse(Student student, StudentCourse course) {
-        if(student.enrollCourse(course)) {
-        	Vector<StudentCourse> courses = student.getCourses();
-        	courses.add(course);
-        	student.setCourses(courses);
+    public boolean registerForCourse(Student student, String courseCode) {
+    	Course c = UniversitySystem.findCourse(courseCode);
+        if(student.enrollCourse(c)) {
+        	HashMap<Course, Mark> allCourses = student.getAllCourses();
+        	if(allCourses.containsKey(c)) {
+        		return false;
+        	}
+        	allCourses.put(c, new Mark());
+        	student.setAllCourses(allCourses);
         	return true;
         }
         return false;
+    }
+    
+    public boolean deleteFromCourse(Student student, String courseCode) {
+    	Course c = UniversitySystem.findCourse(courseCode);
+    	HashMap<Course, Mark> allCourses = student.getAllCourses();
+    	for(Map.Entry<Course, Mark> hm: allCourses.entrySet()) {
+    		if(hm.getKey().equals(c)) {
+    			allCourses.remove(hm.getKey(), hm.getValue());
+    			student.setAllCourses(allCourses);
+    			return true;
+    		}
+    	}
+    	return false;
     }
     
     public Vector<Student> viewStudents() {

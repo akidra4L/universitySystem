@@ -14,6 +14,8 @@ public class viewManagerController {
 		System.out.println("8. Create course");
 		System.out.println("9. Edit course");
 		System.out.println("10. Delete course");
-		System.out.println("11. Logout");
+		System.out.println("11. Register for course");
+		System.out.println("12. Delete from course");
+		System.out.println("13. Logout");
 	}
 }

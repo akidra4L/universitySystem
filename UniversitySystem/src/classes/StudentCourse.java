@@ -17,6 +17,13 @@ public class StudentCourse extends Course {
 		this.isPassed = isPassed;
 	}
     
+    public StudentCourse(String code, String title, Faculty faculty, int credits) {
+    	super(code, title, faculty, credits);
+    	this.mark = null;
+    	this.attendance = 0;
+    	this.isPassed = false;
+    }
+    
     public int getAttendance() {
         return this.attendance;
     }

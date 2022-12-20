@@ -80,6 +80,24 @@ public class UniversitySystem {
 		return null;
 	}
 	
+	public User findUser(String id) {
+		for(User u: users) {
+			if(u.getId().getNumberID().equals(id)) {
+				return u;
+			}
+		}
+		return null;
+	}
+	
+	public static Course findCourse(String code) {
+		for(Course c: courses) {
+			if(c.getCode().equals(code)) {
+				return c;
+			}
+		}
+		return null;
+	}
+	
 	public User login(String name, String password) {
 		for(User u: users) {
 			if(u.getName().equals(name) && u.getPassword().equals(password)) {
@@ -188,9 +206,9 @@ public class UniversitySystem {
 								System.out.println(student.getSchedule());
 							} else if (option == 3) {
 								System.err.println("\n---Marks---");
-								for(StudentCourse cs: student.getCourses()) {
-									System.out.println(cs.getTitle() + " - " + cs.getMark().getScore());
-								}
+								student.getAllCourses().forEach(
+										(key, value) 
+											-> System.out.println(key.getTitle() + " - " + value.getScore()));
 							} else if (option == 4) {
 								System.err.println("\n---Transcript---");
 								System.out.println(student.getTranscript());
@@ -223,7 +241,7 @@ public class UniversitySystem {
 							
 							System.out.print("Option: ");
 							int option = Integer.parseInt(input.readLine());
-							if(option == 11) {
+							if(option == 13) {
 								isLoged = false;
 							} else if (option == 1) {
 								System.err.print("New password: ");
@@ -329,6 +347,49 @@ public class UniversitySystem {
 									}
 								}
 								System.out.println("\n---Done---");
+							} else if (option == 11) {
+								System.out.println("---Register for course---");
+								System.out.print("User ID: ");
+								String id = input.readLine();
+								
+								System.out.print("Course code: ");
+								String courseCode = input.readLine();
+								
+								User user = findUser(id);
+								if(user != null) {
+									if(user instanceof Student) {
+										Student s = (Student) user;
+										if(manager.registerForCourse(s, courseCode)) {
+											System.out.println("\n---Done---");
+										} else {
+											System.err.println("Error: student already registered for this course");
+										}
+									}
+								} else {
+									System.err.println("Error: unknown user");
+								}
+							} else if (option == 12) {
+								System.out.println("---Delete from course---");
+								
+								System.out.print("User ID: ");
+								String id = input.readLine();
+								
+								System.out.print("Course code: ");
+								String courseCode = input.readLine();
+								
+								User user = findUser(id);
+								if(user != null) {
+									if(user instanceof Student) {
+										Student s = (Student) user;
+										if(manager.deleteFromCourse(s, courseCode)) {
+											System.out.println("\n---Done---");
+										} else {
+											System.err.println("Error: student do not have this course");
+										}
+									}
+								} else {
+									System.err.println("Error: unknown user");
+								}
 							}
 						}
 					}
