@@ -2,3 +2,5 @@
 /viewStudentController.class
 /viewTeacherController.class
 /viewUserController.class
+/viewEditCourseController.class
+/viewManagerController.class

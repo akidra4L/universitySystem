@@ -5,8 +5,11 @@ import java.util.Vector;
 
 import classes.Course;
 import classes.ID;
+import classes.Mark;
 import classes.Schedule;
+import classes.StudentCourse;
 import enums.Faculty;
+import enums.MarkLetter;
 import enums.TeacherTitle;
 
 public class Teacher extends Employee {
@@ -79,9 +82,16 @@ public class Teacher extends Employee {
 		this.allCourses = allCourses;
 	}
 
-	public void putMark(Student s) {
-		
-	}
+//	public void putMark(StudentCourse studentCourse) {
+//	    Mark mark = studentCourse.getMark();
+//	    mark.setScore(90.0);
+//	    mark.setMarkLetter(MarkLetter.A);
+//	    if (mark.getScore() >= 60.0) {
+//	        studentCourse.setIsPassed(true);
+//	    } else {
+//	        studentCourse.setIsPassed(false);
+//	    }
+//	}
 
 	public boolean equals(Object o) {
 		if (!super.equals(o))
