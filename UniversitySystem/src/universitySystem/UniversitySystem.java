@@ -21,10 +21,11 @@ public class UniversitySystem {
 		users = new Vector<User>();
 		courses = new Vector<Course>();
 		news = new Vector<News>();
+		books = new Vector<Book>();
 		new UsersData();
 		new CoursesData();
 		new NewsData();
-		books = new Vector<Book>();
+		new BooksData();
 	}
 	
 	public UniversitySystem(String name) {
@@ -107,6 +108,7 @@ public class UniversitySystem {
 		UsersData.saveUsers();
 		CoursesData.saveCourses();
 		NewsData.saveNews();
+		BooksData.saveBooks();
 	}
 	
 	void launch() throws Exception {
@@ -183,8 +185,9 @@ public class UniversitySystem {
 										
 								} else if (option == 5) {
 										isLoged = false;
+								} else {
+									System.err.println("Error: wrong option");
 								}
-									
 							} else if (u instanceof Student) {
 								Student student = (Student) u;
 								viewStudentController.showStudentMenu((Student) u);
@@ -208,9 +211,10 @@ public class UniversitySystem {
 								} else if (option == 4) {
 									System.err.println("\n---Transcript---");
 									System.out.println(student.getTranscript());
-								}
-								else if (option == 5) {
+								} else if (option == 5) {
 									isLoged = false;
+								} else {
+									System.err.println("Error: wrong option");
 								}
 							} else if (u instanceof Teacher) {
 								Teacher teacher = (Teacher) u;
@@ -218,7 +222,7 @@ public class UniversitySystem {
 									
 								System.out.print("Option: ");
 								int option = Integer.parseInt(input.readLine());
-								if(option == 5) {
+								if(option == 6) {
 									isLoged = false;
 								} else if(option == 1) {
 									System.out.println("---Change password---");
@@ -265,240 +269,328 @@ public class UniversitySystem {
 									} else {
 										System.err.println("Error: wrong user");
 									}
+								} else {
+									System.err.println("Error: wrong option");
 								}
 							} else if (u instanceof Manager) {
 								Manager manager = (Manager) u;
-								viewManagerController.showManagerMenu(manager);
+								if (manager.getType() == ManagerType.Manager) {
+									viewManagerController.showManagerMenu(manager);
+									
+									System.out.print("Option: ");
+									int option = Integer.parseInt(input.readLine());
+									if(option == 15) {
+										isLoged = false;
+									} else if (option == 1) {
+										System.err.print("New password: ");
+										String newPassword = input.readLine();
+										manager.setPassword(newPassword);
+										System.out.println("---Done---");
+									} else if (option == 2) {
+										System.out.println("---Change user information---");
+										System.out.print("ID: ");
+										String id = input.readLine();
+										
+										viewEditController.showEditUserMenu();
+										System.out.print("Option: ");
+										int editCommand = Integer.parseInt(input.readLine());
+										
+										if (manager.viewStudent(id) != null) {
+											Student s = manager.viewStudent(id);
+											if (editCommand == 1) {
+												System.out.print("New user name: ");
+												String newName = input.readLine();
+												s.setName(newName);
+												System.out.println("---Done---");
+											} else if (editCommand == 2) {
+												System.out.print("New faculty: ");
+												Faculty fac = Faculty.of(input.readLine().toLowerCase());
+												s.setFaculty(fac);
+												System.out.println("---Done---");
+											} else {
+												System.err.println("Error: unknown command");
+											}
+										} else if (manager.viewTeacher(id) != null) {
+											Teacher t = manager.viewTeacher(id);
+											if (editCommand == 1) {
+												System.out.print("New user name: ");
+												String newName = input.readLine();
+												t.setName(newName);
+												System.out.println("---Done---");
+											} else if (editCommand == 2) {
+												System.out.print("New faculty: ");
+												Faculty fac = Faculty.of(input.readLine().toLowerCase());
+												t.setFaculty(fac);
+												System.out.println("---Done---");
+											} else {
+												System.err.println("Error: unknown command");
+											}
+										} else {
+											System.err.println("Error: null user");
+										}
+									} else if (option == 3) {
+										System.out.println("\n---All teachers---");
+										Vector <Teacher> teachers = manager.viewTeachers();
+										for(Teacher t: teachers) {
+											System.out.println("- " + t.viewInfo());
+										}
+										System.out.println("---Done---");
+									} else if (option == 4) {
+										System.out.println("\n---All students---");
+										Vector <Student> students = manager.viewStudents();
+										for(Student s: students) {
+											System.out.println("- " + s.viewInfo());
+										}
+										System.out.println("---Done---");
+									} else if (option == 5) {
+										System.out.println("\n---View student---");
+										System.out.print("ID: ");
+										String studentID = input.readLine();
+										
+										System.out.println(manager.viewStudent(studentID));
+										System.out.println("\n---Done---");
+									} else if (option == 6) {
+										System.out.println("---News---");
+										System.out.println(news);
+										System.out.println("---Done---");
+									} else if (option == 7) {
+										System.out.println("\n---News creation---");
+										System.out.print("Title: ");
+										String title = input.readLine();
+										System.out.print("Description: ");
+										String description = input.readLine();
+										
+										manager.createNews(title, description);
+										System.out.println("\n---Done---");
+									} else if (option == 8) {
+										System.out.println("\n---Delete news---");
+										System.out.print("Author: ");
+										String author = input.readLine();
+										System.out.print("Title: ");
+										String title = input.readLine();
+										System.out.print("Description: ");
+										String description = input.readLine();
+										
+										manager.deleteNews(author, title, description);
+										System.out.println("\n---Done---");
+									} else if (option == 9) {
+										System.out.println("---All courses---");
+										if(courses.isEmpty()) {
+											System.out.println("Empty.");
+										} else {
+											for(Course c: courses) {
+												System.out.println("- " + c);
+											}
+										}
+										System.out.println("\n---Done---");
+									} else if (option == 10) {
+										System.out.println("---Create course---");
+										System.out.print("Course name: ");
+										String courseName = input.readLine();
+										
+										System.out.print("Faculty: ");
+										Faculty faculty = Faculty.of(input.readLine().toLowerCase());
+										
+										System.out.print("Credits: ");
+										int credits = Integer.parseInt(input.readLine());
+										
+										System.out.print("Weekday: ");
+										WeekDay weekday = WeekDay.of(input.readLine().toLowerCase());
+										
+										System.out.print("Hour: ");
+										int hours = Integer.parseInt(input.readLine());
+										
+										System.out.print("Minutes: ");
+										int minutes = Integer.parseInt(input.readLine());
+										
+										manager.createCourse(courseName, faculty, credits, weekday, hours, minutes);
+										System.out.println("\n---Done---");
+									} else if (option == 11) {
+										System.out.println("\n---Edit course---");
+										System.out.print("Course's code: ");
+										String courseCode = input.readLine();
+										
+										for(Course c: courses) {
+											if(c.getCode().equals(courseCode)) {
+												viewEditController.showEditCourseMenu();
+												System.out.print("--- Option: ");
+												int editCourse = Integer.parseInt(input.readLine());
+												
+												if (editCourse == 1) {
+													System.out.print("New name: ");
+													String name = input.readLine();
+													c.setTitle(name);
+												} else if (editCourse == 2) {
+													System.out.print("New faculty: ");
+													Faculty faculty = Faculty.of(input.readLine().toLowerCase());
+													c.setFaculty(faculty);
+												} else if (editCourse == 3) {
+													System.out.print("New credits: ");
+													int credits = Integer.parseInt(input.readLine());
+													c.setCredits(credits);
+												}
+												break;
+											}
+										}
+										System.out.println("\n---Done---");
+									} else if (option == 12) {
+										System.out.println("---Delete course---");
+										System.out.print("Course's code: ");
+										String courseCode = input.readLine();
+										
+										Vector <Course> newCourses = courses;
+										for(Course c: newCourses) {
+											if(c.getCode().equals(courseCode)) {
+												newCourses.remove(c);
+												UniversitySystem.setCourses(newCourses);
+												break;
+											}
+										}
+										System.out.println("\n---Done---");
+									} else if (option == 13) {
+										System.out.println("---Register for course---");
+										System.out.print("User ID: ");
+										String id = input.readLine();
+										
+										System.out.print("Course code: ");
+										String courseCode = input.readLine();
+										
+										User user = findUser(id);
+										if(user != null) {
+											if(user instanceof Student) {
+												System.out.print("Teacher's ID: ");
+												String teacherID = input.readLine();
+												User teacher = findUser(teacherID);
+												if(teacher != null) {
+													Student s = (Student) user;
+													Teacher t = (Teacher) teacher;
+													if(manager.registerForCourse(s, courseCode, t)) {
+														System.out.println("\n---Done---");
+													} else {
+														System.err.println("Error: student already registered for this course");
+													}
+												} else {
+													System.err.println("Error: teacher is not found");
+												}
+												
+											} else if(user instanceof Teacher) {
+												Teacher t = (Teacher) user;
+												if(manager.registerForCourse(t, courseCode)) {
+													System.out.println("\n---Done---");
+												} else {
+													System.err.println("Error: teacher already registered for this course");
+												}
+											}
+										} else {
+											System.err.println("Error: unknown user");
+										}
+									} else if (option == 14) {
+										System.out.println("---Delete from course---");
+										
+										System.out.print("User ID: ");
+										String id = input.readLine();
+										
+										System.out.print("Course code: ");
+										String courseCode = input.readLine();
+										
+										User user = findUser(id);
+										if(user != null) {
+											if(user instanceof Student) {
+												Student s = (Student) user;
+												if(manager.deleteFromCourse(s, courseCode)) {
+													System.out.println("\n---Done---");
+												} else {
+													System.err.println("Error: student do not have this course");
+												}
+											}
+										} else {
+											System.err.println("Error: unknown user");
+										}
+									} else {
+										System.err.println("Error: wrong option");
+									}
+								} else if (manager.getType() == ManagerType.ManagerFinancial) {
+									viewManagerController.showFinancialManagerMenu(manager);
+									
+									System.out.print("Option: ");
+									int option = Integer.parseInt(input.readLine());
+									if (option == 4) {
+										isLoged = false;
+									} else if (option == 1) {
+										System.err.print("New password: ");
+										String newPassword = input.readLine();
+										manager.setPassword(newPassword);
+										System.out.println("---Done---");
+									} else if (option == 2) {
+										System.out.println("---All employees---");
+										Vector <Employee> employees = manager.getEmployees();
+										for(Employee e: employees) {
+											System.out.println("- " + e.viewInfoForFinancial());
+										}
+										System.out.println("\n---Done---");
+									} else if (option == 3) {
+										System.out.println("---Edit employee's salary---");
+										System.out.print("Employee's ID: ");
+										String employeeID = input.readLine();
+										
+										System.out.print("New salary: ");
+										double salary = Double.parseDouble(input.readLine());
+										
+										try {
+											Employee e = manager.getEmployee(employeeID);
+											e.setSalary(salary);
+											System.out.println("---Done---");
+										} catch(NullPointerException e) {
+											System.err.println("Error: null user");
+										}
+									} else {
+										System.err.println("Error: wrong option");
+									}
+								}
+							} else if (u instanceof Librarian) {
+								Librarian librarian = (Librarian) u;
+								viewLibrarianController.showLibrarianMenu(librarian);
 								
 								System.out.print("Option: ");
 								int option = Integer.parseInt(input.readLine());
-								if(option == 15) {
+								if(option == 5) {
 									isLoged = false;
 								} else if (option == 1) {
 									System.err.print("New password: ");
 									String newPassword = input.readLine();
-									manager.setPassword(newPassword);
+									librarian.setPassword(newPassword);
 									System.out.println("---Done---");
 								} else if (option == 2) {
-									System.out.println("---Change user information---");
-									System.out.print("ID: ");
-									String id = input.readLine();
-									
-									viewEditController.showEditUserMenu();
-									System.out.print("Option: ");
-									int editCommand = Integer.parseInt(input.readLine());
-									
-									if (manager.viewStudent(id) != null) {
-										Student s = manager.viewStudent(id);
-										if (editCommand == 1) {
-											System.out.print("New user name: ");
-											String newName = input.readLine();
-											s.setName(newName);
-											System.out.println("---Done---");
-										} else if (editCommand == 2) {
-											System.out.print("New faculty: ");
-											Faculty fac = Faculty.of(input.readLine().toLowerCase());
-											s.setFaculty(fac);
-											System.out.println("---Done---");
-										} else {
-											System.err.println("Error: unknown command");
-										}
-									} else if (manager.viewTeacher(id) != null) {
-										Teacher t = manager.viewTeacher(id);
-										if (editCommand == 1) {
-											System.out.print("New user name: ");
-											String newName = input.readLine();
-											t.setName(newName);
-											System.out.println("---Done---");
-										} else if (editCommand == 2) {
-											System.out.print("New faculty: ");
-											Faculty fac = Faculty.of(input.readLine().toLowerCase());
-											t.setFaculty(fac);
-											System.out.println("---Done---");
-										} else {
-											System.err.println("Error: unknown command");
-										}
-									} else {
-										System.err.println("Error: null user");
-									}
+									System.out.println("---View books---");
+									librarian.viewBooks();
+									System.out.println("\n---Done---");
 								} else if (option == 3) {
-									System.out.println("\n---All teachers---");
-									Vector <Teacher> teachers = manager.viewTeachers();
-									for(Teacher t: teachers) {
-										System.out.println("- " + t.viewInfo());
-									}
-									System.out.println("---Done---");
-								} else if (option == 4) {
-									System.out.println("\n---All students---");
-									Vector <Student> students = manager.viewStudents();
-									for(Student s: students) {
-										System.out.println("- " + s.viewInfo());
-									}
-									System.out.println("---Done---");
-								} else if (option == 5) {
-									System.out.println("\n---View student---");
-									System.out.print("ID: ");
-									String studentID = input.readLine();
-									
-									System.out.println(manager.viewStudent(studentID));
-									System.out.println("\n---Done---");
-								} else if (option == 6) {
-									System.out.println("---News---");
-									System.out.println(news);
-									System.out.println("---Done---");
-								} else if (option == 7) {
-									System.out.println("\n---News creation---");
-									System.out.print("Title: ");
-									String title = input.readLine();
-									System.out.print("Description: ");
-									String description = input.readLine();
-									
-									manager.createNews(title, description);
-									System.out.println("\n---Done---");
-								} else if (option == 8) {
-									System.out.println("\n---Delete news---");
+									System.out.println("---Add book---");
 									System.out.print("Author: ");
 									String author = input.readLine();
-									System.out.print("Title: ");
-									String title = input.readLine();
-									System.out.print("Description: ");
-									String description = input.readLine();
 									
-									manager.deleteNews(author, title, description);
+									System.out.print("Book name: ");
+									String bookName = input.readLine();
+									
+									librarian.addBook(author, bookName);
 									System.out.println("\n---Done---");
-								} else if (option == 9) {
-									System.out.println("---All courses---");
-									if(courses.isEmpty()) {
-										System.out.println("Empty.");
-									} else {
-										for(Course c: courses) {
-											System.out.println("- " + c);
-										}
-									}
-									System.out.println("\n---Done---");
-								} else if (option == 10) {
-									System.out.println("---Create course---");
-									System.out.print("Course name: ");
-									String courseName = input.readLine();
-									
-									System.out.print("Faculty: ");
-									Faculty faculty = Faculty.of(input.readLine().toLowerCase());
-									
-									System.out.print("Credits: ");
-									int credits = Integer.parseInt(input.readLine());
-									
-									System.out.print("Weekday: ");
-									WeekDay weekday = WeekDay.of(input.readLine().toLowerCase());
-									
-									System.out.print("Hour: ");
-									int hours = Integer.parseInt(input.readLine());
-									
-									System.out.print("Minutes: ");
-									int minutes = Integer.parseInt(input.readLine());
-									
-									manager.createCourse(courseName, faculty, credits, weekday, hours, minutes);
-									System.out.println("\n---Done---");
-								} else if (option == 11) {
-									System.out.println("\n---Edit course---");
-									System.out.print("Course's code: ");
-									String courseCode = input.readLine();
-									
-									for(Course c: courses) {
-										if(c.getCode().equals(courseCode)) {
-											viewEditController.showEditCourseMenu();
-											System.out.print("--- Option: ");
-											int editCourse = Integer.parseInt(input.readLine());
-											
-											if (editCourse == 1) {
-												System.out.print("New name: ");
-												String name = input.readLine();
-												c.setTitle(name);
-											} else if (editCourse == 2) {
-												System.out.print("New faculty: ");
-												Faculty faculty = Faculty.of(input.readLine().toLowerCase());
-												c.setFaculty(faculty);
-											} else if (editCourse == 3) {
-												System.out.print("New credits: ");
-												int credits = Integer.parseInt(input.readLine());
-												c.setCredits(credits);
-											}
-											break;
-										}
-									}
-									System.out.println("\n---Done---");
-								} else if (option == 12) {
-									System.out.println("---Delete course---");
-									System.out.print("Course's code: ");
-									String courseCode = input.readLine();
-									
-									Vector <Course> newCourses = courses;
-									for(Course c: newCourses) {
-										if(c.getCode().equals(courseCode)) {
-											newCourses.remove(c);
-											UniversitySystem.setCourses(newCourses);
-											break;
-										}
-									}
-									System.out.println("\n---Done---");
-								} else if (option == 13) {
-									System.out.println("---Register for course---");
+								} else if (option == 4) {
+									System.out.println("---Give book---");
 									System.out.print("User ID: ");
-									String id = input.readLine();
+									String userID = input.readLine();
 									
-									System.out.print("Course code: ");
-									String courseCode = input.readLine();
+									System.out.print("Book ID: ");
+									String bookID = input.readLine();
 									
-									User user = findUser(id);
-									if(user != null) {
-										if(user instanceof Student) {
-											System.out.print("Teacher's ID: ");
-											String teacherID = input.readLine();
-											User teacher = findUser(teacherID);
-											if(teacher != null) {
-												Student s = (Student) user;
-												Teacher t = (Teacher) teacher;
-												if(manager.registerForCourse(s, courseCode, t)) {
-													System.out.println("\n---Done---");
-												} else {
-													System.err.println("Error: student already registered for this course");
-												}
-											} else {
-												System.err.println("Error: teacher is not found");
-											}
-											
-										} else if(user instanceof Teacher) {
-											Teacher t = (Teacher) user;
-											if(manager.registerForCourse(t, courseCode)) {
-												System.out.println("\n---Done---");
-											} else {
-												System.err.println("Error: teacher already registered for this course");
-											}
-										}
-									} else {
-										System.err.println("Error: unknown user");
+									User bookUser = findUser(userID);
+									try {
+										librarian.giveBook(bookUser, bookID);
+										System.out.println("\n---Done---");
+									} catch(NullPointerException e) {
+										System.err.println("Error: null user");
 									}
-								} else if (option == 14) {
-									System.out.println("---Delete from course---");
-									
-									System.out.print("User ID: ");
-									String id = input.readLine();
-									
-									System.out.print("Course code: ");
-									String courseCode = input.readLine();
-									
-									User user = findUser(id);
-									if(user != null) {
-										if(user instanceof Student) {
-											Student s = (Student) user;
-											if(manager.deleteFromCourse(s, courseCode)) {
-												System.out.println("\n---Done---");
-											} else {
-												System.err.println("Error: student do not have this course");
-											}
-										}
-									} else {
-										System.err.println("Error: unknown user");
-									}
+								} else {
+									System.err.println("Error: wrong option");
 								}
 							}
 						}

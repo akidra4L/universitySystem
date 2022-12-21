@@ -53,4 +53,8 @@ public class Employee extends User {
 		return super.toString();
 	} 
 	
+	public String viewInfoForFinancial() {
+		return super.getId() + " " + super.getName() + " " + this.salary;
+	}
+	
 }

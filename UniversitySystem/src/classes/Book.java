@@ -1,7 +1,12 @@
 package classes;
 
-public class Book {
-    private ID id;
+import java.io.Serializable;
+
+import universitySystem.UniversitySystem;
+
+public class Book implements Serializable {
+    private static final long serialVersionUID = 1L;
+	private ID id;
     private String author;
     private String name;
     private boolean isAvailable;
@@ -11,6 +16,15 @@ public class Book {
     	this.author = author;
     	this.name = name;
     	this.isAvailable = isAvailable;
+    	UniversitySystem.addBook(this);
+    }
+    
+    public Book(String author, String name) {
+    	this.id = new ID();
+    	this.author = author;
+    	this.name = name;
+    	this.isAvailable = true;
+    	UniversitySystem.addBook(this);
     }
     
     public ID getId() {

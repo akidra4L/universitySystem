@@ -128,6 +128,27 @@ public class Manager extends Employee {
     	return null;
     }
     
+    public Vector<Employee> getEmployees() {
+    	Vector <Employee> employees = new Vector<Employee>();
+    	Vector <User> users = UniversitySystem.getUsers();
+    	for(User u: users) {
+    		if(u instanceof Employee) {
+    			employees.add((Employee) u);
+    		}
+    	}
+    	return employees;
+    }
+    
+    public Employee getEmployee(String id) {
+    	Vector <Employee> employees = getEmployees();
+    	for(Employee e: employees) {
+    		if(e.getId().getNumberID().equals(id)) {
+    			return e;
+    		}
+    	}
+    	return null;
+    }
+    
     public void createCourse(String name, Faculty faculty, int credits, WeekDay weekday, int hours, int minutes) {
     	new Course(name, faculty, credits, weekday, hours, minutes);
     }

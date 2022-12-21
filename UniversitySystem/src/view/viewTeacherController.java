@@ -8,6 +8,7 @@ public class viewTeacherController {
 		System.out.println("2. Teacher's schedule.");
 		System.out.println("3. View students.");
 		System.out.println("4. Set marks.");
-		System.out.println("5. Logout.");
+		System.out.println("5. Attendance");
+		System.out.println("6. Logout.");
 	}
 }

@@ -20,4 +20,11 @@ public class viewManagerController {
 		System.out.println("14. Delete from course");
 		System.out.println("15. Logout");
 	}
+	
+	public static void showFinancialManagerMenu(Manager manager) {
+		viewUserController.showUserMenu(manager);
+		System.out.println("2. View all employees");
+		System.out.println("3. Edit employees's salary");
+		System.out.println("4. Logout");
+	}
 }

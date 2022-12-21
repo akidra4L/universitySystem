@@ -1,7 +1,9 @@
 package users;
 
 import java.io.Serializable;
+import java.util.Vector;
 
+import classes.Book;
 import classes.ID;
 import universitySystem.UniversitySystem;
 
@@ -10,11 +12,13 @@ public class User implements Serializable {
 	private ID id;
     private String name;
     private String password;
+    private Vector<Book> books;
     
     public User(ID id, String name) {
     	this.id = id;
     	this.name = name;
     	this.password = id.getNumberID();
+    	this.books = new Vector<Book>();
     	UniversitySystem.addUser(this);
     }
     
@@ -22,6 +26,7 @@ public class User implements Serializable {
     	this.id = id;
     	this.name = name;
     	this.password = password;
+    	this.books = new Vector<Book>();
     	UniversitySystem.addUser(this);
     }
 
@@ -48,14 +53,20 @@ public class User implements Serializable {
 	public int getHashCode() {
 		return this.password.hashCode();
 	}
-
-    public void Logout() {
-        //TODO
-    }
     
     public void createRequest() {
         //TODO
     }
+    
+	public Vector<Book> getMyBooks() {
+		return books;
+	}
+	public void setBooks(Vector<Book> books) {
+		this.books = books;
+	}
+	public void addBookToMyCollection(Book book) {
+		books.add(book);
+	}
     
     public boolean equals(Object o) {
     	if(this == o) return true;
