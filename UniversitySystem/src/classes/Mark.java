@@ -4,29 +4,53 @@ import java.io.Serializable;
 
 import enums.MarkLetter;
 
+/**
+ * Mark Class
+ *
+ */
 public class Mark implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private double score;
 	private MarkLetter markLetter;
 	
+	/**
+	 * Default constructor
+	 * @param score
+	 */
 	public Mark(double score) {
 		this.score = score;
 	}
-	
+	/**
+	 * Default constructor
+	 */
 	public Mark() {
 		this.score = 0;
 	}
 	
+	/**
+	 * Getter for Mark's total score
+	 * @return Double
+	 */
 	public double getScore() {
 		return score;
 	}
+	/**
+	 * Setter for Mark's total score
+	 * @param score
+	 */
 	public void setScore(double score) {
 		this.score = score;
 	}
-	
+	/**
+	 * Setter for Mark Letter representation
+	 * @param markLetter
+	 */
 	public void setMarkLetter(MarkLetter markLetter) {
 		this.markLetter = markLetter;
 	}
+	/**
+	 * Getter for Mark Letter representation
+	 */
 	public MarkLetter getMarkLetter() {
 		if (score < 30) {
 			setMarkLetter(MarkLetter.F);
@@ -42,6 +66,10 @@ public class Mark implements Serializable {
 		return markLetter;
 	}
 	
+	/**
+	 * Return string representation of the Object
+	 * @return String
+	 */
 	public String toString() {
 		return this.score + " " + this.markLetter;
 	}

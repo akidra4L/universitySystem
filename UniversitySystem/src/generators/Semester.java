@@ -2,44 +2,22 @@ package generators;
 
 import java.time.Month;
 
+/**
+ * Semester Enum
+ * @author AlikhanGubayev
+ *
+ */
 public enum Semester {
 	Spring, Summer, Fall;
 	
+	/**
+	 * Method of Semester's Enum, which is returning during Semester by month
+	 * @param month
+	 * @return
+	 */
 	static public Semester of (final Month month) {
-		if(month.ordinal()<6) return Spring;
-		switch(month) {
-		// cases to return Spring Semester
-		case JANUARY:
-			return Spring;
-		case FEBRUARY:
-			return Spring;
-		case MARCH:
-			return Spring;
-		case APRIL:
-			return Spring;
-		case MAY:
-			return Spring;
-		
-		// cases to return Summer Semester
-		case JUNE:
-			return Summer;
-		case JULY:
-			return Summer;
-		
-		// cases to return Fall Semester
-		case AUGUST:
-			return Fall;
-		case SEPTEMBER:
-			return Fall;
-		case OCTOBER:
-			return Fall;
-		case NOVEMBER:
-			return Fall;
-		case DECEMBER:
-			return Fall;
-		
-		default:
-			return null;
-		}
+		if(month.ordinal() < 6 && month.ordinal() > 1) return Spring;
+		else if (month.ordinal() >= 6 && month.ordinal() < 9) return Summer;
+		else return Fall;
 	}
 }

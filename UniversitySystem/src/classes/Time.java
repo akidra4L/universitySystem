@@ -2,15 +2,28 @@ package classes;
 
 import java.io.Serializable;
 
+/**
+ * Time class
+ *
+ */
 public class Time implements Comparable<Time>, Serializable {
 	private static final long serialVersionUID = 1L;
 	int hours, minutes;
 
+	/**
+	 * Default constructor
+	 * @param hours
+	 * @param minutes
+	 */
 	public Time(int hours, int minutes) {
 		this.hours = hours;
 		this.minutes = minutes;
 	}
 	
+	/**
+	 * Method, which is creating right format of a Time
+	 * @return String
+	 */
 	public String checkMinutesAndSeconds() {	
 		var builder = new StringBuilder();
 		
@@ -23,6 +36,10 @@ public class Time implements Comparable<Time>, Serializable {
 		return builder.toString();
 	}
 	
+	/**
+	 * Method, which returns Universal representation of Time
+	 * @return String
+	 */
 	public String toUniversal() {
 		String ans = "";
 		if(this.hours < 10) {
@@ -37,6 +54,10 @@ public class Time implements Comparable<Time>, Serializable {
 		return ans;
 	}
 	
+	/**
+	 * Method, which returns Standard representation of Time
+	 * @return String
+	 */
 	public String toStandard() {
 		String ans = "";
 		if(this.hours > 12) {
@@ -68,6 +89,10 @@ public class Time implements Comparable<Time>, Serializable {
 		return 0;
 	}
 	
+	/**
+	 * Return string representation of the Object
+	 * @return String
+	 */
 	public String toString() {
 		return this.hours + " " + this.minutes;
 	}

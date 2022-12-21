@@ -1,8 +1,17 @@
 package enums;
 
+/**
+ * Faculty Enum
+ *
+ */
 public enum Faculty {
 	FIT, ISE, KMA, SECAEN, SCE, RECMC, KBS, GEF, FEOGI, FGE, Undefined;
 	
+	/**
+	 * Method of Faculty Enum, which is receive faculty as String and return it as Enum
+	 * @param faculty
+	 * @return Faculty
+	 */
 	static public Faculty of (final String faculty) {
 		switch (faculty) {
 		case "fit":
