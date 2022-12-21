@@ -54,7 +54,6 @@ public class User implements Serializable {
 	}
 	/**
 	 * Setter for User's ID
-	 * @return
 	 */
 	public void setId(ID id) {
 		this.id = id;
@@ -62,6 +61,7 @@ public class User implements Serializable {
 
 	/**
 	 * Getter for User's name
+	 * @return String
 	 */
 	public String getName() {
 		return this.name;

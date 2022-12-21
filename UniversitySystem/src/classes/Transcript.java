@@ -58,7 +58,7 @@ public class Transcript implements Serializable {
     
     /**
      * Getter for Marks
-     * @return HashMap<Course, MarkLetter>
+     * @return HashMap
      */
 	public HashMap<Course, MarkLetter> getMarks() {
 		return markLetters;

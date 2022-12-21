@@ -91,7 +91,7 @@ public class Manager extends Employee {
      * @param student
      * @param courseCode
      * @param teacher
-     * @return
+     * @return boolean
      */
     public boolean registerForCourse(Student student, String courseCode, Teacher teacher) {
     	Course c = UniversitySystem.findCourse(courseCode);
@@ -147,7 +147,7 @@ public class Manager extends Employee {
     
     /**
      * Method, which returns Vector<Teacher> to show them
-     * @return Vector<Teacher>
+     * @return Vector
      */
     public Vector<Teacher> viewTeachers() {
     	Vector <Teacher> teachers = new Vector<Teacher>();
@@ -163,7 +163,7 @@ public class Manager extends Employee {
     
     /**
      * Method, which returns Vector<Student> to show them
-     * @return Vector<Student>
+     * @return Vector
      */
     public Vector<Student> viewStudents() {
     	Vector <Student> students = new Vector<Student>();
@@ -209,7 +209,7 @@ public class Manager extends Employee {
     
     /**
      * Method, which returns all Employees
-     * @return Vector<Employee>
+     * @return Vector
      */
     public Vector<Employee> getEmployees() {
     	Vector <Employee> employees = new Vector<Employee>();
@@ -274,7 +274,7 @@ public class Manager extends Employee {
 
     /**
      * Method, which returns all Requests in System
-     * @return List<Request> 
+     * @return List
      */
 	public static List<Request> getRequests() {
 		return UniversitySystem.getRequests();
