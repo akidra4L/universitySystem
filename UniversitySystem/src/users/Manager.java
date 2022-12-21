@@ -84,6 +84,18 @@ public class Manager extends Employee {
     	return false;
     }
     
+    public Vector<Teacher> viewTeachers() {
+    	Vector <Teacher> teachers = new Vector<Teacher>();
+    	Vector <User> users = UniversitySystem.getUsers();
+    	
+    	for(User u: users) {
+    		if (u instanceof Teacher) {
+    			teachers.add((Teacher) u);
+    		}
+    	}
+    	return teachers;
+    }
+    
     public Vector<Student> viewStudents() {
     	Vector <Student> students = new Vector<Student>();
     	Vector <User> users = UniversitySystem.getUsers();
@@ -106,8 +118,18 @@ public class Manager extends Employee {
     	return null;
     }
     
-    public void createCourse(String name, Faculty faculty, int credits) {
-    	new Course(name, faculty, credits);
+    public Teacher viewTeacher(String id) {
+    	Vector <Teacher> teachers = viewTeachers();
+    	for(Teacher t : teachers) {
+    		if (t.getId().getNumberID().equals(id)) {
+    			return t;
+    		}
+    	}
+    	return null;
+    }
+    
+    public void createCourse(String name, Faculty faculty, int credits, WeekDay weekday, int hours, int minutes) {
+    	new Course(name, faculty, credits, weekday, hours, minutes);
     }
 
     public Course viewCourseInfo() {

@@ -30,6 +30,15 @@ public class Date implements Serializable {
     	this.year = year;
     }
     
+    public Date(WeekDay weekday, Time time) {
+    	this.weekday =  weekday;
+    	this.time = time;
+    }
+    
+    public String getWeekdayAndTime() {
+    	return this.weekday + " " + this.time.toStandard();
+    }
+    
     public Time getTime() {
     	return this.time;
     }
@@ -70,5 +79,9 @@ public class Date implements Serializable {
 
 	public void setDay(int day) {
 		this.day = day;
+	}
+	
+	public String toString() {
+		return this.getWeekdayAndTime();
 	}
 }

@@ -1,11 +1,11 @@
 package users;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import classes.Course;
 import classes.ID;
 import classes.Mark;
-import classes.Schedule;
 import classes.Transcript;
 import enums.Degree;
 import enums.Faculty;
@@ -16,17 +16,15 @@ public class Student extends User implements Comparable<Student>, Cloneable {
 	private Degree degree;
 	private HashMap<Course, Mark> allCourses;
 	private double gpa;
-	private Schedule schedule;
 	private Transcript transcript;
 
 	public Student(ID id, String name, Faculty faculty, Degree degree, HashMap<Course, Mark> allCourses, double gpa,
-			Schedule schedule, Transcript transcript) {
+			Transcript transcript) {
 		super(id, name);
 		this.faculty = faculty;
 		this.degree = degree;
 		this.allCourses = allCourses;
 		this.gpa = gpa;
-		this.schedule = schedule;
 		this.transcript = transcript;
 	}
 
@@ -36,7 +34,6 @@ public class Student extends User implements Comparable<Student>, Cloneable {
 		this.degree = Degree.Undefined;
 		this.allCourses = new HashMap<Course, Mark>();
 		this.gpa = 0;
-		this.schedule = new Schedule(id);
 		this.transcript = new Transcript(id);
 	}
 
@@ -46,12 +43,14 @@ public class Student extends User implements Comparable<Student>, Cloneable {
 		this.degree = Degree.Undefined;
 		this.allCourses = new HashMap<Course, Mark>();
 		this.gpa = 0;
-		this.schedule = new Schedule(id);
 		this.transcript = new Transcript(id);
 	}
 
 	public Faculty getFaculty() {
 		return this.faculty;
+	}
+	public void setFaculty(Faculty fac) {
+		this.faculty = fac;
 	}
 
 	public Degree getDegree() {
@@ -60,14 +59,6 @@ public class Student extends User implements Comparable<Student>, Cloneable {
 
 	public double getGpa() {
 		return this.gpa;
-	}
-
-	public Schedule getSchedule() {
-		return this.schedule;
-	}
-
-	public void setSchedule(Schedule schedule) {
-		this.schedule = schedule;
 	}
 
 	public int getTotalCreditsInSemester() {
@@ -117,13 +108,8 @@ public class Student extends User implements Comparable<Student>, Cloneable {
 
 		Student s = (Student) o;
 		return this.faculty.equals(s.getFaculty()) && this.degree.equals(s.getDegree()) && this.gpa == s.getGpa()
-				&& this.schedule.equals(s.getSchedule()) && this.transcript.equals(s.getTranscript())
+			    && this.transcript.equals(s.getTranscript())
 				&& this.getAllCourses().equals(s.getAllCourses());
-	}
-
-	public String toString() {
-		return super.toString() + " " + this.faculty + " " + this.degree + " " + this.allCourses + " " + this.gpa + " "
-				+ this.schedule + " " + this.transcript;
 	}
 
 	public void putMark(Course course, double mark) {
@@ -144,8 +130,30 @@ public class Student extends User implements Comparable<Student>, Cloneable {
 	public HashMap<Course, Mark> getAllCourses() {
 		return allCourses;
 	}
+	
+	public double getPoints(Course c) {
+		for(Map.Entry<Course, Mark> hm: allCourses.entrySet()) {
+			if(hm.getKey().equals(c)) {
+				return hm.getValue().getScore();
+			}
+		}
+		return 0;
+	}
 
 	public void setAllCourses(HashMap<Course, Mark> allCourses) {
 		this.allCourses = allCourses;
+	}
+	
+	public void viewSchedule() {
+		allCourses.keySet().forEach((key) -> System.out.println(key.getWeekdayAndTime()));
+	}
+	
+	public String toString() {
+		return super.toString() + " " + this.faculty + " " + this.degree + " " + this.allCourses + " " + this.gpa + " "
+				+ " " + this.transcript;
+	}
+	
+	public String viewInfo() {
+		return this.getId().getNumberID() + " " + this.getName() + " " + this.getGpa() + " " + this.getFaculty() + " " + this.allCourses;
 	}
 }

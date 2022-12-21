@@ -4,12 +4,11 @@ import java.io.Serializable;
 
 public class Time implements Comparable<Time>, Serializable {
 	private static final long serialVersionUID = 1L;
-	int hours, minutes, seconds;
+	int hours, minutes;
 
-	public Time(int hours, int minutes, int seconds) {
+	public Time(int hours, int minutes) {
 		this.hours = hours;
 		this.minutes = minutes;
-		this.seconds = seconds;
 	}
 	
 	public String checkMinutesAndSeconds() {	
@@ -19,11 +18,6 @@ public class Time implements Comparable<Time>, Serializable {
 			builder.append("0" + this.minutes + ":");
 		} else {
 			builder.append(this.minutes + ":");
-		}
-		if(this.seconds < 10) {
-			builder.append("0" + this.seconds);
-		} else {
-			builder.append(this.seconds);
 		}
 		
 		return builder.toString();
@@ -63,9 +57,6 @@ public class Time implements Comparable<Time>, Serializable {
 			if(this.hours == o.hours) {
 				if(this.minutes > o.minutes) {
 					if(this.minutes == o.minutes) {
-						if(this.seconds > o.seconds) {
-							return 1;
-						}
 						return 0;
 					}
 					return 1;
@@ -78,6 +69,6 @@ public class Time implements Comparable<Time>, Serializable {
 	}
 	
 	public String toString() {
-		return this.hours + " " + this.minutes + " " + this.seconds;
+		return this.hours + " " + this.minutes;
 	}
 }

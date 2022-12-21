@@ -6,7 +6,6 @@ import java.util.Vector;
 
 import classes.Course;
 import classes.ID;
-import classes.Schedule;
 import enums.Faculty;
 import enums.TeacherTitle;
 
@@ -15,21 +14,18 @@ public class Teacher extends Employee {
 	private Faculty faculty;
 	private TeacherTitle title;
 	private HashMap<Course, Vector<Student>> allCourses;
-	private Schedule schedule;
 
-	public Teacher(ID id, String name, double salary, Faculty faculty, TeacherTitle title, HashMap<Course, Vector<Student>> allCourses, Schedule schedule) {
+	public Teacher(ID id, String name, double salary, Faculty faculty, TeacherTitle title, HashMap<Course, Vector<Student>> allCourses) {
 		super(id, name, salary);
 		this.faculty = faculty;
 		this.title = title;
 		this.allCourses = allCourses;
-		this.schedule = schedule;
 	}
 
 	public Teacher(ID id, String name, double salary) {
 		super(id, name, salary);
 		this.faculty = Faculty.Undefined;
 		this.allCourses = new HashMap<Course, Vector<Student>>();
-		this.schedule = new Schedule(id);
 	}
 
 	public Teacher(ID id, String name) {
@@ -37,7 +33,6 @@ public class Teacher extends Employee {
 		this.faculty = Faculty.Undefined;
 		this.title = TeacherTitle.Undefined;
 		this.allCourses = new HashMap<Course, Vector<Student>>();
-		this.schedule = new Schedule(id);
 	}
 	
 	public Teacher(ID id, String name, String password) {
@@ -45,13 +40,11 @@ public class Teacher extends Employee {
 		this.faculty = Faculty.Undefined;
 		this.title = TeacherTitle.Undefined;
 		this.allCourses = new HashMap<Course, Vector<Student>>();
-		this.schedule = new Schedule(id);
 	}
 
 	public Faculty getFaculty() {
 		return this.faculty;
 	}
-
 	public void setFaculty(Faculty faculty) {
 		this.faculty = faculty;
 	}
@@ -62,14 +55,6 @@ public class Teacher extends Employee {
 
 	public void setTitle(TeacherTitle title) {
 		this.title = title;
-	}
-
-	public Schedule getSchedule() {
-		return this.schedule;
-	}
-
-	public void setSchedule(Schedule schedule) {
-		this.schedule = schedule;
 	}
 	
 	public HashMap<Course, Vector<Student>> getAllCourses() {
@@ -85,8 +70,7 @@ public class Teacher extends Employee {
 			return false;
 
 		Teacher t = (Teacher) o;
-		return this.faculty.equals(t.getFaculty()) && this.title.equals(t.getTitle())
-				&& this.schedule.equals(t.getSchedule());
+		return this.faculty.equals(t.getFaculty()) && this.title.equals(t.getTitle());
 	}
 
 	public Vector<Student> checkAttendance() {
@@ -98,6 +82,18 @@ public class Teacher extends Employee {
 		for (Course c : this.allCourses.keySet()) {
 			if(c.getCode().equals(courseCode)) {
 				return c;
+			}
+		}
+		return null;
+	}
+	
+	public Vector<Student> getStudents(String courseCode) {
+		Course c = containsCourse(courseCode);
+		for(Map.Entry<Course, Vector<Student>> hm: allCourses.entrySet()) {
+			if(hm.getKey().equals(c)) {
+				return hm.getValue();
+			} else {
+				return null;
 			}
 		}
 		return null;
@@ -118,6 +114,12 @@ public class Teacher extends Employee {
 			}
 		}
 		return null;
+	}
+	
+	public String getInfoForCourse(String courseCode, ID id) {
+		Student s = getStudent(courseCode, id.getNumberID());
+		Course c = containsCourse(courseCode);
+		return s.getId().getNumberID() + " " + s.getName() + " " + s.getPoints(c);
 	}
 	
 	public boolean putMarkToStudent(String courseCode, String id, double mark) {
@@ -141,8 +143,16 @@ public class Teacher extends Employee {
 	public void addCourse(Course c) {
 		allCourses.put(c, new Vector<Student>());
 	}
+	
+	public void viewSchedule() {
+		allCourses.keySet().forEach((key) -> System.out.println(key.getWeekdayAndTime()));
+	}
 
 	public String toString() {
-		return super.toString() + " " + this.faculty + " " + this.title +  " " + this.allCourses + " " + this.schedule;
+		return super.toString() + " " + this.faculty + " " + this.title +  " " + this.allCourses;
+	}
+	
+	public String viewInfo() {
+		return this.getId().getNumberID() + " " + this.getName() + " " + this.getFaculty() + " " + this.getAllCourses();
 	}
 }
