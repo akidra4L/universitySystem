@@ -16,38 +16,21 @@ public class UniversitySystem {
 	static Vector<Course> courses;
 	static Vector<Book> books;
 	static Vector<News> news;
-
-	private static List<Request> requests = new ArrayList<>();
+	static List<Request> requests;
 
 	static {
 		users = new Vector<User>();
 		courses = new Vector<Course>();
 		news = new Vector<News>();
 		books = new Vector<Book>();
+		requests = new ArrayList<Request>();
 		new UsersData();
 		new CoursesData();
 		new NewsData();
 		new BooksData();
+		new RequestsData();
 	}
 
-//	Aba start
-	public static void processRequest(Request request) {
-		requests.add(request);
-	}
-
-	public static List<Request> getRequests() {
-		return requests;
-	}
-
-	public static void approveRequest(Request request) {
-		request.setState(StateOfRequest.APPROVED);
-	}
-
-	public static void denyRequest(Request request) {
-		request.setState(StateOfRequest.DENIED);
-	}
-
-//	Aba end
 	public UniversitySystem(String name) {
 		UniversitySystem.name = name;
 	}
@@ -66,6 +49,12 @@ public class UniversitySystem {
 
 	public static void addCourse(Course c) {
 		courses.add(c);
+	}
+	public static void addRequest(Request r) {
+		requests.add(r);
+	}
+	public static List<Request> getRequests() {
+		return requests;
 	}
 
 	public static Vector<User> getUsers() {
@@ -132,6 +121,7 @@ public class UniversitySystem {
 		CoursesData.saveCourses();
 		NewsData.saveNews();
 		BooksData.saveBooks();
+		RequestsData.saveRequests();
 	}
 
 	void launch() throws Exception {
@@ -170,12 +160,19 @@ public class UniversitySystem {
 									admin.setPassword(newPassword);
 									System.out.println("\n---Done---");
 								} else if (option == 2) {
+									System.out.println("---Create Request---");
+									System.out.print("Description: ");
+									String description = input.readLine();
+									
+									admin.sendRequest(new Request(admin, description));
+									System.out.println("\n---Done---");
+								} else if (option == 3) {
 									System.out.println("\n---All users---");
 									for (User us : users) {
 										System.out.println(us);
 									}
 
-								} else if (option == 3) {
+								} else if (option == 4) {
 									System.out.println("\n---Create user---");
 									System.out.print("Name: ");
 									String newUserName = input.readLine();
@@ -192,7 +189,7 @@ public class UniversitySystem {
 									}
 									System.out.println("\n---Done---");
 
-								} else if (option == 4) {
+								} else if (option == 5) {
 									System.out.println("\n---Delete user---");
 									System.out.print("ID: ");
 									String deleteID = input.readLine();
@@ -206,7 +203,7 @@ public class UniversitySystem {
 									}
 									System.out.println("\n---Done---");
 
-								} else if (option == 5) {
+								} else if (option == 6) {
 									isLoged = false;
 								} else {
 									System.err.println("Error: wrong option");
@@ -224,16 +221,23 @@ public class UniversitySystem {
 									student.setPassword(newPassword);
 									System.out.println("\n---Done---");
 								} else if (option == 2) {
+									System.out.println("---Create Request---");
+									System.out.print("Description: ");
+									String description = input.readLine();
+									
+									student.sendRequest(new Request(student, description));
+									System.out.println("\n---Done---");
+								} else if (option == 3) {
 									System.err.println("\n---Schedule---");
 									student.viewSchedule();
-								} else if (option == 3) {
+								} else if (option == 4) {
 									System.err.println("\n---Marks---");
 									student.getAllCourses().forEach((key, value) -> System.out
 											.println(key.getTitle() + " - " + value.getScore()));
-								} else if (option == 4) {
+								} else if (option == 5) {
 									System.err.println("\n---Transcript---");
 									student.viewTranscript();
-								} else if (option == 5) {
+								} else if (option == 6) {
 									isLoged = false;
 								} else {
 									System.err.println("Error: wrong option");
@@ -253,9 +257,16 @@ public class UniversitySystem {
 									teacher.setPassword(newPassword);
 									System.out.println("---Done---");
 								} else if (option == 2) {
+									System.out.println("---Create Request---");
+									System.out.print("Description: ");
+									String description = input.readLine();
+									
+									teacher.sendRequest(new Request(teacher, description));
+									System.out.println("\n---Done---");
+								} else if (option == 3) {
 									System.out.println("\n---Schedule---");
 									teacher.viewSchedule();
-								} else if (option == 3) {
+								} else if (option == 4) {
 									System.out.println("\n---Students---");
 									System.out.print("Course ID: ");
 									String courseID = input.readLine();
@@ -268,7 +279,7 @@ public class UniversitySystem {
 									} catch (NullPointerException e) {
 										System.err.println("Error: do not have such course");
 									}
-								} else if (option == 4) {
+								} else if (option == 5) {
 									System.out.println("\n---Setting mark---");
 
 									System.out.print("ID: ");
@@ -301,7 +312,7 @@ public class UniversitySystem {
 
 									System.out.print("Option: ");
 									int option = Integer.parseInt(input.readLine());
-									if (option == 15) {
+									if (option == 17) {
 										isLoged = false;
 									} else if (option == 1) {
 										System.err.print("New password: ");
@@ -309,6 +320,49 @@ public class UniversitySystem {
 										manager.setPassword(newPassword);
 										System.out.println("---Done---");
 									} else if (option == 2) {
+										System.out.println("---Create Request---");
+										System.out.print("Description: ");
+										String description = input.readLine();
+										
+										manager.sendRequest(new Request(manager, description));
+										System.out.println("\n---Done---");
+									} else if (option == 3) {
+										System.out.println("---Requests---");
+										viewManagerController.showRequestsManagerMenu();
+										System.out.print("Option: ");
+										int requestCommand = Integer.parseInt(input.readLine());
+										
+										if(requestCommand == 1) {
+											System.out.println("---All requests---");
+											for(Request r: Manager.getRequests()) {
+												System.out.println("- " + r);
+											}
+											System.out.println("---Done---");
+										} else if (requestCommand == 2) {
+											System.out.println("---Manage request---");
+											viewManagerController.showRequestsOptions();
+											System.out.print("Option: ");
+											int requestOption = Integer.parseInt(input.readLine());
+											
+											System.out.print("Request ID: ");
+											Request r = manager.getRequest(input.readLine());
+											if (r != null) {
+												if (requestOption == 1) {
+													manager.approveRequest(r);
+													System.out.println("---Done---");
+												} else if (requestOption == 2) {
+													manager.denyRequest(r);
+													System.out.println("---Done---");
+												} else {
+													System.err.println("Error: unknown request command");
+												}
+											} else {
+												System.err.println("Error: null request");
+											}
+										} else {
+											System.err.println("Error: unknown command");
+										}
+									} else if (option == 4) {
 										System.out.println("---Change user information---");
 										System.out.print("ID: ");
 										String id = input.readLine();
@@ -350,32 +404,32 @@ public class UniversitySystem {
 										} else {
 											System.err.println("Error: null user");
 										}
-									} else if (option == 3) {
+									} else if (option == 5) {
 										System.out.println("\n---All teachers---");
 										Vector<Teacher> teachers = manager.viewTeachers();
 										for (Teacher t : teachers) {
 											System.out.println("- " + t.viewInfo());
 										}
 										System.out.println("---Done---");
-									} else if (option == 4) {
+									} else if (option == 6) {
 										System.out.println("\n---All students---");
 										Vector<Student> students = manager.viewStudents();
 										for (Student s : students) {
 											System.out.println("- " + s.viewInfo());
 										}
 										System.out.println("---Done---");
-									} else if (option == 5) {
+									} else if (option == 7) {
 										System.out.println("\n---View student---");
 										System.out.print("ID: ");
 										String studentID = input.readLine();
 
 										System.out.println(manager.viewStudent(studentID));
 										System.out.println("\n---Done---");
-									} else if (option == 6) {
+									} else if (option == 8) {
 										System.out.println("---News---");
 										System.out.println(news);
 										System.out.println("---Done---");
-									} else if (option == 7) {
+									} else if (option == 9) {
 										System.out.println("\n---News creation---");
 										System.out.print("Title: ");
 										String title = input.readLine();
@@ -384,7 +438,7 @@ public class UniversitySystem {
 
 										manager.createNews(title, description);
 										System.out.println("\n---Done---");
-									} else if (option == 8) {
+									} else if (option == 10) {
 										System.out.println("\n---Delete news---");
 										System.out.print("Author: ");
 										String author = input.readLine();
@@ -395,7 +449,7 @@ public class UniversitySystem {
 
 										manager.deleteNews(author, title, description);
 										System.out.println("\n---Done---");
-									} else if (option == 9) {
+									} else if (option == 11) {
 										System.out.println("---All courses---");
 										if (courses.isEmpty()) {
 											System.out.println("Empty.");
@@ -405,7 +459,7 @@ public class UniversitySystem {
 											}
 										}
 										System.out.println("\n---Done---");
-									} else if (option == 10) {
+									} else if (option == 12) {
 										System.out.println("---Create course---");
 										System.out.print("Course name: ");
 										String courseName = input.readLine();
@@ -427,7 +481,7 @@ public class UniversitySystem {
 
 										manager.createCourse(courseName, faculty, credits, weekday, hours, minutes);
 										System.out.println("\n---Done---");
-									} else if (option == 11) {
+									} else if (option == 13) {
 										System.out.println("\n---Edit course---");
 										System.out.print("Course's code: ");
 										String courseCode = input.readLine();
@@ -455,7 +509,7 @@ public class UniversitySystem {
 											}
 										}
 										System.out.println("\n---Done---");
-									} else if (option == 12) {
+									} else if (option == 14) {
 										System.out.println("---Delete course---");
 										System.out.print("Course's code: ");
 										String courseCode = input.readLine();
@@ -469,7 +523,7 @@ public class UniversitySystem {
 											}
 										}
 										System.out.println("\n---Done---");
-									} else if (option == 13) {
+									} else if (option == 15) {
 										System.out.println("---Register for course---");
 										System.out.print("User ID: ");
 										String id = input.readLine();
@@ -508,7 +562,7 @@ public class UniversitySystem {
 										} else {
 											System.err.println("Error: unknown user");
 										}
-									} else if (option == 14) {
+									} else if (option == 16) {
 										System.out.println("---Delete from course---");
 
 										System.out.print("User ID: ");
@@ -538,7 +592,7 @@ public class UniversitySystem {
 
 									System.out.print("Option: ");
 									int option = Integer.parseInt(input.readLine());
-									if (option == 4) {
+									if (option == 5) {
 										isLoged = false;
 									} else if (option == 1) {
 										System.err.print("New password: ");
@@ -546,13 +600,20 @@ public class UniversitySystem {
 										manager.setPassword(newPassword);
 										System.out.println("---Done---");
 									} else if (option == 2) {
+										System.out.println("---Create Request---");
+										System.out.print("Description: ");
+										String description = input.readLine();
+										
+										manager.sendRequest(new Request(manager, description));
+									}
+									else if (option == 3) {
 										System.out.println("---All employees---");
 										Vector<Employee> employees = manager.getEmployees();
 										for (Employee e : employees) {
 											System.out.println("- " + e.viewInfoForFinancial());
 										}
 										System.out.println("\n---Done---");
-									} else if (option == 3) {
+									} else if (option == 4) {
 										System.out.println("---Edit employee's salary---");
 										System.out.print("Employee's ID: ");
 										String employeeID = input.readLine();
@@ -577,7 +638,7 @@ public class UniversitySystem {
 
 								System.out.print("Option: ");
 								int option = Integer.parseInt(input.readLine());
-								if (option == 5) {
+								if (option == 6) {
 									isLoged = false;
 								} else if (option == 1) {
 									System.err.print("New password: ");
@@ -585,10 +646,17 @@ public class UniversitySystem {
 									librarian.setPassword(newPassword);
 									System.out.println("---Done---");
 								} else if (option == 2) {
+									System.out.println("---Create Request---");
+									System.out.print("Description: ");
+									String description = input.readLine();
+									
+									librarian.sendRequest(new Request(librarian, description));
+									System.out.println("\n---Done---");
+								} else if (option == 3) {
 									System.out.println("---View books---");
 									librarian.viewBooks();
 									System.out.println("\n---Done---");
-								} else if (option == 3) {
+								} else if (option == 4) {
 									System.out.println("---Add book---");
 									System.out.print("Author: ");
 									String author = input.readLine();
@@ -598,7 +666,7 @@ public class UniversitySystem {
 
 									librarian.addBook(author, bookName);
 									System.out.println("\n---Done---");
-								} else if (option == 4) {
+								} else if (option == 5) {
 									System.out.println("---Give book---");
 									System.out.print("User ID: ");
 									String userID = input.readLine();

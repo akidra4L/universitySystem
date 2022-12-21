@@ -9,12 +9,26 @@ import classes.ID;
 import enums.Faculty;
 import enums.TeacherTitle;
 
+/**
+ * Teacher class
+ * @author AlikhanGubayev
+ *
+ */
 public class Teacher extends Employee {
 	private static final long serialVersionUID = 1L;
 	private Faculty faculty;
 	private TeacherTitle title;
 	private HashMap<Course, Vector<Student>> allCourses;
 
+	/**
+	 * Default constructor
+	 * @param id
+	 * @param name
+	 * @param salary
+	 * @param faculty
+	 * @param title
+	 * @param allCourses
+	 */
 	public Teacher(ID id, String name, double salary, Faculty faculty, TeacherTitle title, HashMap<Course, Vector<Student>> allCourses) {
 		super(id, name, salary);
 		this.faculty = faculty;
@@ -22,12 +36,23 @@ public class Teacher extends Employee {
 		this.allCourses = allCourses;
 	}
 
+	/**
+	 * Default constructor
+	 * @param id
+	 * @param name
+	 * @param salary
+	 */
 	public Teacher(ID id, String name, double salary) {
 		super(id, name, salary);
 		this.faculty = Faculty.Undefined;
 		this.allCourses = new HashMap<Course, Vector<Student>>();
 	}
 
+	/**
+	 * Default constructor
+	 * @param id
+	 * @param name
+	 */
 	public Teacher(ID id, String name) {
 		super(id, name);
 		this.faculty = Faculty.Undefined;
@@ -35,6 +60,12 @@ public class Teacher extends Employee {
 		this.allCourses = new HashMap<Course, Vector<Student>>();
 	}
 	
+	/**
+	 * Default constructor
+	 * @param id
+	 * @param name
+	 * @param password
+	 */
 	public Teacher(ID id, String name, String password) {
 		super(id, name, password);
 		this.faculty = Faculty.Undefined;
@@ -42,25 +73,49 @@ public class Teacher extends Employee {
 		this.allCourses = new HashMap<Course, Vector<Student>>();
 	}
 
+	/**
+	 * Getter for Teacher's Faculty
+	 * @return Faculty
+	 */
 	public Faculty getFaculty() {
 		return this.faculty;
 	}
+	/**
+	 * Setter for Teacher's faculty
+	 * @param faculty
+	 */
 	public void setFaculty(Faculty faculty) {
 		this.faculty = faculty;
 	}
 
+	/**
+	 * Getter for Teacher's Title
+	 * @return TeacherTitle
+	 */
 	public TeacherTitle getTitle() {
 		return this.title;
 	}
 
+	/**
+	 * Setter for Teacher's Title
+	 * @param title
+	 */
 	public void setTitle(TeacherTitle title) {
 		this.title = title;
 	}
 	
+	/**
+	 * Getter for Teacher's Courses
+	 * @return HashMap
+	 */
 	public HashMap<Course, Vector<Student>> getAllCourses() {
 		return allCourses;
 	}
 
+	/**
+	 * Setter for Teacher's Courses
+	 * @param allCourses
+	 */
 	public void setAllCourses(HashMap<Course, Vector<Student>> allCourses) {
 		this.allCourses = allCourses;
 	}
@@ -72,12 +127,12 @@ public class Teacher extends Employee {
 		Teacher t = (Teacher) o;
 		return this.faculty.equals(t.getFaculty()) && this.title.equals(t.getTitle());
 	}
-
-	public Vector<Student> checkAttendance() {
-		// TODO
-		return null;
-	}
 	
+	/**
+	 * Method, which returning Course by it's code
+	 * @param courseCode
+	 * @return Course if exists in System, null otherwise
+	 */
 	public Course containsCourse(String courseCode) {
 		for (Course c : this.allCourses.keySet()) {
 			if(c.getCode().equals(courseCode)) {
@@ -87,6 +142,11 @@ public class Teacher extends Employee {
 		return null;
 	}
 	
+	/**
+	 * Method, which returning Vector<Student> by Course code 
+	 * @param courseCode
+	 * @return Vector<Student>
+	 */
 	public Vector<Student> getStudents(String courseCode) {
 		Course c = containsCourse(courseCode);
 		for(Map.Entry<Course, Vector<Student>> hm: allCourses.entrySet()) {
@@ -99,6 +159,12 @@ public class Teacher extends Employee {
 		return null;
 	}
 	
+	/**
+	 * Method, which returning Student by his ID
+	 * @param courseCode
+	 * @param studentID
+	 * @return Student
+	 */
 	public Student getStudent(String courseCode, String studentID) {
 		Course c = containsCourse(courseCode);
 		for(Map.Entry<Course, Vector<Student>> hm: allCourses.entrySet()) {
@@ -116,12 +182,25 @@ public class Teacher extends Employee {
 		return null;
 	}
 	
+	/**
+	 * Method, which returning info about Student for certain Course
+	 * @param courseCode
+	 * @param id
+	 * @return String
+	 */
 	public String getInfoForCourse(String courseCode, ID id) {
 		Student s = getStudent(courseCode, id.getNumberID());
 		Course c = containsCourse(courseCode);
 		return s.getId().getNumberID() + " " + s.getName() + " " + s.getPoints(c);
 	}
 	
+	/**
+	 * Method, which adding for certain Student points
+	 * @param courseCode
+	 * @param id
+	 * @param mark
+	 * @return true if Student is in certain Course, false otherwise
+	 */
 	public boolean putMarkToStudent(String courseCode, String id, double mark) {
 		for(Map.Entry<Course, Vector<Student>> hm : allCourses.entrySet()) {
 			if(hm.getKey().getCode().equals(courseCode)) {
@@ -136,22 +215,42 @@ public class Teacher extends Employee {
 		return false;
 	}
 	
+	/**
+	 * Method, which adding certain Student for this Teacher for certain Course
+	 * @param c
+	 * @param s
+	 */
 	public void addStudent(Course c, Student s) {
 		allCourses.entrySet().stream().filter(n -> n.getKey().equals(c)).forEach(n -> n.getValue().add(s));;
 	}
 	
+	/**
+	 * Method, which adding Course to Teacher
+	 * @param c
+	 */
 	public void addCourse(Course c) {
 		allCourses.put(c, new Vector<Student>());
 	}
 	
+	/**
+	 * Method, which shows Schedule of Teacher
+	 */
 	public void viewSchedule() {
 		allCourses.keySet().forEach((key) -> System.out.println(key.getWeekdayAndTime()));
 	}
 
+	/**
+	 * Return string representation of the Object
+	 * @return String
+	 */
 	public String toString() {
 		return super.toString() + " " + this.faculty + " " + this.title +  " " + this.allCourses;
 	}
 	
+	/**
+	 * Method, which shows information about Teacher: ID's number, name, faculty, courses
+	 * @return String
+	 */
 	public String viewInfo() {
 		return this.getId().getNumberID() + " " + this.getName() + " " + this.getFaculty() + " " + this.getAllCourses();
 	}

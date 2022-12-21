@@ -1,5 +1,5 @@
 package enums;
 
 public enum StateOfRequest {
-	APPROVED, DENIED;
+	APPROVED, DENIED, CHECKING;
 }

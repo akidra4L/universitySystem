@@ -7,17 +7,37 @@ import classes.*;
 import enums.*;
 import users.*;
 
+/**
+ * Admin class. Main user in System.
+ */
 public class Admin extends User implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Default constructor
+     * @param id
+     * @param name
+     */
 	public Admin(ID id, String name) {
 		super(id, name);
 	}
     
+	/**
+	 * Default constructor
+	 * @param id
+	 * @param name
+	 * @param password
+	 */
     public Admin(ID id, String name, String password) {
 		super(id, name, password);
 	}
 
+    /**
+     * Method, which is creating user in system.
+     * @param id
+     * @param name
+     * @param role
+     */
 	public void createUser(ID id, String name, Role role) {
 		if(role == Role.Admin) {
 			@SuppressWarnings("unused")
@@ -44,10 +64,21 @@ public class Admin extends User implements Serializable {
 		}
     }
 	
+	/**
+	 * Method, which is creating certain Manager with type
+	 * @param id
+	 * @param name
+	 * @param type
+	 */
 	public void createUser(ID id, String name, ManagerType type) {
 		new Manager(id, name, type);
     }
     
+	/**
+	 * Method, which is deleting User from System, using his ID
+	 * @param id
+	 * @return true, if user is exists in System, false otherwise
+	 */
     public boolean deleteUser(ID id) {
     	Vector<User> users = UniversitySystem.getUsers();
     	for(User user: users) {
@@ -60,6 +91,11 @@ public class Admin extends User implements Serializable {
     	return false;
     }
     
+    /**
+     * Method, which is deleting User from System, using his ID as string representation
+     * @param id
+     * @return true, if user is exists in System, false otherwise
+     */
     public boolean deleteUser(String id) {
     	Vector<User> users = UniversitySystem.getUsers();
     	for(User user: users) {
@@ -71,23 +107,11 @@ public class Admin extends User implements Serializable {
     	}
     	return false;
     }
-
-    public void updateSoftware() {
-        //TODO
-    }
     
-    public void manageServer() {
-        //TODO
-    }
-
-    public void restoreData() {
-        //TODO
-    }
-    
-    public void backupData() {
-        //TODO
-    }
-    
+    /**
+     * Return string representation of the Object
+     * @return String
+     */
     public String toString() {
     	return super.toString();
     }

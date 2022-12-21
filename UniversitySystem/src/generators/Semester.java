@@ -4,7 +4,6 @@ import java.time.Month;
 
 /**
  * Semester Enum
- * @author AlikhanGubayev
  *
  */
 public enum Semester {

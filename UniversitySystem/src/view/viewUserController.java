@@ -15,5 +15,6 @@ public class viewUserController {
 		System.out.println("\nWelcome " + user.getName() + " to " + UniversitySystem.name);
 		System.out.println("Menu: choose your option");
 		System.out.println("1. Change password.");
+		System.out.println("2. Create request");
 	}
 }

@@ -1,15 +1,13 @@
 package generators;
 
 import java.util.HashMap;
-import java.time.LocalDate;
 import java.util.Random;
 
 /**
- * GeneratorID class, generator for User's ID, creating unique ID
+ * GeneratorRequestsID class, generator for Request ID, creating unique ID
  *
  */
-public class GeneratorID {
-	private static LocalDate currentDate = LocalDate.now();
+public class GeneratorRequestID {
 	private static HashMap<Integer, Boolean> allID = new HashMap<Integer, Boolean>();
 	
 	/**
@@ -22,19 +20,11 @@ public class GeneratorID {
 	}
 	
 	/**
-	 * Method, which is returning last 2 numbers of Current Year
-	 * @return Integer
-	 */
-	private static int getYear() {
-		return currentDate.getYear() % 100;
-	}
-	
-	/**
-	 * Method, which is creating unique User's ID
+	 * Method, which is creating unique Request ID
 	 * @return String
 	 */
 	public static String generateID() {
-		String code = getYear() + "B0";
+		String code = "R";
 		int randomID = getRandomID();
 		while(true) {
 			if(!allID.containsKey(randomID)) {
