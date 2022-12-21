@@ -15,9 +15,9 @@ public class Time implements Comparable<Time>, Serializable {
 		var builder = new StringBuilder();
 		
 		if(this.minutes < 10) {
-			builder.append("0" + this.minutes + ":");
+			builder.append("0" + this.minutes);
 		} else {
-			builder.append(this.minutes + ":");
+			builder.append(this.minutes);
 		}
 		
 		return builder.toString();

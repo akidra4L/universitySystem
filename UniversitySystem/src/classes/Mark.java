@@ -24,11 +24,22 @@ public class Mark implements Serializable {
 		this.score = score;
 	}
 	
-	public MarkLetter getMarkLetter() {
-		return markLetter;
-	}
 	public void setMarkLetter(MarkLetter markLetter) {
 		this.markLetter = markLetter;
+	}
+	public MarkLetter getMarkLetter() {
+		if (score < 30) {
+			setMarkLetter(MarkLetter.F);
+		} else if (score > 30 && score < 50) {
+			setMarkLetter(MarkLetter.D);
+		} else if (score >= 50 && score < 70) {
+			setMarkLetter(MarkLetter.C);
+		} else if (score >= 70 && score < 90) {
+			setMarkLetter(MarkLetter.B);
+		} else {
+			setMarkLetter(MarkLetter.A);
+		}
+		return markLetter;
 	}
 	
 	public String toString() {

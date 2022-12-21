@@ -64,7 +64,10 @@ public class Manager extends Employee {
     
     public boolean registerForCourse(Teacher teacher, String courseCode) {
     	Course c = UniversitySystem.findCourse(courseCode);
-    	if (!teacher.getAllCourses().keySet().contains(c)) {
+    	if (c == null) {
+    		return false;
+    	}
+    	else if (!teacher.getAllCourses().keySet().contains(c)) {
     		teacher.addCourse(c);
     		return true;
     	}

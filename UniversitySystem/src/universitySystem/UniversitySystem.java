@@ -210,7 +210,7 @@ public class UniversitySystem {
 												-> System.out.println(key.getTitle() + " - " + value.getScore()));
 								} else if (option == 4) {
 									System.err.println("\n---Transcript---");
-									System.out.println(student.getTranscript());
+									student.viewTranscript();
 								} else if (option == 5) {
 									isLoged = false;
 								} else {

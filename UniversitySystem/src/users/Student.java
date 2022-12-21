@@ -89,6 +89,12 @@ public class Student extends User implements Comparable<Student>, Cloneable {
 	public Transcript getTranscript() {
 		return transcript;
 	}
+	
+	public void viewTranscript() {
+		for(Map.Entry<Course, Mark> hm: allCourses.entrySet()) {
+			System.out.println("- " + hm.getKey().viewTranscriptInfo() + " " + hm.getValue().getScore() + " " + hm.getValue().getMarkLetter());
+		}
+	}
 
 	@Override
 	public int compareTo(Student o) {

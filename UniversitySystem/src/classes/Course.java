@@ -84,4 +84,8 @@ public class Course implements Serializable {
 	public String getWeekdayAndTime() {
 		return this.title + ": " + this.getDate().getWeekdayAndTime();
 	}
+	
+	public String viewTranscriptInfo() {
+		return this.code + " " + this.title + " " + this.credits;
+	}
 }
