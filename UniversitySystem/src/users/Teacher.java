@@ -182,6 +182,19 @@ public class Teacher extends Employee {
 		return null;
 	}
 	
+	public boolean deleteStudentFromCourse(String courseCode, String studentID) {
+		Student s = this.getStudent(courseCode, studentID);
+		Course c = containsCourse(courseCode);
+		for(Map.Entry<Course, Vector<Student>> hm: allCourses.entrySet()) {
+			if(hm.getKey().equals(c)) {
+				hm.getValue().remove(s);
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	/**
 	 * Method, which returning info about Student for certain Course
 	 * @param courseCode

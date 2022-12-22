@@ -9,6 +9,7 @@ import classes.Mark;
 import classes.Transcript;
 import enums.Degree;
 import enums.Faculty;
+import enums.MarkLetter;
 
 public class Student extends User implements Comparable<Student>, Cloneable {
 	private static final long serialVersionUID = 1L;
@@ -56,8 +57,30 @@ public class Student extends User implements Comparable<Student>, Cloneable {
 	public Degree getDegree() {
 		return this.degree;
 	}
+	
+	public void setGpa(double gpa) {
+		this.gpa = gpa;
+	}
 
 	public double getGpa() {
+		double totalPoints = 0;
+		for(Map.Entry<Course, Mark> hm: allCourses.entrySet()) {
+			MarkLetter ml = hm.getValue().getMarkLetter();
+			
+			switch (ml) {
+			case A:
+				totalPoints += 4.0;
+			case B:
+				totalPoints += 3.0;
+			case C:
+				totalPoints += 2.0;
+			case D:
+				totalPoints += 1.0;
+			default:
+				totalPoints += 0.0;
+			}
+		}
+		setGpa(totalPoints / this.allCourses.size());
 		return this.gpa;
 	}
 

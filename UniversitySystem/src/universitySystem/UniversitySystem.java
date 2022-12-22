@@ -570,12 +570,17 @@ public class UniversitySystem {
 
 										System.out.print("Course code: ");
 										String courseCode = input.readLine();
+										
+										System.out.print("Teacher's ID: ");
+										String teacherID = input.readLine();
 
 										User user = findUser(id);
+										Teacher t = manager.viewTeacher(teacherID);
 										if (user != null) {
 											if (user instanceof Student) {
 												Student s = (Student) user;
 												if (manager.deleteFromCourse(s, courseCode)) {
+													t.deleteStudentFromCourse(courseCode, id);
 													System.out.println("\n---Done---");
 												} else {
 													System.err.println("Error: student do not have this course");
