@@ -127,7 +127,11 @@ public class Student extends User implements Comparable<Student>, Cloneable {
 			if (sum > 100) {
 				throw new IllegalArgumentException("The score cannot exceed 100");
 			}
-			allCourses.put(course, new Mark(sum));
+			for(Map.Entry<Course, Mark> hm : allCourses.entrySet()) {
+				if(hm.getKey().equals(course)) {
+					hm.getValue().setScore(sum);
+				}
+			}
 		} else {
 			throw new IllegalArgumentException("The student is not registered for this course");
 		}

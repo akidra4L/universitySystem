@@ -12,6 +12,7 @@ public class Mark implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private double score;
 	private MarkLetter markLetter;
+	private boolean isPassed;
 	
 	/**
 	 * Default constructor
@@ -19,12 +20,14 @@ public class Mark implements Serializable {
 	 */
 	public Mark(double score) {
 		this.score = score;
+		this.isPassed = false;
 	}
 	/**
 	 * Default constructor
 	 */
 	public Mark() {
 		this.score = 0;
+		this.isPassed = false;
 	}
 	
 	/**
@@ -40,6 +43,9 @@ public class Mark implements Serializable {
 	 */
 	public void setScore(double score) {
 		this.score = score;
+		if(this.score >= 60) {
+			this.setPassed(true);
+		}
 	}
 	/**
 	 * Setter for Mark Letter representation
@@ -66,11 +72,18 @@ public class Mark implements Serializable {
 		return markLetter;
 	}
 	
+	public boolean isPassed() {
+		return isPassed;
+	}
+	public void setPassed(boolean isPassed) {
+		this.isPassed = isPassed;
+	}
+	
 	/**
 	 * Return string representation of the Object
 	 * @return String
 	 */
 	public String toString() {
-		return this.score + " " + this.markLetter;
-	}
+		return this.score + " " + this.markLetter + " " + this.isPassed;
+	} 
 }
